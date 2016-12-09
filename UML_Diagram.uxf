@@ -27,8 +27,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>2009</x>
-      <y>301</y>
+      <x>1799</x>
+      <y>693</y>
       <w>273</w>
       <h>77</h>
     </coordinates>
@@ -41,8 +41,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>2009</x>
-      <y>217</y>
+      <x>1799</x>
+      <y>609</y>
       <w>140</w>
       <h>56</h>
     </coordinates>
@@ -56,10 +56,10 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>2009</x>
-      <y>252</y>
-      <w>28</w>
-      <h>56</h>
+      <x>1806</x>
+      <y>644</y>
+      <w>34</w>
+      <h>62</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>21;21;21;49</additional_attributes>
@@ -67,8 +67,8 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>2009</x>
-      <y>406</y>
+      <x>1799</x>
+      <y>812</y>
       <w>273</w>
       <h>105</h>
     </coordinates>
@@ -80,8 +80,8 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Note</type>
     <coordinates>
-      <x>1708</x>
-      <y>161</y>
+      <x>1498</x>
+      <y>553</y>
       <w>623</w>
       <h>378</h>
     </coordinates>
@@ -92,8 +92,8 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>1743</x>
-      <y>301</y>
+      <x>1533</x>
+      <y>693</y>
       <w>217</w>
       <h>133</h>
     </coordinates>
@@ -108,19 +108,19 @@ handler: ICMDHandler
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>2016</x>
-      <y>357</y>
-      <w>28</w>
-      <h>56</h>
+      <x>1806</x>
+      <y>749</y>
+      <w>34</w>
+      <h>76</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>21;21;21;49</additional_attributes>
+    <additional_attributes>21;21;21;63</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>1939</x>
-      <y>322</y>
+      <x>1729</x>
+      <y>714</y>
       <w>83</w>
       <h>34</h>
     </coordinates>
@@ -130,8 +130,8 @@ handler: ICMDHandler
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>700</x>
-      <y>434</y>
+      <x>553</x>
+      <y>665</y>
       <w>231</w>
       <h>84</h>
     </coordinates>
@@ -148,8 +148,8 @@ nodes: Map&lt;String, Name&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>455</y>
+      <x>189</x>
+      <y>686</y>
       <w>98</w>
       <h>35</h>
     </coordinates>
@@ -162,8 +162,8 @@ nodes: Map&lt;String, Name&gt;
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>161</x>
-      <y>455</y>
+      <x>14</x>
+      <y>686</y>
       <w>133</w>
       <h>42</h>
     </coordinates>
@@ -175,8 +175,8 @@ Denotes stylable objects
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>455</x>
-      <y>350</y>
+      <x>308</x>
+      <y>581</y>
       <w>231</w>
       <h>84</h>
     </coordinates>
@@ -193,8 +193,8 @@ relationshipsTo: List&lt;Relationship&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>518</x>
-      <y>511</y>
+      <x>371</x>
+      <y>742</y>
       <w>91</w>
       <h>70</h>
     </coordinates>
@@ -210,8 +210,8 @@ getTo(): Node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
-      <y>378</y>
+      <x>231</x>
+      <y>609</y>
       <w>91</w>
       <h>91</h>
     </coordinates>
@@ -221,8 +221,8 @@ getTo(): Node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
-      <y>483</y>
+      <x>231</x>
+      <y>714</y>
       <w>154</w>
       <h>77</h>
     </coordinates>
@@ -232,8 +232,8 @@ getTo(): Node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>679</x>
-      <y>378</y>
+      <x>532</x>
+      <y>609</y>
       <w>147</w>
       <h>70</h>
     </coordinates>
@@ -244,8 +244,8 @@ m1=0..n</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>602</x>
-      <y>511</y>
+      <x>455</x>
+      <y>742</y>
       <w>224</w>
       <h>56</h>
     </coordinates>
@@ -256,8 +256,8 @@ m1=0..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>833</x>
-      <y>343</y>
+      <x>686</x>
+      <y>574</y>
       <w>182</w>
       <h>42</h>
     </coordinates>
@@ -269,16 +269,16 @@ m1=0..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1176</x>
-      <y>322</y>
+      <x>966</x>
+      <y>588</y>
       <w>266</w>
-      <h>70</h>
+      <h>84</h>
     </coordinates>
     <panel_attributes>DOTFileExporter
 --
 rules: List&lt;StyleGroup&gt;
+transformer: INodeTextTransformer
 --
-+ addRule(rule: StyleGroup): void
 + export(diagram: Diagram): String
 - compile(stylable: IStylable): List&lt;IStyle&gt;</panel_attributes>
     <additional_attributes/>
@@ -286,8 +286,8 @@ rules: List&lt;StyleGroup&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1379</x>
-      <y>427</y>
+      <x>1169</x>
+      <y>707</y>
       <w>266</w>
       <h>77</h>
     </coordinates>
@@ -296,7 +296,7 @@ rules: List&lt;StyleGroup&gt;
 appliesTo: Class&lt;IStyleable&gt;
 styles: List&lt;IStyle&gt;
 --
-+ isApplicable(stylable: IStylable): void
++ isApplicable(stylable: IStylable)
 + getStyle(): IStyle
 + </panel_attributes>
     <additional_attributes/>
@@ -304,19 +304,19 @@ styles: List&lt;IStyle&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1435</x>
-      <y>357</y>
+      <x>1225</x>
+      <y>630</y>
       <w>84</w>
-      <h>84</h>
+      <h>91</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>100.0;100.0;100.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>100.0;104.0;100.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1526</x>
-      <y>560</y>
+      <x>1316</x>
+      <y>833</y>
       <w>119</w>
       <h>49</h>
     </coordinates>
@@ -329,19 +329,19 @@ int compareTo(other: T)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1575</x>
-      <y>497</y>
+      <x>1365</x>
+      <y>777</y>
       <w>21</w>
-      <h>77</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1176</x>
-      <y>427</y>
+      <x>966</x>
+      <y>700</y>
       <w>154</w>
       <h>49</h>
     </coordinates>
@@ -354,8 +354,8 @@ int compareTo(other: T)</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1379</x>
-      <y>532</y>
+      <x>1169</x>
+      <y>805</y>
       <w>140</w>
       <h>77</h>
     </coordinates>
@@ -370,19 +370,19 @@ will be "greater"</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1239</x>
-      <y>385</y>
+      <x>1029</x>
+      <y>665</y>
       <w>21</w>
-      <h>56</h>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1239</x>
-      <y>469</y>
+      <x>1029</x>
+      <y>742</y>
       <w>21</w>
       <h>63</h>
     </coordinates>
@@ -392,12 +392,12 @@ will be "greater"</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1176</x>
-      <y>518</y>
+      <x>966</x>
+      <y>791</y>
       <w>154</w>
       <h>35</h>
     </coordinates>
-    <panel_attributes>NodeTextTransformer
+    <panel_attributes>DefaultNodeTextTransformer
 --
 + transform(toparse: Node)</panel_attributes>
     <additional_attributes/>
@@ -405,8 +405,8 @@ will be "greater"</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1526</x>
-      <y>322</y>
+      <x>1316</x>
+      <y>588</y>
       <w>119</w>
       <h>56</h>
     </coordinates>
@@ -420,19 +420,19 @@ IStyle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1575</x>
-      <y>371</y>
+      <x>1365</x>
+      <y>637</y>
       <w>21</w>
-      <h>70</h>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;94.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>287</x>
-      <y>469</y>
+      <x>140</x>
+      <y>700</y>
       <w>63</w>
       <h>21</h>
     </coordinates>
@@ -442,8 +442,8 @@ IStyle
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1141</x>
-      <y>280</y>
+      <x>931</x>
+      <y>553</y>
       <w>539</w>
       <h>378</h>
     </coordinates>
@@ -454,8 +454,8 @@ IStyle
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>161</x>
-      <y>210</y>
+      <x>14</x>
+      <y>441</y>
       <w>161</w>
       <h>98</h>
     </coordinates>
@@ -469,8 +469,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>161</x>
-      <y>112</y>
+      <x>14</x>
+      <y>343</y>
       <w>161</w>
       <h>77</h>
     </coordinates>
@@ -484,8 +484,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>210</y>
+      <x>189</x>
+      <y>441</y>
       <w>182</w>
       <h>98</h>
     </coordinates>
@@ -499,8 +499,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>532</x>
-      <y>210</y>
+      <x>385</x>
+      <y>441</y>
       <w>161</w>
       <h>98</h>
     </coordinates>
@@ -514,8 +514,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>707</x>
-      <y>210</y>
+      <x>560</x>
+      <y>441</y>
       <w>168</w>
       <h>98</h>
     </coordinates>
@@ -529,8 +529,8 @@ node: ClassNode
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>595</x>
-      <y>301</y>
+      <x>448</x>
+      <y>532</y>
       <w>42</w>
       <h>63</h>
     </coordinates>
@@ -540,8 +540,8 @@ node: ClassNode
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>679</x>
-      <y>301</y>
+      <x>532</x>
+      <y>532</y>
       <w>105</w>
       <h>63</h>
     </coordinates>
@@ -551,8 +551,8 @@ node: ClassNode
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>455</x>
-      <y>301</y>
+      <x>308</x>
+      <y>532</y>
       <w>63</w>
       <h>63</h>
     </coordinates>
@@ -562,8 +562,8 @@ node: ClassNode
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
-      <y>301</y>
+      <x>168</x>
+      <y>532</y>
       <w>154</w>
       <h>63</h>
     </coordinates>
@@ -573,8 +573,8 @@ node: ClassNode
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>238</x>
-      <y>182</y>
+      <x>91</x>
+      <y>413</y>
       <w>21</w>
       <h>42</h>
     </coordinates>
@@ -584,8 +584,8 @@ node: ClassNode
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>896</x>
-      <y>378</y>
+      <x>749</x>
+      <y>609</y>
       <w>21</w>
       <h>70</h>
     </coordinates>
@@ -595,8 +595,8 @@ node: ClassNode
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>147</x>
-      <y>49</y>
+      <x>0</x>
+      <y>280</y>
       <w>889</w>
       <h>651</h>
     </coordinates>
@@ -608,8 +608,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>273</x>
-      <y>609</y>
+      <x>126</x>
+      <y>840</y>
       <w>119</w>
       <h>21</h>
     </coordinates>
@@ -619,8 +619,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>399</x>
-      <y>609</y>
+      <x>252</x>
+      <y>840</y>
       <w>119</w>
       <h>21</h>
     </coordinates>
@@ -630,8 +630,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>525</x>
-      <y>609</y>
+      <x>378</x>
+      <y>840</y>
       <w>119</w>
       <h>21</h>
     </coordinates>
@@ -641,8 +641,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>651</x>
-      <y>609</y>
+      <x>504</x>
+      <y>840</y>
       <w>119</w>
       <h>21</h>
     </coordinates>
@@ -652,8 +652,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>609</y>
+      <x>630</x>
+      <y>840</y>
       <w>119</w>
       <h>21</h>
     </coordinates>
@@ -663,8 +663,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>315</x>
-      <y>644</y>
+      <x>168</x>
+      <y>875</y>
       <w>154</w>
       <h>21</h>
     </coordinates>
@@ -674,8 +674,8 @@ node: ClassNode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>476</x>
-      <y>644</y>
+      <x>329</x>
+      <y>875</y>
       <w>154</w>
       <h>35</h>
     </coordinates>
@@ -687,8 +687,8 @@ cardinality: String</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>322</x>
-      <y>560</y>
+      <x>175</x>
+      <y>791</y>
       <w>210</w>
       <h>63</h>
     </coordinates>
@@ -698,8 +698,8 @@ cardinality: String</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>455</x>
-      <y>574</y>
+      <x>308</x>
+      <y>805</y>
       <w>84</w>
       <h>49</h>
     </coordinates>
@@ -709,8 +709,8 @@ cardinality: String</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>546</x>
-      <y>574</y>
+      <x>399</x>
+      <y>805</y>
       <w>21</w>
       <h>49</h>
     </coordinates>
@@ -720,8 +720,8 @@ cardinality: String</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>581</x>
-      <y>574</y>
+      <x>434</x>
+      <y>805</y>
       <w>140</w>
       <h>49</h>
     </coordinates>
@@ -731,8 +731,8 @@ cardinality: String</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>602</x>
-      <y>560</y>
+      <x>455</x>
+      <y>791</y>
       <w>252</w>
       <h>63</h>
     </coordinates>
@@ -742,8 +742,8 @@ cardinality: String</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>574</y>
+      <x>413</x>
+      <y>805</y>
       <w>63</w>
       <h>84</h>
     </coordinates>
@@ -753,8 +753,8 @@ cardinality: String</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>574</y>
+      <x>301</x>
+      <y>805</y>
       <w>105</w>
       <h>84</h>
     </coordinates>
@@ -764,8 +764,8 @@ cardinality: String</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>896</x>
-      <y>210</y>
+      <x>749</x>
+      <y>441</y>
       <w>119</w>
       <h>98</h>
     </coordinates>
@@ -780,12 +780,93 @@ text: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>679</x>
-      <y>301</y>
+      <x>532</x>
+      <y>532</y>
       <w>252</w>
       <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;100.0;340.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>315</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+/IAnalyzer/
+--
+/+ analyze(Diagram): Diagram/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>931</x>
+      <y>315</y>
+      <w>301</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>UMLGenerator
+--
+analyzers: List&lt;IAnalyzer&gt;
+textTransformer: INodeTextTransformer
+styles: List&lt;StyleGroup&gt;
+parser: CMDParser
+--
++ addRule(rule: StyleGroup)
++ addAnalyzer(analyzer: IAnalyzer)
++ setTextTransformer(tt: INodeTextTransformer)
++ setCMDHandler(h: ICMDHandler)
++ addStyleGroup(ruleset: StyleGroup)
++ execute(String command)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1225</x>
+      <y>427</y>
+      <w>336</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>460.0;380.0;460.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1197</x>
+      <y>448</y>
+      <w>21</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1225</x>
+      <y>350</y>
+      <w>301</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>410.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>861</x>
+      <y>420</y>
+      <w>84</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;260.0;60.0;260.0;60.0;10.0;100.0;10.0</additional_attributes>
   </element>
 </diagram>
