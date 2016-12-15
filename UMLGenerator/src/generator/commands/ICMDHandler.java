@@ -1,4 +1,4 @@
-package generator.cmdparsers;
+package generator.commands;
 
 public interface ICMDHandler {
 

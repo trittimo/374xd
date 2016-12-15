@@ -1,5 +1,5 @@
 package generator.exporters;
 
-public class DOTFileExporter {
+public class DOTFileExporter implements IExporter {
 
 }
