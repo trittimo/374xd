@@ -1,0 +1,7 @@
+digraph whatever{
+generator_factories_IGraphFactory [ shape="record", label = "{\<\<interface\>\>\nIGraphFactory|+ addNodeToGraph(arg0: generator.Graph, arg1: java.lang.String): void\l+ linkGraph(arg0: generator.Graph): void\l}" ];
+generator_factories_DefaultGraphFactory [ shape="record", label = "{DefaultGraphFactory||+ addNodeToGraph(arg0: generator.Graph, arg1: java.lang.String): void\l+ linkGraph(arg0: generator.Graph): void\l}" ];
+generator_factories_IGraphFactory -> java_lang_Object [arrowhead="onormal"];
+generator_factories_DefaultGraphFactory -> java_lang_Object [arrowhead="onormal"];
+generator_factories_DefaultGraphFactory -> generator_factories_IGraphFactory [arrowhead="onormal", style="dashed"];
+}

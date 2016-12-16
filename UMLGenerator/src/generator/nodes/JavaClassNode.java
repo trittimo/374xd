@@ -131,11 +131,11 @@ public class JavaClassNode implements INode {
 	public void createLinks(Graph g) {		
 		// inherits
 		if (classNode.superName != null)
-			this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName));
+			this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName.replaceAll("/", "_")));
 		// impl
 		if (classNode.interfaces != null) {
 			for (String name : ((List<String>) classNode.interfaces))
-				this.addLink(new ImplementsLink(this.getQualifiedName(), name));
+				this.addLink(new ImplementsLink(this.getQualifiedName(), name.replaceAll("/", "_")));
 		}
 	}
 

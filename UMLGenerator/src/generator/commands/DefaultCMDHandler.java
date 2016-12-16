@@ -21,6 +21,8 @@ public class DefaultCMDHandler implements ICMDHandler {
 				factory.addNodeToGraph(graph, inputClass);
 			}
 			
+			factory.linkGraph(graph);
+			
 			for (IAnalyzer analyzer : analyzers) {
 				// analyze
 				// TODO

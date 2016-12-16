@@ -8,8 +8,8 @@ public abstract class OneToOneLink implements ILink {
 	String end;
 	
 	public OneToOneLink(String from, String to) {
-		start = from;
-		end = to;
+		start = from.replaceAll("\\.", "_");
+		end = to.replaceAll("\\.", "_");
 	}
 	
 	public OneToOneLink(INode from, INode to) {
