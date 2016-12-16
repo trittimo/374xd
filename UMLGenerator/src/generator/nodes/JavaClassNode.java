@@ -2,6 +2,8 @@ package generator.nodes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -27,6 +29,8 @@ public class JavaClassNode implements INode {
 	public String getQualifiedName() {
 		return Type.getObjectType(classNode.name).getClassName();
 	}
+	
+	protected final Pattern REPL_DOLLARS = Pattern.compile("\\$");
 
 	@Override
 	public String getLabel() {
@@ -38,8 +42,9 @@ public class JavaClassNode implements INode {
 		// Methods
 		label += getMethodSection();
 		
-		//label = label.replaceAll("\\#", "\\#");
-		//label = label.replaceAll("$", "\\$");
+		label = label.replaceAll("#", Matcher.quoteReplacement("\\#"));
+		label = label.replaceAll("\\$", Matcher.quoteReplacement("\\$"));
+		//label = REPL_DOLLARS.matcher(label).replaceAll(Matcher.quoteReplacement("\\$"));
 		
 		return label;
 	}
@@ -49,17 +54,19 @@ public class JavaClassNode implements INode {
 	}
 	
 	protected String getFieldSection() {
-		String section = "";
+		String section = "|", type;
 		@SuppressWarnings("unchecked")
 		List<FieldNode> fields = (List<FieldNode>) classNode.fields;
 		for(FieldNode field : fields) {
 			//newline char, accessiblity , field name, field type
 			
-			section += String.format("%s%s %s: %s", 
-					(section.equals(""))?"|":"\\l",
+			// Can't seem to get parametized types working
+			type = Type.getType(field.desc).getClassName();
+			
+			section += String.format("%s %s: %s\\l",
 					getAccessibility(field.access),
 					field.name,
-					Type.getType(field.desc));
+					type);
 		}
 		return section;
 	}
@@ -75,22 +82,21 @@ public class JavaClassNode implements INode {
 	}
 
 	protected String getMethodSection() {
-		String section = "";
+		String section = "|";
 		List<MethodNode> methods = (List<MethodNode>) classNode.methods;
 		for(MethodNode method : methods) {
-			if (method.name.equals("<init>")) {
+			if (method.name.startsWith("<")) {
 				continue;
 			}
 			//newline char, accessiblity , field name, field type
 			String methodArgs = getMethodArguments(method);
-			String retType = Type.getReturnType(method.desc).toString();
+			String retType = Type.getReturnType(method.desc).getClassName();
 			
-			section += String.format("%s%s %s(%s): %s", 
-					(section.equals(""))?"|":"\\l",
+			section += String.format("%s %s(%s): %s\\l", 
 					getAccessibility(method.access),
 					method.name,
 					methodArgs,
-					retType.equals("V") ? "void" : retType);
+					retType);
 		}
 		return section;
 	}
@@ -98,14 +104,14 @@ public class JavaClassNode implements INode {
 
 	private String getMethodArguments(MethodNode m) {
 		List<ParameterNode> params = m.parameters;
-		if (params == null) {
-			return "";
-		}
 		Type[] types = Type.getArgumentTypes(m.desc);
 		String stringify = "";
-		for (int i = 0; i < params.size(); i++) {
+		String name, type;
+		for (int i = 0; i < types.length; i++) {
+			type = types[i].getClassName();
+			name = (params != null)?params.get(i).name:("arg"+i);
 			stringify += (i == 0)?"":", ";
-			stringify += String.format("%s: %s", params.get(i).name, types[i].getClassName());
+			stringify += String.format("%s: %s", name, type);
 		}
 		return stringify;
 	}
