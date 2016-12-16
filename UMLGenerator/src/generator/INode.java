@@ -6,10 +6,13 @@ public interface INode {
 
 	public String getQualifiedName();
 	
-	public String getText();
+	public String getLabel();
+	
+	public String getStylingText();
 	
 	public void addLink(ILink link);
 	
 	public List<ILink> getLinks();
+	
 
 }

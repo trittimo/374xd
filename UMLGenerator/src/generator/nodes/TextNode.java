@@ -22,7 +22,7 @@ public class TextNode implements INode {
 	}
 
 	@Override
-	public String getText() {
+	public String getLabel() {
 		return text;
 	}
 
@@ -34,6 +34,12 @@ public class TextNode implements INode {
 	@Override
 	public List<ILink> getLinks() {
 		return links;
+	}
+
+	@Override
+	public String getStylingText() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
