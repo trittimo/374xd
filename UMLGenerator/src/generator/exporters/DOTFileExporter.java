@@ -11,7 +11,7 @@ public class DOTFileExporter implements IExporter {
 	public void export(Graph graph, CMDParams params) {
 		for (String nodeName : graph.getNodes().keySet()) {
 			System.out.println("Node: " + nodeName + "\n");
-			JavaClassNode node = (JavaClassNode) graph.getNodes().get(nodeName);
+			INode node = graph.getNodes().get(nodeName);
 			System.out.println("Label: " + node.getLabel() + "\n");
 			System.out.println("------------------");
 		}

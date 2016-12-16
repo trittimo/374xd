@@ -3,8 +3,6 @@ package generator.nodes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
@@ -18,7 +16,7 @@ import generator.INode;
 public class JavaClassNode implements INode {
 
 	private List<ILink> links;
-	private ClassNode classNode;
+	protected ClassNode classNode;
 	
 	public JavaClassNode(ClassNode node) {
 		this.classNode = node;
@@ -32,7 +30,7 @@ public class JavaClassNode implements INode {
 
 	@Override
 	public String getLabel() {
-		String label = "";
+		String label = "{";
 		// Name
 		label += getLabelName();		
 		// Fields
@@ -44,7 +42,7 @@ public class JavaClassNode implements INode {
 		label = label.replaceAll("\\$", Matcher.quoteReplacement("\\$"));
 		//label = REPL_DOLLARS.matcher(label).replaceAll(Matcher.quoteReplacement("\\$"));
 		
-		return label;
+		return label + "}";
 	}
 
 	protected String getLabelName() {
