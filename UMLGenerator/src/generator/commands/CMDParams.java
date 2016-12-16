@@ -31,4 +31,14 @@ public class CMDParams {
 	public void addArgument(String s) {
 		args.add(s);
 	}
+	
+	public List<String> getFlags() {
+		return this.flags;
+	}
+	public Map<String, String> getOptionPairs() {
+		return this.optionPair;
+	}
+	public List<String> getArgs() {
+		return this.args;
+	}
 }
