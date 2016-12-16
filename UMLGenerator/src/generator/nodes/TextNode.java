@@ -36,10 +36,4 @@ public class TextNode implements INode {
 		return links;
 	}
 
-	@Override
-	public String getStylingText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
