@@ -128,10 +128,12 @@ public class JavaClassNode implements INode {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void createLinks(Graph g) {		
+	public void createLinks(Graph g) {	
+		ILink link;
 		// inherits
-		if (classNode.superName != null)
+		if (classNode.superName != null) {
 			this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName.replaceAll("/", "_")));
+		}
 		// impl
 		if (classNode.interfaces != null) {
 			for (String name : ((List<String>) classNode.interfaces))

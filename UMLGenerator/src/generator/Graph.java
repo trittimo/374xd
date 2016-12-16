@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Graph {
+	
 	private Map<String, INode> nodes;
-	private ArrayList<String> nodeOrdered;
+	public ArrayList<ILink> links;
 	
 	public Graph() {
 		nodes = new HashMap<String, INode>();
-		nodeOrdered = new ArrayList<String>();
+		links = new ArrayList<ILink>();
 	}
 	
 	public INode addNode(INode n) {
 		this.nodes.put(n.getQualifiedName(), n);
-		nodeOrdered.add(n.getQualifiedName());
 		return n;
 	}
 	

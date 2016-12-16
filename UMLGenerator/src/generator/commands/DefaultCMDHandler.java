@@ -15,6 +15,8 @@ public class DefaultCMDHandler implements ICMDHandler {
 	
 	@Override
 	public void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, IGraphFactory factory) {
+		
+		
 		Graph graph = new Graph();
 		try {
 			for (String inputClass : params.getArgs()) {

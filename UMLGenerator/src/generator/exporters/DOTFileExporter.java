@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import generator.Graph;
@@ -19,15 +20,10 @@ public class DOTFileExporter implements IExporter {
 	public void export(Graph graph, CMDParams params) {
 		
 		String outFileName = params.getOptionPairs().get("out");
-		String digraph = "digraph " + outFileName.substring(0, outFileName.indexOf('.')) + "{\n";
+		String digraph = "digraph " + outFileName.substring(0, outFileName.indexOf('.')) + "{\nrankdir=\"BT\";\n";
 		
-		
-		
-		
-		
-		for (String nodeName : graph.getNodes().keySet()) {
-			INode node = graph.getNodes().get(nodeName);
-			digraph += String.format("%s [ shape=\"record\", label = \"%s\" ];\n", nodeName.replaceAll("\\.", "_"), node.getLabel());
+		for (INode node : graph.getNodes().values() ) {
+			digraph += String.format("%s [ shape=\"record\", label = \"%s\" ];\n", node.getQualifiedName().replaceAll("\\.", "_"), node.getLabel());
 		}
 		
 		for (INode node : graph.getNodes().values()) {
