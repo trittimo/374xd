@@ -7,11 +7,9 @@ import java.util.Map;
 public class Graph {
 	
 	private Map<String, INode> nodes;
-	public ArrayList<ILink> links;
 	
 	public Graph() {
 		nodes = new HashMap<String, INode>();
-		links = new ArrayList<ILink>();
 	}
 	
 	public INode addNode(INode n) {
