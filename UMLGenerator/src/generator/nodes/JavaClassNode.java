@@ -141,4 +141,8 @@ public class JavaClassNode implements INode {
 		}
 	}
 
+	public ClassNode getClassNode() {
+		return this.classNode;
+	}
+
 }
