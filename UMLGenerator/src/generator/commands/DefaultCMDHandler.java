@@ -9,12 +9,12 @@ import generator.INode;
 import generator.UMLGenerator;
 import generator.analyzers.IAnalyzer;
 import generator.exporters.IExporter;
-import generator.factories.INodeFactory;
+import generator.factories.IGraphFactory;
 
 public class DefaultCMDHandler implements ICMDHandler {
 	
 	@Override
-	public void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, INodeFactory factory) {
+	public void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, IGraphFactory factory) {
 		Graph graph = new Graph();
 		try {
 			for (String inputClass : params.getArgs()) {

@@ -2,6 +2,7 @@ package generator.nodes;
 
 import java.util.List;
 
+import generator.Graph;
 import generator.ILink;
 import generator.INode;
 
@@ -34,6 +35,11 @@ public class TextNode implements INode {
 	@Override
 	public List<ILink> getLinks() {
 		return links;
+	}
+
+	@Override
+	public void createLinks(Graph g) {
+		return;
 	}
 
 }

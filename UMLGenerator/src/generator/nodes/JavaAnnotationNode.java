@@ -1,9 +1,8 @@
-package generator.factories;
+package generator.nodes;
 
 import org.objectweb.asm.tree.ClassNode;
 
 import generator.INode;
-import generator.nodes.JavaClassNode;
 
 public class JavaAnnotationNode extends JavaClassNode implements INode {
 

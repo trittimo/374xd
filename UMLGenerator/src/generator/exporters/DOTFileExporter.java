@@ -9,11 +9,9 @@ public class DOTFileExporter implements IExporter {
 
 	@Override
 	public void export(Graph graph, CMDParams params) {
+		
 		for (String nodeName : graph.getNodes().keySet()) {
-			System.out.println("Node: " + nodeName + "\n");
-			INode node = graph.getNodes().get(nodeName);
-			System.out.println("Label: " + node.getLabel() + "\n");
-			System.out.println("------------------");
+			
 		}
 	}
 

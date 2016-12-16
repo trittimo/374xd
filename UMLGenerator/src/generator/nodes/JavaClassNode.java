@@ -2,6 +2,7 @@ package generator.nodes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -10,8 +11,11 @@ import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.ParameterNode;
 
+import generator.Graph;
 import generator.ILink;
 import generator.INode;
+import generator.links.ExtendsLink;
+import generator.links.ImplementsLink;
 
 public class JavaClassNode implements INode {
 
@@ -120,6 +124,19 @@ public class JavaClassNode implements INode {
 	@Override
 	public List<ILink> getLinks() {
 		return this.links;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void createLinks(Graph g) {		
+		// inherits
+		if (classNode.superName != null)
+			this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName));
+		// impl
+		if (classNode.interfaces != null) {
+			for (String name : ((List<String>) classNode.interfaces))
+				this.addLink(new ImplementsLink(this.getQualifiedName(), name));
+		}
 	}
 
 }

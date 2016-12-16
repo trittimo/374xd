@@ -10,6 +10,8 @@ public interface INode {
 	
 	public void addLink(ILink link);
 	
+	public void createLinks(Graph g);
+	
 	public List<ILink> getLinks();
 	
 

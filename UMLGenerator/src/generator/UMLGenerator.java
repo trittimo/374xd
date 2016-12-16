@@ -8,14 +8,14 @@ import generator.commands.CMDParams;
 import generator.commands.CMDParser;
 import generator.commands.ICMDHandler;
 import generator.exporters.IExporter;
-import generator.factories.INodeFactory;
+import generator.factories.IGraphFactory;
 
 public class UMLGenerator {
 	
 	private ICMDHandler cmdHandler;
 	private List<IAnalyzer> analyzers;
 	private List<IExporter> exporters;
-	private INodeFactory factory;
+	private IGraphFactory factory;
 	
 	public UMLGenerator() {
 		this.analyzers = new ArrayList<IAnalyzer>();
@@ -26,7 +26,7 @@ public class UMLGenerator {
 		this.cmdHandler = handler;
 	}
 	
-	public void setGraphFactory(INodeFactory factory) {
+	public void setGraphFactory(IGraphFactory factory) {
 		this.factory = factory;
 	}
 	
@@ -43,7 +43,7 @@ public class UMLGenerator {
 		cmdHandler.execute(params, analyzers, exporters, factory);
 	}
 	
-	public INodeFactory getGraphFactory() {
+	public IGraphFactory getGraphFactory() {
 		return this.factory;
 	}
 	

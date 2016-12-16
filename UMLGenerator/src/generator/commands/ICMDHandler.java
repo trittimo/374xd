@@ -4,9 +4,9 @@ import java.util.List;
 
 import generator.analyzers.IAnalyzer;
 import generator.exporters.IExporter;
-import generator.factories.INodeFactory;
+import generator.factories.IGraphFactory;
 
 public interface ICMDHandler {
-	public abstract void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, INodeFactory factory);
+	public abstract void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, IGraphFactory factory);
 
 }
