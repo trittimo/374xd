@@ -1,0 +1,10 @@
+JavaClassNode
+- qualified name
+- name
+- methods
+- fields
+
+addStyleTransformer(Class<? extends INode>, StyleTransformer t)
+
+StyleTransformer<T extends INode>
+- String getNodeText(T node)

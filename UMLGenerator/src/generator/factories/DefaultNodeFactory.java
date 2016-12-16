@@ -7,19 +7,18 @@ import org.objectweb.asm.tree.ClassNode;
 
 import generator.Graph;
 import generator.INode;
+import generator.nodes.JavaClassNode;
 
 public class DefaultNodeFactory implements INodeFactory {
 	
 	@Override
-	public INode createNode(Graph g, String qualifiedName) throws IOException {
+	public void addNodeToGraph(Graph g, String qualifiedName) throws IOException {
 		ClassReader reader = new ClassReader(qualifiedName);
 		ClassNode classNode = new ClassNode();
 		reader.accept(classNode, ClassReader.EXPAND_FRAMES);
 		
-		
-		
-		
-		return null;
+		JavaClassNode node = new JavaClassNode(classNode);
+		g.addNode(node);
 	}
 	
 }

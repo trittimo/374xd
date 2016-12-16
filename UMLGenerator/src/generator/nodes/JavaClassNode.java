@@ -32,16 +32,20 @@ public class JavaClassNode implements INode {
 	public String getLabel() {
 		String label = "";
 		// Name
-				
+		label += getLabelName();		
 		// Fields
-		
+		label += getFieldSection();
 		// Methods
+		label += getMethodSection();
+		
+		//label = label.replaceAll("\\#", "\\#");
+		//label = label.replaceAll("$", "\\$");
 		
 		return label;
 	}
 
 	protected String getLabelName() {
-		return classNode.name;
+		return classNode.name.substring(classNode.name.lastIndexOf('/') + 1);
 	}
 	
 	protected String getFieldSection() {
@@ -57,6 +61,7 @@ public class JavaClassNode implements INode {
 					field.name,
 					Type.getType(field.desc));
 		}
+		return section;
 	}
 	
 	protected String getAccessibility(int access) {
@@ -73,19 +78,29 @@ public class JavaClassNode implements INode {
 		String section = "";
 		List<MethodNode> methods = (List<MethodNode>) classNode.methods;
 		for(MethodNode method : methods) {
+			if (method.name.equals("<init>")) {
+				continue;
+			}
 			//newline char, accessiblity , field name, field type
-			section += String.format("%s%s %s: %s", 
+			String methodArgs = getMethodArguments(method);
+			String retType = Type.getReturnType(method.desc).toString();
+			
+			section += String.format("%s%s %s(%s): %s", 
 					(section.equals(""))?"|":"\\l",
 					getAccessibility(method.access),
 					method.name,
-					getMethodArguments(method),
-					Type.getReturnType(method.desc));
+					methodArgs,
+					retType.equals("V") ? "void" : retType);
 		}
+		return section;
 	}
 	
 
-	private Object getMethodArguments(MethodNode m) {
+	private String getMethodArguments(MethodNode m) {
 		List<ParameterNode> params = m.parameters;
+		if (params == null) {
+			return "";
+		}
 		Type[] types = Type.getArgumentTypes(m.desc);
 		String stringify = "";
 		for (int i = 0; i < params.size(); i++) {
@@ -97,20 +112,12 @@ public class JavaClassNode implements INode {
 
 	@Override
 	public void addLink(ILink link) {
-		// TODO Auto-generated method stub
-		
+		this.links.add(link);
 	}
 
 	@Override
 	public List<ILink> getLinks() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getStylingText() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.links;
 	}
 
 }

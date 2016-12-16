@@ -1,16 +1,37 @@
 package generator.commands;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import generator.Graph;
+import generator.INode;
 import generator.UMLGenerator;
+import generator.analyzers.IAnalyzer;
+import generator.exporters.IExporter;
+import generator.factories.INodeFactory;
 
 public class DefaultCMDHandler implements ICMDHandler {
 	
-	private UMLGenerator api;
-	public DefaultCMDHandler(UMLGenerator api) {
-		this.api = api;
-	}
-	
 	@Override
-	public void execute(CMDParams params) {
+	public void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, INodeFactory factory) {
+		Graph graph = new Graph();
+		try {
+			for (String inputClass : params.getArgs()) {
+				factory.addNodeToGraph(graph, inputClass);
+			}
+			
+			for (IAnalyzer analyzer : analyzers) {
+				// analyze
+				// TODO
+			}
+			
+			for (IExporter exporter : exporters) {
+				exporter.export(graph, params);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

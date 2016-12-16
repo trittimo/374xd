@@ -40,7 +40,7 @@ public class UMLGenerator {
 	
 	public void execute(String[] args) {
 		CMDParams params = CMDParser.parse(args);
-		cmdHandler.execute(params);
+		cmdHandler.execute(params, analyzers, exporters, factory);
 	}
 	
 	public INodeFactory getGraphFactory() {

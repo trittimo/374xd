@@ -15,4 +15,8 @@ public class Graph {
 	public void addNode(INode n) {
 		this.nodes.put(n.getQualifiedName(), n);
 	}
+	
+	public Map<String, INode> getNodes() {
+		return nodes;
+	}
 }

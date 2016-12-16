@@ -1,5 +1,8 @@
 package generator.exporters;
 
-public interface IExporter {
+import generator.Graph;
+import generator.commands.CMDParams;
 
+public interface IExporter {
+	public void export(Graph graph, CMDParams params);
 }

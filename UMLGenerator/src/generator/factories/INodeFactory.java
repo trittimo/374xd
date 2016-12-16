@@ -7,5 +7,5 @@ import generator.INode;
 
 public interface INodeFactory {
 	
-	public INode createNode(Graph g, String qualifiedName) throws IOException;
+	public void addNodeToGraph(Graph g, String qualifiedName) throws IOException;
 }
