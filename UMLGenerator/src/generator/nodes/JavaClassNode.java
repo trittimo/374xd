@@ -29,8 +29,6 @@ public class JavaClassNode implements INode {
 	public String getQualifiedName() {
 		return Type.getObjectType(classNode.name).getClassName();
 	}
-	
-	protected final Pattern REPL_DOLLARS = Pattern.compile("\\$");
 
 	@Override
 	public String getLabel() {
