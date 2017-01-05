@@ -23,14 +23,14 @@
 
 
 // This text will be stored with each diagram;  use it for notes.</help_text>
-  <zoom_level>6</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>2004</x>
-      <y>552</y>
-      <w>120</w>
-      <h>48</h>
+      <x>2880</x>
+      <y>620</y>
+      <w>200</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>CMDParams
 --
@@ -42,21 +42,21 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>1884</x>
-      <y>564</y>
-      <w>132</w>
-      <h>72</h>
+      <x>2680</x>
+      <y>640</y>
+      <w>220</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>120;18;18;18;18;60</additional_attributes>
+    <additional_attributes>200;30;30;30;30;100</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>1986</x>
-      <y>720</y>
-      <w>456</w>
-      <h>54</h>
+      <x>2850</x>
+      <y>900</y>
+      <w>760</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>DefaultCMDHandler
 --
@@ -66,10 +66,10 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Note</type>
     <coordinates>
-      <x>1746</x>
-      <y>504</y>
-      <w>750</w>
-      <h>324</h>
+      <x>2450</x>
+      <y>540</y>
+      <w>1250</w>
+      <h>540</h>
     </coordinates>
     <panel_attributes>generator.commands</panel_attributes>
     <additional_attributes/>
@@ -77,10 +77,10 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>1776</x>
-      <y>624</y>
-      <w>186</w>
-      <h>114</h>
+      <x>2500</x>
+      <y>740</y>
+      <w>310</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>CMDParser
 --
@@ -90,21 +90,21 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>2016</x>
-      <y>654</y>
-      <w>30</w>
-      <h>78</h>
+      <x>2900</x>
+      <y>790</y>
+      <w>50</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>18;18;18;66</additional_attributes>
+    <additional_attributes>30;30;30;110</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1296</x>
-      <y>660</y>
-      <w>228</w>
-      <h>36</h>
+      <x>1700</x>
+      <y>800</y>
+      <w>380</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>DOTFileExporter
 --
@@ -114,10 +114,10 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1254</x>
-      <y>504</y>
-      <w>462</w>
-      <h>324</h>
+      <x>1630</x>
+      <y>540</y>
+      <w>770</w>
+      <h>540</h>
     </coordinates>
     <panel_attributes>generator.exporters</panel_attributes>
     <additional_attributes/>
@@ -125,10 +125,10 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1776</x>
-      <y>264</y>
-      <w>246</w>
-      <h>48</h>
+      <x>2500</x>
+      <y>140</y>
+      <w>410</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 /IAnalyzer/
@@ -139,10 +139,10 @@ args: List&lt;String&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1266</x>
-      <y>246</y>
-      <w>258</w>
-      <h>120</h>
+      <x>1650</x>
+      <y>110</y>
+      <w>430</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>UMLGenerator
 --
@@ -162,10 +162,10 @@ parser: CMDParser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1518</x>
-      <y>360</y>
-      <w>282</w>
-      <h>276</h>
+      <x>2070</x>
+      <y>300</y>
+      <w>470</w>
+      <h>460</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>450.0;440.0;450.0;100.0;190.0;100.0;10.0;10.0</additional_attributes>
@@ -173,10 +173,10 @@ parser: CMDParser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1488</x>
-      <y>360</y>
-      <w>18</w>
-      <h>204</h>
+      <x>2020</x>
+      <y>300</y>
+      <w>30</w>
+      <h>340</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;320.0;10.0;10.0</additional_attributes>
@@ -184,10 +184,10 @@ parser: CMDParser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1518</x>
-      <y>276</y>
-      <w>270</w>
-      <h>18</h>
+      <x>2070</x>
+      <y>160</y>
+      <w>450</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>430.0;10.0;10.0;10.0</additional_attributes>
@@ -195,10 +195,10 @@ parser: CMDParser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1020</x>
-      <y>336</y>
-      <w>258</w>
-      <h>18</h>
+      <x>1240</x>
+      <y>260</y>
+      <w>430</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;410.0;10.0</additional_attributes>
@@ -206,10 +206,10 @@ parser: CMDParser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1350</x>
-      <y>552</y>
-      <w>228</w>
-      <h>42</h>
+      <x>1790</x>
+      <y>620</y>
+      <w>380</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /IExporter/
@@ -220,10 +220,10 @@ parser: CMDParser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1398</x>
-      <y>588</y>
-      <w>18</w>
-      <h>84</h>
+      <x>1870</x>
+      <y>680</y>
+      <w>30</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
@@ -231,10 +231,10 @@ parser: CMDParser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1452</x>
-      <y>720</y>
-      <w>228</w>
-      <h>48</h>
+      <x>1960</x>
+      <y>900</y>
+      <w>380</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>PNGExporter
 --
@@ -246,10 +246,10 @@ graphVizCMD: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1554</x>
-      <y>588</y>
-      <w>18</w>
-      <h>144</h>
+      <x>2130</x>
+      <y>680</y>
+      <w>30</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
@@ -257,10 +257,10 @@ graphVizCMD: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1782</x>
-      <y>414</y>
-      <w>402</w>
-      <h>222</h>
+      <x>2510</x>
+      <y>390</y>
+      <w>670</w>
+      <h>370</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>650.0;350.0;650.0;10.0;10.0;10.0</additional_attributes>
@@ -268,21 +268,21 @@ graphVizCMD: String
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>2016</x>
-      <y>582</y>
-      <w>30</w>
-      <h>54</h>
+      <x>2900</x>
+      <y>670</y>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>18;18;18;42;18;42</additional_attributes>
+    <additional_attributes>30;30;30;70;30;70</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1740</x>
-      <y>234</y>
-      <w>318</w>
-      <h>168</h>
+      <x>2440</x>
+      <y>90</y>
+      <w>530</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>generator.analyzers</panel_attributes>
     <additional_attributes/>
@@ -290,10 +290,10 @@ graphVizCMD: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1776</x>
-      <y>336</y>
-      <w>246</w>
-      <h>48</h>
+      <x>2500</x>
+      <y>260</y>
+      <w>410</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>RecursiveClassAnalyzer
 --
@@ -303,10 +303,10 @@ graphVizCMD: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1872</x>
-      <y>306</y>
-      <w>18</w>
-      <h>42</h>
+      <x>2660</x>
+      <y>210</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
@@ -314,10 +314,10 @@ graphVizCMD: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1986</x>
-      <y>624</y>
-      <w>462</w>
-      <h>48</h>
+      <x>2850</x>
+      <y>740</y>
+      <w>770</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /ICMDHandler/
@@ -328,10 +328,10 @@ graphVizCMD: String
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>762</x>
-      <y>504</y>
-      <w>420</w>
-      <h>312</h>
+      <x>810</x>
+      <y>530</y>
+      <w>700</w>
+      <h>520</h>
     </coordinates>
     <panel_attributes>generator.nodes</panel_attributes>
     <additional_attributes/>
@@ -339,10 +339,10 @@ graphVizCMD: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>798</x>
-      <y>312</y>
-      <w>228</w>
-      <h>54</h>
+      <x>870</x>
+      <y>220</y>
+      <w>380</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /IGraphFactory/
@@ -354,10 +354,10 @@ graphVizCMD: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>798</x>
-      <y>384</y>
-      <w>228</w>
-      <h>42</h>
+      <x>870</x>
+      <y>370</y>
+      <w>380</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>DefaultGraphFactory
 --
@@ -368,21 +368,21 @@ graphVizCMD: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>918</x>
-      <y>360</y>
-      <w>18</w>
-      <h>36</h>
+      <x>1070</x>
+      <y>300</y>
+      <w>30</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1266</x>
-      <y>180</y>
-      <w>258</w>
-      <h>18</h>
+      <x>1650</x>
+      <y>0</y>
+      <w>430</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>UMLGeneratorApp
 </panel_attributes>
@@ -391,10 +391,10 @@ graphVizCMD: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1398</x>
-      <y>192</y>
-      <w>18</w>
-      <h>66</h>
+      <x>1870</x>
+      <y>20</y>
+      <w>30</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -402,10 +402,10 @@ graphVizCMD: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
-      <y>318</y>
-      <w>156</w>
-      <h>54</h>
+      <x>490</x>
+      <y>230</y>
+      <w>260</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Graph
 --
@@ -418,10 +418,10 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>318</y>
-      <w>90</w>
-      <h>18</h>
+      <x>740</x>
+      <y>230</y>
+      <w>150</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
@@ -429,10 +429,10 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
-      <y>510</y>
-      <w>156</w>
-      <h>78</h>
+      <x>490</x>
+      <y>360</y>
+      <w>260</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /INode/
@@ -447,21 +447,21 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>648</x>
-      <y>366</y>
-      <w>18</w>
-      <h>156</h>
+      <x>620</x>
+      <y>310</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;240.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
-      <y>630</y>
-      <w>156</w>
-      <h>54</h>
+      <x>140</x>
+      <y>360</y>
+      <w>260</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /ILink/
@@ -473,21 +473,21 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>642</x>
-      <y>582</y>
-      <w>18</w>
-      <h>60</h>
+      <x>390</x>
+      <y>380</y>
+      <w>120</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>762</x>
-      <y>288</y>
-      <w>306</w>
-      <h>180</h>
+      <x>810</x>
+      <y>180</y>
+      <w>510</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>generator.factories</panel_attributes>
     <additional_attributes/>
@@ -495,10 +495,10 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>870</x>
-      <y>522</y>
-      <w>156</w>
-      <h>96</h>
+      <x>990</x>
+      <y>570</y>
+      <w>260</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>JavaClassNode
 --
@@ -515,21 +515,21 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>546</y>
-      <w>162</w>
-      <h>18</h>
+      <x>740</x>
+      <y>420</y>
+      <w>270</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;250.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;250.0;200.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>792</x>
-      <y>666</y>
-      <w>156</w>
-      <h>18</h>
+      <x>860</x>
+      <y>810</y>
+      <w>260</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>JavaInterfaceNode
 </panel_attributes>
@@ -538,10 +538,10 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>882</x>
-      <y>708</y>
-      <w>156</w>
-      <h>18</h>
+      <x>1010</x>
+      <y>880</y>
+      <w>260</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>JavaAnnotationNode
 </panel_attributes>
@@ -550,10 +550,10 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>984</x>
-      <y>750</y>
-      <w>156</w>
-      <h>18</h>
+      <x>1180</x>
+      <y>950</y>
+      <w>260</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>JavaAbstractNode
 </panel_attributes>
@@ -562,10 +562,10 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>912</x>
-      <y>612</y>
-      <w>18</w>
-      <h>66</h>
+      <x>1060</x>
+      <y>720</y>
+      <w>30</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
@@ -573,10 +573,10 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>612</y>
-      <w>18</w>
-      <h>108</h>
+      <x>1140</x>
+      <y>720</y>
+      <w>30</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
@@ -584,12 +584,234 @@ nodes: Map&lt;String, ClassName&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1020</x>
-      <y>582</y>
-      <w>66</w>
-      <h>180</h>
+      <x>1240</x>
+      <y>670</y>
+      <w>110</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0;90.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>560</y>
+      <w>260</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>AssociationLink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>610</y>
+      <w>260</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>DependencyLink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>660</y>
+      <w>260</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ExtendsLink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>710</y>
+      <w>260</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ImplementsLink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>760</y>
+      <w>260</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>/CardinalityLink/
+--
+String startCardinality
+String endCardinality
+--
+/+ getAttributes()/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>510</y>
+      <w>260</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>OneToOneLink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>880</y>
+      <w>260</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ManyToManyLink
+--
+from: String
+to: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>1050</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>OneToManyLink
+--
+to: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>970</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ManyToOneLink
+--
+from: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>440</y>
+      <w>70</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;360.0;50.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>510</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>530</y>
+      <w>70</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0;50.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>560</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>610</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>660</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>890</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>840</y>
+      <w>70</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;230.0;50.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>990</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>40</x>
+      <y>500</y>
+      <w>590</w>
+      <h>650</h>
+    </coordinates>
+    <panel_attributes>generator.links</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
