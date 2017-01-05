@@ -466,8 +466,8 @@ nodes: Map&lt;String, ClassName&gt;
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /ILink/
 --
-+ getRelationship(): String
-+ getAttributes(): String</panel_attributes>
+/+ getRelationship(): String/
+/+ getAttributes(): String/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -597,7 +597,7 @@ nodes: Map&lt;String, ClassName&gt;
     <coordinates>
       <x>510</x>
       <y>560</y>
-      <w>260</w>
+      <w>200</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>AssociationLink</panel_attributes>
@@ -608,7 +608,7 @@ nodes: Map&lt;String, ClassName&gt;
     <coordinates>
       <x>510</x>
       <y>610</y>
-      <w>260</w>
+      <w>200</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>DependencyLink</panel_attributes>
@@ -619,7 +619,7 @@ nodes: Map&lt;String, ClassName&gt;
     <coordinates>
       <x>510</x>
       <y>660</y>
-      <w>260</w>
+      <w>200</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>ExtendsLink</panel_attributes>
@@ -630,7 +630,7 @@ nodes: Map&lt;String, ClassName&gt;
     <coordinates>
       <x>510</x>
       <y>710</y>
-      <w>260</w>
+      <w>200</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>ImplementsLink</panel_attributes>
@@ -642,34 +642,36 @@ nodes: Map&lt;String, ClassName&gt;
       <x>450</x>
       <y>760</y>
       <w>260</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>/CardinalityLink/
 --
 String startCardinality
 String endCardinality
---
-/+ getAttributes()/
-</panel_attributes>
+start: String
+end: String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>450</x>
-      <y>510</y>
+      <y>480</y>
       <w>260</w>
-      <h>30</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>OneToOneLink</panel_attributes>
+    <panel_attributes>OneToOneLink
+--
+start: String
+end: String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>510</x>
-      <y>880</y>
-      <w>260</w>
+      <y>910</y>
+      <w>200</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>ManyToManyLink
@@ -682,8 +684,8 @@ to: String</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>510</x>
-      <y>1050</y>
-      <w>260</w>
+      <y>1080</y>
+      <w>200</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>OneToManyLink
@@ -695,8 +697,8 @@ to: String</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>510</x>
-      <y>970</y>
-      <w>260</w>
+      <y>1000</y>
+      <w>200</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>ManyToOneLink
@@ -774,7 +776,7 @@ from: String</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>890</y>
+      <y>920</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -785,18 +787,18 @@ from: String</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>840</y>
+      <y>850</y>
       <w>70</w>
-      <h>250</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;230.0;50.0;230.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;250.0;50.0;250.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>990</y>
+      <y>1020</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -807,9 +809,9 @@ from: String</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>60</x>
-      <y>500</y>
-      <w>820</w>
-      <h>650</h>
+      <y>470</y>
+      <w>670</w>
+      <h>680</h>
     </coordinates>
     <panel_attributes>generator.links</panel_attributes>
     <additional_attributes/>
@@ -818,11 +820,14 @@ from: String</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>110</x>
-      <y>880</y>
+      <y>850</y>
       <w>260</w>
-      <h>30</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>BidirectionalLink</panel_attributes>
+    <panel_attributes>BidirectionalLink
+--
+aNodeName: String
+bNodeName: String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -919,9 +924,9 @@ from: String</panel_attributes>
       <x>200</x>
       <y>790</y>
       <w>230</w>
-      <h>110</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>210.0;10.0;10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>210.0;10.0;10.0;10.0;10.0;60.0</additional_attributes>
   </element>
 </diagram>
