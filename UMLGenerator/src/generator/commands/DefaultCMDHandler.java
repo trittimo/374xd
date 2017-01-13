@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.reflect.ClassPath;
+
 import generator.Graph;
 import generator.INode;
 import generator.UMLGenerator;
@@ -29,7 +31,8 @@ public class DefaultCMDHandler implements ICMDHandler {
 		Graph graph = new Graph();
 		try {
 			for (String inputClass : params.getArgs()) {
-				factory.addNodeToGraph(graph, inputClass);
+				Thread.currentThread().getContextClassLoader().loadClass(inputClass);
+				factory.addNodeToGraph(graph, inputClass); 
 			}
 			
 			

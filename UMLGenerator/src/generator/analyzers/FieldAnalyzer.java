@@ -39,11 +39,11 @@ public class FieldAnalyzer implements IAnalyzer {
 						case 'L': // a class
 							String className = fn.desc.substring(1).replaceAll("/", ".").substring(0, fn.desc.length()-2);
 							if (!graph.getNodes().containsKey(className)) {
-								System.out.println("Skipping " + className);
+								//System.out.println("Skipping " + className);
 								continue;
 							}
 							currentList.add(className);
-							System.out.println("Adding " + className);
+							//System.out.println("Adding " + className);
 						default:
 							//primitives will be ignored
 					}

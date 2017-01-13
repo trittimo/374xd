@@ -77,7 +77,7 @@ public class JavaClassNode implements INode {
 		return "#";
 	}
 
-	protected String getMethodSection() {
+	public String getMethodSection() {
 		String section = "|";
 		List<MethodNode> methods = (List<MethodNode>) classNode.methods;
 		for(MethodNode method : methods) {
@@ -96,7 +96,6 @@ public class JavaClassNode implements INode {
 		}
 		return section;
 	}
-	
 
 	private String getMethodArguments(MethodNode m) {
 		List<ParameterNode> params = m.parameters;
