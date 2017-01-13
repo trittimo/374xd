@@ -49,18 +49,6 @@ public class FieldAnalyzer implements IAnalyzer {
 					}
 				}
 				
-				if (classNode.methods != null) {
-					//System.out.println("Parsing methods...");
-					for (MethodNode method : (List<MethodNode>) classNode.methods) {
-						List<String> clazzes = AnalyzerUtils.parseClassesFromMethod(method);
-						for (String s : clazzes) {
-							String className = s.replaceAll("/", ".");
-							if (graph.getNodes().containsKey(className)) {
-								currentList.add(className);
-							}
-						}
-					}
-				}
 				fields.put(classNode.name.replaceAll("/", "."), currentList);
 			}
 		}

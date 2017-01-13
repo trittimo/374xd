@@ -5,6 +5,7 @@ import generator.Graph;
 import generator.analyzers.FieldAnalyzer;
 import generator.analyzers.IAnalyzer;
 import generator.analyzers.RecursiveClassAnalyzer;
+import generator.analyzers.SignatureAnalyzer;
 import generator.exporters.IExporter;
 import generator.factories.IGraphFactory;
 
@@ -21,10 +22,13 @@ public class DefaultCMDHandler implements ICMDHandler {
 			analyzers.add(new FieldAnalyzer());
 		}
 		
+		if (params.getFlags().contains("m")) {
+			analyzers.add(new SignatureAnalyzer());
+		}
+		
 		Graph graph = new Graph();
 		try {
 			for (String inputClass : params.getArgs()) {
-				System.out.println("Adding: " + inputClass);
 				factory.addNodeToGraph(graph, inputClass); 
 			}
 			

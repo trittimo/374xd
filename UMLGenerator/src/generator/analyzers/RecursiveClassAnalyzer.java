@@ -44,17 +44,17 @@ public class RecursiveClassAnalyzer implements IAnalyzer {
 				
 
 				//System.out.println("methods...");
-				if (classNode.methods != null) {
-					//System.out.println("Parsing methods...");
-					for (MethodNode method : (List<MethodNode>) classNode.methods) {
-						List<String> clazzes = AnalyzerUtils.parseClassesFromMethod(method);
-						for (String s : clazzes) {
-							if (!graph.getNodes().containsKey(s.replaceAll("/", "."))) {
-								toAdd.add(s);
-							}
-						}
-					}
-				}
+//				if (classNode.methods != null) {
+//					//System.out.println("Parsing methods...");
+//					for (MethodNode method : (List<MethodNode>) classNode.methods) {
+//						List<String> clazzes = AnalyzerUtils.parseClassesFromMethod(method);
+//						for (String s : clazzes) {
+//							if (!graph.getNodes().containsKey(s.replaceAll("/", "."))) {
+//								toAdd.add(s);
+//							}
+//						}
+//					}
+//				}
 			}
 		}
 		
