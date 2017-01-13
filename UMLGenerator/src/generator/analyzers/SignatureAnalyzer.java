@@ -29,10 +29,10 @@ public class SignatureAnalyzer implements IAnalyzer {
 				ClassNode classNode = ((JavaClassNode) node).getClassNode();
 				HashSet<String> currentList = new HashSet<String>();
 				
+				
 				if (classNode.methods != null) {
 					//System.out.println("Parsing methods...");
 					for (MethodNode method : (List<MethodNode>) classNode.methods) {
-						
 						List<String> clazzes = parseSignature(method.desc);
 						for (String s : clazzes) {
 							String className = s.replaceAll("/", ".");
@@ -68,6 +68,9 @@ public class SignatureAnalyzer implements IAnalyzer {
 	
 	
 	private List<String> parseSignature(String sig) {
+		if (sig.contains("ITest")) {
+			System.out.println(sig);
+		}
 		List<String> list = new ArrayList<String>();
 		String[] res = sig.split(";");
 		if (res.length == 0) {
@@ -75,13 +78,13 @@ public class SignatureAnalyzer implements IAnalyzer {
 		}
 		
 		for (int i = 0; i < res.length; i++) {
-			String current;
-			if (res[i].startsWith("(")) {
+			String current = res[i];
+			if (current.startsWith("(")) {
 				current = res[i].substring(1,res[i].length());
-			} else if (res[i].startsWith(")")) {
-				current = res[i].substring(1);
-			} else {
-				current = res[i];
+			}
+			
+			if (current.startsWith(")")) {
+				current = current.substring(1);
 			}
 			
 			if (current.startsWith("L")) {
