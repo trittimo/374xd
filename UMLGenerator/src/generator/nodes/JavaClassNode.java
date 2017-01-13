@@ -126,7 +126,9 @@ public class JavaClassNode implements INode {
 	public void createLinks(Graph g) {
 		// inherits
 		if (classNode.superName != null) {
-			this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName.replaceAll("/", ".")));
+			if (!classNode.superName.equals("java/lang/Object")) {
+				this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName.replaceAll("/", ".")));
+			}
 		}
 		// impl
 		if (classNode.interfaces != null) {
