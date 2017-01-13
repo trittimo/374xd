@@ -1,14 +1,7 @@
 package generator.commands;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.reflect.ClassPath;
-
 import generator.Graph;
-import generator.INode;
-import generator.UMLGenerator;
 import generator.analyzers.FieldAnalyzer;
 import generator.analyzers.IAnalyzer;
 import generator.analyzers.RecursiveClassAnalyzer;
@@ -31,7 +24,7 @@ public class DefaultCMDHandler implements ICMDHandler {
 		Graph graph = new Graph();
 		try {
 			for (String inputClass : params.getArgs()) {
-				Thread.currentThread().getContextClassLoader().loadClass(inputClass);
+				System.out.println("Adding: " + inputClass);
 				factory.addNodeToGraph(graph, inputClass); 
 			}
 			

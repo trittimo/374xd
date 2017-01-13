@@ -13,33 +13,35 @@ import org.objectweb.asm.tree.ParameterNode;
 public class AnalyzerUtils {
 	@SuppressWarnings("unchecked")
 	public static List<String> parseClassesFromMethod(MethodNode m) {
-		String s;
-		System.out.println("method = " + m.name);
+		//System.out.println("method = " + m.name);
 		return parseSignature(m.desc);
 		
 	}
 	
 	public static List<String> parseSignature(String sig) {
 		System.out.println("parseSig: " + sig);
-		Matcher m = Pattern.compile("\\((?:(L.*?);|\\[?.|)\\)((?:L.*?;|\\[?.|)*)").matcher(sig.replaceAll("/", "."));
-		ArrayList<String> list =  new ArrayList<String>();
-		if (m.matches()) {
-			String args;
-			if (m.groupCount() > 1) {
-				System.out.println("Adding ret: " + m.group(1));
-				list.add(m.group(1)); // add return value;
-				args = m.group(2);
-			} else
-				args = m.group(1);
-			m = Pattern.compile("(?:L(.*?);|\\[?.)").matcher(args);
-			while (m.find()) {
-				if (m.groupCount() > 0) {
-					System.out.println("Adding param: " + m.group(1));
-					list.add(m.group(1));
-				}
+		List<String> list = new ArrayList<String>();
+		String[] res = sig.split(";");
+		if (res.length == 0) {
+			return list;
+		}
+		
+		for (int i = 0; i < res.length; i++) {
+			String current;
+			if (res[i].startsWith("(")) {
+				current = res[i].substring(1,res[i].length());
+			} else if (res[i].startsWith(")")) {
+				current = res[i].substring(1);
+			} else {
+				current = res[i];
+			}
+			System.out.println("current=" + current);
+			
+			if (current.startsWith("L")) {
+				//System.out.println(current);
+				list.add(current.substring(1));
 			}
 		}
-		//throw new RuntimeException("Could not parse sig: " + sig);
 		return list;
 	}
 

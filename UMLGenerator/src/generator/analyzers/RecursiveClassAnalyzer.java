@@ -43,13 +43,13 @@ public class RecursiveClassAnalyzer implements IAnalyzer {
 				}
 				
 
-				System.out.println("methods...");
+				//System.out.println("methods...");
 				if (classNode.methods != null) {
-					System.out.println("Parsing methods...");
-					for(MethodNode method : (List<MethodNode>) classNode.methods) {
+					//System.out.println("Parsing methods...");
+					for (MethodNode method : (List<MethodNode>) classNode.methods) {
 						List<String> clazzes = AnalyzerUtils.parseClassesFromMethod(method);
 						for (String s : clazzes) {
-							if (!graph.getNodes().containsKey(s)) {
+							if (!graph.getNodes().containsKey(s.replaceAll("/", "."))) {
 								toAdd.add(s);
 							}
 						}
@@ -60,7 +60,7 @@ public class RecursiveClassAnalyzer implements IAnalyzer {
 		
 		for (String name : toAdd) {
 			try {
-				System.out.println("Adding:" + name);
+				//System.out.println("Adding:" + name);
 				factory.addNodeToGraph(graph, name);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -68,12 +68,12 @@ public class RecursiveClassAnalyzer implements IAnalyzer {
 		}
 		
 		if (!toAdd.isEmpty()) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 			analyze(graph, params, factory);
 			

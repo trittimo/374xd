@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
+import org.objectweb.asm.tree.MethodNode;
 
 import generator.Graph;
 import generator.INode;
@@ -20,12 +21,11 @@ public class FieldAnalyzer implements IAnalyzer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void analyze(Graph graph, CMDParams params, IGraphFactory factory) {
-		for (String node : graph.getNodes().keySet()) {
-			System.out.println(node);
-		}
+//		for (String node : graph.getNodes().keySet()) {
+//			System.out.println(node);
+//		}
 		
 		HashMap<String, Set<String>> fields = new HashMap<String, Set<String>>();
-		
 		
 		for (INode node : graph.getNodes().values()) {
 			if (node instanceof JavaClassNode) {
@@ -46,6 +46,19 @@ public class FieldAnalyzer implements IAnalyzer {
 							//System.out.println("Adding " + className);
 						default:
 							//primitives will be ignored
+					}
+				}
+				
+				if (classNode.methods != null) {
+					//System.out.println("Parsing methods...");
+					for (MethodNode method : (List<MethodNode>) classNode.methods) {
+						List<String> clazzes = AnalyzerUtils.parseClassesFromMethod(method);
+						for (String s : clazzes) {
+							String className = s.replaceAll("/", ".");
+							if (graph.getNodes().containsKey(className)) {
+								currentList.add(className);
+							}
+						}
 					}
 				}
 				fields.put(classNode.name.replaceAll("/", "."), currentList);
