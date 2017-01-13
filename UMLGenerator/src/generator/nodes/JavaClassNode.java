@@ -124,9 +124,7 @@ public class JavaClassNode implements INode {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void createLinks(Graph g) {	
-		ILink link;
-
+	public void createLinks(Graph g) {
 		// inherits
 		if (classNode.superName != null) {
 			this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName.replaceAll("/", ".")));
