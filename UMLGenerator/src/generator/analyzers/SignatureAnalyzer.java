@@ -1,5 +1,6 @@
 package generator.analyzers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class SignatureAnalyzer implements IAnalyzer {
 	@Override
 	public void analyze(Graph graph, CMDParams params, IGraphFactory factory) {
 		HashMap<String, Set<String>> fields = new HashMap<String, Set<String>>();
+		HashSet<String> recursiveAdd = new HashSet<String>();
 		
 		for (INode node : graph.getNodes().values()) {
 			if (node instanceof JavaClassNode) {
@@ -36,6 +38,10 @@ public class SignatureAnalyzer implements IAnalyzer {
 						List<String> clazzes = parseSignature(method.desc);
 						for (String s : clazzes) {
 							String className = s.replaceAll("/", ".");
+							if (params.getArgs().contains("r") && !graph.getNodes().containsKey(className)) {
+								recursiveAdd.add(className);
+							}
+							
 							if (graph.getNodes().containsKey(className)) {
 								currentList.add(className);
 							}
@@ -63,6 +69,14 @@ public class SignatureAnalyzer implements IAnalyzer {
 					node.addLink(new DependencyLink(node, other));
 				}
 			}
+		}
+		
+		for (String clazz : recursiveAdd) {
+			factory.addNodeToGraph(graph, clazz);			
+		}
+		
+		if (params.getArgs().contains("r") && recursiveAdd.size() > 0) {
+			analyze(graph, params, factory);
 		}
 	}
 	

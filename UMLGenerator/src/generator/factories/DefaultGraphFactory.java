@@ -18,8 +18,13 @@ import generator.nodes.JavaInterfaceNode;
 public class DefaultGraphFactory implements IGraphFactory {
 	
 	@Override
-	public void addNodeToGraph(Graph g, String qualifiedName) throws IOException {
-		ClassReader reader = new ClassReader(qualifiedName);
+	public void addNodeToGraph(Graph g, String qualifiedName) {
+		ClassReader reader = null;
+		try {
+			reader = new ClassReader(qualifiedName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		ClassNode classNode = new ClassNode();
 		reader.accept(classNode, ClassReader.EXPAND_FRAMES);
 		

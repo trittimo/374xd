@@ -6,6 +6,6 @@ import generator.Graph;
 
 public interface IGraphFactory {
 	
-	public void addNodeToGraph(Graph g, String qualifiedName) throws IOException;
+	public void addNodeToGraph(Graph g, String qualifiedName);
 	public void linkGraph(Graph g);
 }
