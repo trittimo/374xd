@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldNode;
 
 import generator.Graph;
 import generator.INode;
@@ -16,6 +17,7 @@ import generator.nodes.JavaClassNode;
 
 public class RecursiveClassAnalyzer implements IAnalyzer {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void analyze(Graph graph, CMDParams params, IGraphFactory factory) {
 		HashSet<String> toAdd = new HashSet<String>();
@@ -48,18 +50,8 @@ public class RecursiveClassAnalyzer implements IAnalyzer {
 				e.printStackTrace();
 			}
 		}
-//		
-//		for (String nodeName : graph.getNodes().keySet()) {
-//			System.out.println(nodeName +",");
-//		}
 		
 		if (!toAdd.isEmpty()) {
-//			try {
-//				Thread.sleep(5000);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			
 			analyze(graph, params, factory);
 			
 		}

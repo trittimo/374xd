@@ -7,6 +7,7 @@ import java.util.List;
 import generator.Graph;
 import generator.INode;
 import generator.UMLGenerator;
+import generator.analyzers.FieldAnalyzer;
 import generator.analyzers.IAnalyzer;
 import generator.analyzers.RecursiveClassAnalyzer;
 import generator.exporters.IExporter;
@@ -19,6 +20,10 @@ public class DefaultCMDHandler implements ICMDHandler {
 		
 		if (params.getFlags().contains("r")) {
 			analyzers.add(new RecursiveClassAnalyzer());
+		}
+		
+		if (params.getFlags().contains("f")) {
+			analyzers.add(new FieldAnalyzer());
 		}
 		
 		Graph graph = new Graph();
