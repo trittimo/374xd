@@ -50,7 +50,7 @@ public class DOTFileExporter implements IExporter {
 	
 	
 	private String sanitize(String string) {
-		return string.replaceAll("\\$", "_DOLLAR_").replaceAll("\\.", "_").replaceAll("#", "\\#");
+		return string.replaceAll("\\$", "_DOLLAR_").replaceAll("\\.", "_").replaceAll("#", "\\#").replaceAll(",,,", "...");
 	}
 
 }

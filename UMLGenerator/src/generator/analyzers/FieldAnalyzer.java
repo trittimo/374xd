@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
-import org.objectweb.asm.tree.MethodNode;
 
 import generator.Graph;
 import generator.INode;
@@ -27,7 +26,7 @@ public class FieldAnalyzer implements IAnalyzer {
 //		}
 
 		HashMap<String, Set<String>> fields = new HashMap<String, Set<String>>();
-		HashMap<String, Set<String>> multi_fields = new HashMap<String, Set<String>>();
+		HashMap<String, Set<String>> multiFields = new HashMap<String, Set<String>>();
 		
 		String className;
 		
@@ -39,8 +38,10 @@ public class FieldAnalyzer implements IAnalyzer {
 				for (FieldNode fn : (List<FieldNode>) classNode.fields) {
 					switch (fn.desc.charAt(0)) {
 						case '[': // array
-							className = fn.desc.substring(fn.desc.lastIndexOf("["));
+							className = fn.desc.substring(fn.desc.lastIndexOf("[")+2,fn.desc.length()-1).replaceAll("/", ".");
 							if (!graph.getNodes().containsKey(className)) {
+								System.out.println(graph.getNodes().keySet());
+								System.out.println(className);
 								continue;
 							} 
 							// one to many
@@ -56,15 +57,15 @@ public class FieldAnalyzer implements IAnalyzer {
 							//primitives will be ignored
 					}
 				}
-				
+				multiFields.put(classNode.name.replaceAll("/", "."), currentMultiList);
 				fields.put(classNode.name.replaceAll("/", "."), currentList);
 			}
 		}
 		
 
-		for (String name : multi_fields.keySet()) {
+		for (String name : multiFields.keySet()) {
 			INode node = graph.getNodes().get(name);
-			for (String field : multi_fields.get(name)) {
+			for (String field : multiFields.get(name)) {
 				node.addLink(new AssociationManyLink(node, graph.getNodes().get(field)));
 			}
 		}
@@ -72,7 +73,7 @@ public class FieldAnalyzer implements IAnalyzer {
 		for (String name : fields.keySet()) {
 			INode node = graph.getNodes().get(name);
 			for (String field : fields.get(name)) {
-				if (multi_fields.get(name).contains(field)) // case: already added as multi
+				if (multiFields.get(name).contains(field)) // case: already added as multi
 					continue;
 				node.addLink(new AssociationLink(node, graph.getNodes().get(field)));
 			}

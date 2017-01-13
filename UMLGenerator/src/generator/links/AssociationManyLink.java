@@ -10,7 +10,7 @@ public class AssociationManyLink extends OneToManyLink {
 
 	@Override
 	public String getAttributes() {
-		return "arrowhead=\"vee\", label=\"1...*\"";
+		return "arrowhead=\"vee\", label=\"1,,,*\"";
 	}
 
 }

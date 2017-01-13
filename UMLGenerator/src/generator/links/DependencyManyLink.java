@@ -10,7 +10,7 @@ public class DependencyManyLink extends OneToManyLink {
 
 	@Override
 	public String getAttributes() {
-		return "arrowhead=\"vee\", style=\"dashed\", label=\"1...*\"";
+		return "arrowhead=\"vee\", style=\"dashed\", label=\"1,,,*\"";
 	}
 
 }
