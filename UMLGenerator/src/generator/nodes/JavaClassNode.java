@@ -58,6 +58,8 @@ public class JavaClassNode implements INode {
 			
 			// Can't seem to get parametized types working
 			type = Type.getType(field.desc).getClassName();
+			if (type.lastIndexOf(".") > 0)
+				type = type.substring(type.lastIndexOf(".") + 1);
 			
 			section += String.format("%s %s: %s\\l",
 					getAccessibility(field.access),
@@ -87,6 +89,8 @@ public class JavaClassNode implements INode {
 			//newline char, accessiblity , field name, field type
 			String methodArgs = getMethodArguments(method);
 			String retType = Type.getReturnType(method.desc).getClassName();
+			if (retType.lastIndexOf(".") > 0)
+				retType = retType.substring(retType.lastIndexOf(".") + 1);
 			
 			section += String.format("%s %s(%s): %s\\l", 
 					getAccessibility(method.access),
@@ -104,6 +108,8 @@ public class JavaClassNode implements INode {
 		String name, type;
 		for (int i = 0; i < types.length; i++) {
 			type = types[i].getClassName();
+			if (type.lastIndexOf(".") > 0)
+				type = type.substring(type.lastIndexOf(".") + 1);
 			name = (params != null)?params.get(i).name:("arg"+i);
 			stringify += (i == 0)?"":", ";
 			stringify += String.format("%s: %s", name, type);
