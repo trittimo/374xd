@@ -4,8 +4,8 @@ import generator.ILink;
 import generator.INode;
 
 public abstract class OneToOneLink implements ILink {
-	String start;
-	String end;
+	protected String start;
+	protected String end;
 	
 	public OneToOneLink(String from, String to) {
 		start = from;
@@ -14,6 +14,14 @@ public abstract class OneToOneLink implements ILink {
 	
 	public OneToOneLink(INode from, INode to) {
 		this(from.getQualifiedName(), to.getQualifiedName());
+	}
+	
+	public String getStart() {
+		return this.start;
+	}
+	
+	public String getEnd() {
+		return this.end;
 	}
 	
 	public String getRelationship() {
