@@ -23,7 +23,9 @@ public class DOTFileExporter implements IExporter {
 		String digraph = "digraph " + outFileName.substring(0, outFileName.indexOf('.')) + "{\nrankdir=\"BT\";\n";
 		
 		for (INode node : graph.getNodes().values() ) {
-			digraph += String.format("%s [ shape=\"record\", label = \"%s\" ];\n", node.getQualifiedName().replaceAll("\\.", "_"), node.getLabel());
+			digraph += String.format("%s [ shape=\"record\", label = \"%s\" ];\n",
+					node.getQualifiedName(),
+					node.getLabel());
 		}
 		
 		for (INode node : graph.getNodes().values()) {
@@ -35,6 +37,8 @@ public class DOTFileExporter implements IExporter {
 		
 		digraph += "}";
 		
+		digraph = sanitize(digraph);
+		
 		Path file = Paths.get(outFileName);
 		byte data[] = digraph.getBytes();
 		try {
@@ -42,6 +46,11 @@ public class DOTFileExporter implements IExporter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	private String sanitize(String string) {
+		return string.replaceAll("\\$", "_DOLLAR_").replaceAll("\\.", "_").replaceAll("#", "\\#");
 	}
 
 }

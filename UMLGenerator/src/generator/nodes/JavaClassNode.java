@@ -42,10 +42,6 @@ public class JavaClassNode implements INode {
 		// Methods
 		label += getMethodSection();
 		
-		label = label.replaceAll("#", Matcher.quoteReplacement("\\#"));
-		label = label.replaceAll("\\$", Matcher.quoteReplacement("\\$"));
-		//label = REPL_DOLLARS.matcher(label).replaceAll(Matcher.quoteReplacement("\\$"));
-		
 		return label + "}";
 	}
 
@@ -130,14 +126,15 @@ public class JavaClassNode implements INode {
 	@Override
 	public void createLinks(Graph g) {	
 		ILink link;
+
 		// inherits
 		if (classNode.superName != null) {
-			this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName.replaceAll("/", "_")));
+			this.addLink(new ExtendsLink(this.getQualifiedName(), classNode.superName.replaceAll("/", ".")));
 		}
 		// impl
 		if (classNode.interfaces != null) {
 			for (String name : ((List<String>) classNode.interfaces))
-				this.addLink(new ImplementsLink(this.getQualifiedName(), name.replaceAll("/", "_")));
+				this.addLink(new ImplementsLink(this.getQualifiedName(), name.replaceAll("/", ".")));
 		}
 	}
 

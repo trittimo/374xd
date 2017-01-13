@@ -15,5 +15,6 @@ public class UMLGeneratorApp {
 		uml.addExporter(new DOTFileExporter());
 		uml.addExporter(new PNGExporter("\"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot\""));
 		uml.execute(args);
+		System.out.println("Finished");
 	}
 }
