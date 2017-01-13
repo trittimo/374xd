@@ -52,7 +52,6 @@ public class SignatureAnalyzer implements IAnalyzer {
 				boolean add = true;
 				INode other = graph.getNodes().get(field);
 				for (ILink link : node.getLinks()) {
-					System.out.println(link.getRelationship());
 					if (link instanceof OneToOneLink) {
 						OneToOneLink theLink = (OneToOneLink) link;
 						if (theLink.getEnd().equals(other.getQualifiedName().replaceAll("/", "."))) {
