@@ -14,6 +14,7 @@ import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
 import generator.links.AssociationLink;
+import generator.links.AssociationManyLink;
 import generator.nodes.JavaClassNode;
 
 public class FieldAnalyzer implements IAnalyzer {
@@ -24,26 +25,33 @@ public class FieldAnalyzer implements IAnalyzer {
 //		for (String node : graph.getNodes().keySet()) {
 //			System.out.println(node);
 //		}
-		
+
 		HashMap<String, Set<String>> fields = new HashMap<String, Set<String>>();
+		HashMap<String, Set<String>> multi_fields = new HashMap<String, Set<String>>();
+		
+		String className;
 		
 		for (INode node : graph.getNodes().values()) {
 			if (node instanceof JavaClassNode) {
 				ClassNode classNode = ((JavaClassNode) node).getClassNode();
 				HashSet<String> currentList = new HashSet<String>();
+				HashSet<String> currentMultiList = new HashSet<String>();
 				for (FieldNode fn : (List<FieldNode>) classNode.fields) {
 					switch (fn.desc.charAt(0)) {
 						case '[': // array
+							className = fn.desc.substring(fn.desc.lastIndexOf("["));
+							if (!graph.getNodes().containsKey(className)) {
+								continue;
+							} 
 							// one to many
+							currentMultiList.add(className);
 							break;
 						case 'L': // a class
-							String className = fn.desc.substring(1).replaceAll("/", ".").substring(0, fn.desc.length()-2);
+							className = fn.desc.substring(1).replaceAll("/", ".").substring(0, fn.desc.length()-2);
 							if (!graph.getNodes().containsKey(className)) {
-								//System.out.println("Skipping " + className);
 								continue;
 							}
 							currentList.add(className);
-							//System.out.println("Adding " + className);
 						default:
 							//primitives will be ignored
 					}
@@ -53,9 +61,19 @@ public class FieldAnalyzer implements IAnalyzer {
 			}
 		}
 		
+
+		for (String name : multi_fields.keySet()) {
+			INode node = graph.getNodes().get(name);
+			for (String field : multi_fields.get(name)) {
+				node.addLink(new AssociationManyLink(node, graph.getNodes().get(field)));
+			}
+		}
+		
 		for (String name : fields.keySet()) {
 			INode node = graph.getNodes().get(name);
 			for (String field : fields.get(name)) {
+				if (multi_fields.get(name).contains(field)) // case: already added as multi
+					continue;
 				node.addLink(new AssociationLink(node, graph.getNodes().get(field)));
 			}
 		}
