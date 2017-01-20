@@ -40,8 +40,6 @@ public class FieldAnalyzer implements IAnalyzer {
 						case '[': // array
 							className = fn.desc.substring(fn.desc.lastIndexOf("[")+2,fn.desc.length()-1).replaceAll("/", ".");
 							if (!graph.getNodes().containsKey(className)) {
-								System.out.println(graph.getNodes().keySet());
-								System.out.println(className);
 								continue;
 							} 
 							// one to many
