@@ -19,7 +19,7 @@ public class DOTFileExporter implements IExporter {
 	@Override
 	public void export(Graph graph, CMDParams params) {
 		String outFileName = params.getOptionPairs().get("out");
-		String digraph = "digraph " + outFileName.substring(0, outFileName.indexOf('.')) + "{\nrankdir=\"BT\";\n";
+		String digraph = "digraph " + outFileName.substring(0, outFileName.indexOf('.')) + "{\nconcentrate=true;\nrankdir=\"BT\";\n";
 		
 		for (INode node : graph.getNodes().values() ) {
 			digraph += String.format("%s [ shape=\"record\", label = \"%s\" ];\n",
