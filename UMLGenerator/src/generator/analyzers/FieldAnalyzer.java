@@ -20,11 +20,7 @@ public class FieldAnalyzer implements IAnalyzer {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void analyze(Graph graph, CMDParams params, IGraphFactory factory) {
-//		for (String node : graph.getNodes().keySet()) {
-//			System.out.println(node);
-//		}
-
+	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
 		HashMap<String, Set<String>> fields = new HashMap<String, Set<String>>();
 		HashMap<String, Set<String>> multiFields = new HashMap<String, Set<String>>();
 		
@@ -38,7 +34,11 @@ public class FieldAnalyzer implements IAnalyzer {
 				for (FieldNode fn : (List<FieldNode>) classNode.fields) {
 					switch (fn.desc.charAt(0)) {
 						case '[': // array
-							className = fn.desc.substring(fn.desc.lastIndexOf("[")+2,fn.desc.length()-1).replaceAll("/", ".");
+							className = fn.desc.substring(fn.desc.lastIndexOf("[")+1,fn.desc.length()-1).replaceAll("/", ".");
+							if (!className.startsWith("L"))
+								break; // not a class
+							else
+								className = className.substring(1);
 							if (!graph.getNodes().containsKey(className)) {
 								continue;
 							} 
@@ -76,6 +76,9 @@ public class FieldAnalyzer implements IAnalyzer {
 				node.addLink(new AssociationLink(node, graph.getNodes().get(field)));
 			}
 		}
+		
+		// Only changes links, does not add nodes. Other analyzers shouldn't need to update
+		return false;
 	}
 	
 

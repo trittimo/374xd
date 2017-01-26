@@ -119,7 +119,12 @@ public class JavaClassNode implements INode {
 
 	@Override
 	public void addLink(ILink link) {
-		this.links.add(link);
+		int exist = this.links.indexOf(link);
+		if (exist < 0)
+			this.links.add(link);
+		if (link instanceof generator.links.OneToManyLink) // one to many has priority
+			this.links.set(exist, link); // override existing
+		// other wise ignore it, we already have a one to one.
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import generator.ILink;
 import generator.INode;
 
 public abstract class OneToManyLink implements ILink {
+	private int hashCode;
 	
 	protected String start;
 	protected String end;
@@ -11,6 +12,8 @@ public abstract class OneToManyLink implements ILink {
 	public OneToManyLink(String from, String to) {
 		start = from;
 		end = to;
+		// precompute hash so it only has to be done once
+		hashCode = toString().hashCode();
 	}
 	
 	public OneToManyLink(INode from, INode to) {
@@ -30,4 +33,21 @@ public abstract class OneToManyLink implements ILink {
 	}
 	
 	public abstract String getAttributes();
+	
+
+	public String toString() {
+		return String.format("<%s, %s>", 
+			getClass().getName(), getRelationship())
+			.replaceAll("Many", "");
+	}
+	
+	public int hashCode() {
+		return this.hashCode;
+	}
+	
+	public boolean equals(Object o) {
+		if (!(o instanceof ILink))
+			return false;
+		return o.toString().equals(this.toString());
+	}
 }

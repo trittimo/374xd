@@ -1,27 +1,22 @@
 package generator.analyzers;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldNode;
-import org.objectweb.asm.tree.MethodNode;
-
 import generator.Graph;
 import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
-import generator.links.ImplementsLink;
 import generator.nodes.JavaClassNode;
 
 public class RecursiveClassAnalyzer implements IAnalyzer {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void analyze(Graph graph, CMDParams params, IGraphFactory factory) {
+	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {		
 		HashSet<String> toAdd = new HashSet<String>();
+		
 		for (INode node : graph.getNodes().values()) {
 			if (node instanceof JavaClassNode) {
 				ClassNode classNode = ((JavaClassNode) node).getClassNode();
@@ -55,5 +50,7 @@ public class RecursiveClassAnalyzer implements IAnalyzer {
 		if (!toAdd.isEmpty()) {
 			analyze(graph, params, factory);
 		}
+		
+		return (toAdd.size() > 0); // return true if added node
 	}
 }

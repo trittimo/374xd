@@ -1,6 +1,5 @@
 package generator.analyzers;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,8 +20,9 @@ import generator.nodes.JavaClassNode;
 
 public class SignatureAnalyzer implements IAnalyzer {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void analyze(Graph graph, CMDParams params, IGraphFactory factory) {
+	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {		
 		HashMap<String, Set<String>> fields = new HashMap<String, Set<String>>();
 		HashSet<String> recursiveAdd = new HashSet<String>();
 		
@@ -75,9 +75,7 @@ public class SignatureAnalyzer implements IAnalyzer {
 			factory.addNodeToGraph(graph, clazz);			
 		}
 		
-		if (params.getArgs().contains("r") && recursiveAdd.size() > 0) {
-			analyze(graph, params, factory);
-		}
+		return (recursiveAdd.size() > 0);
 	}
 	
 	
