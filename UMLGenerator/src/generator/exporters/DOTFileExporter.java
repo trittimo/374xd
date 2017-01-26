@@ -18,7 +18,6 @@ public class DOTFileExporter implements IExporter {
 
 	@Override
 	public void export(Graph graph, CMDParams params) {
-		
 		String outFileName = params.getOptionPairs().get("out");
 		String digraph = "digraph " + outFileName.substring(0, outFileName.indexOf('.')) + "{\nrankdir=\"BT\";\n";
 		

@@ -1,5 +1,7 @@
 package generator;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +40,14 @@ public class UMLGenerator {
 		this.exporters.add(exporter);
 	}
 	
-	public void execute(String[] args) {
-		CMDParams params = CMDParser.parse(args);
+	public void execute(String[] args, File defaultConfigurationFile) {
+		CMDParams params = null;
+		try {
+			params = CMDParser.parse(args, defaultConfigurationFile);
+		} catch (IOException e) {
+			System.err.println("Unable to read configuration file");
+			e.printStackTrace();
+		}
 		cmdHandler.execute(params, analyzers, exporters, factory);
 	}
 	

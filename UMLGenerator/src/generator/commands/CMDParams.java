@@ -11,11 +11,13 @@ public class CMDParams {
 	private List<String> flags;
 	private Map<String, String> optionPair;
 	private List<String> args;
+	private Map<String, List<String>> namedLists;
 	
 	public CMDParams() {
 		flags = new ArrayList<String>();
 		optionPair = new HashMap<String, String>();
 		args = new ArrayList<String>();
+		namedLists = new HashMap<String, List<String>>();
 	}
 	
 	public void addFlag(String s) {
@@ -32,6 +34,10 @@ public class CMDParams {
 		args.add(s);
 	}
 	
+	public void addNamedList(String namedList, List<String> list) {
+		namedLists.put(namedList, list);
+	}
+	
 	public List<String> getFlags() {
 		return this.flags;
 	}
@@ -40,5 +46,8 @@ public class CMDParams {
 	}
 	public List<String> getArgs() {
 		return this.args;
+	}
+	public Map<String, List<String>> getNamedLists() {
+		return this.namedLists;
 	}
 }
