@@ -43,7 +43,7 @@ public class RecursiveClassAnalyzer implements IAnalyzer {
 		toAdd.remove("java.lang.Object");
 		
 		for (String name : toAdd) {
-			System.out.println(name);
+			//System.out.println(name);
 			factory.addNodeToGraph(graph, name);
 		}
 		

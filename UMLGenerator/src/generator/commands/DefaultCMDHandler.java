@@ -40,7 +40,7 @@ public class DefaultCMDHandler implements ICMDHandler {
 			while (updateRequired) {
 				updateRequired = false;
 				for (IAnalyzer analyzer : analyzers) {
-					System.err.printf("DEBUG: Analyzing with %s%n", analyzer.getClass().getName());
+					//System.err.printf("DEBUG: Analyzing with %s%n", analyzer.getClass().getName());
 					updateRequired |= analyzer.analyze(graph, params, factory);
 				}
 			}

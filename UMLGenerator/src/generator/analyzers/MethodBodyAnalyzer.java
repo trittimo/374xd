@@ -64,7 +64,7 @@ public class MethodBodyAnalyzer  implements IAnalyzer {
 		if (map.containsKey(classname))
 			return;
 		
-		System.out.println("Analyzing Method Bodies of Class: " + classname);
+		//System.out.println("Analyzing Method Bodies of Class: " + classname);
 		
 		// declare some vars to use
 		String toparse;
