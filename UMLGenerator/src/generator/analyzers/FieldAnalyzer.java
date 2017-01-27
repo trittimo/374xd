@@ -59,9 +59,11 @@ public class FieldAnalyzer implements IAnalyzer {
 			for (String field : multiFields.get(name)) {
 				if (!graph.getNodes().containsKey(field))
 					factory.addNodeToGraph(graph, field);
-				link = new AssociationManyLink(node, graph.getNodes().get(field));
-				System.out.println("FieldAnalyzer: NewLink: " + link);
-				node.addLink(link);
+				if (node != null && graph.getNodes().get(field) != null) {
+					link = new AssociationManyLink(node, graph.getNodes().get(field));
+					System.out.println("FieldAnalyzer: NewLink: " + link);
+					node.addLink(link);
+				}
 			}
 		}
 		
@@ -106,6 +108,10 @@ public class FieldAnalyzer implements IAnalyzer {
 		// Handle case where a ; comes before a < 
 		// e.g. Lsome/class/here;Ljava/util/ArrayList<Ljava/lang/String;>;
 		while (index_semic < index_brace) {
+			System.out.println(analyze);
+			if (analyze.equals("Ljava/lang/Class<*>;")) {
+				return;
+			}
 			list.add(analyze.substring(0, index_semic));
 			analyze = analyze.substring(index_semic + 1);
 			index_semic = analyze.indexOf(';');
