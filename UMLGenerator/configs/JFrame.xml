@@ -8,5 +8,5 @@
 		lastpass=generator.analyzers.violation.InheritanceAnalyzer
 	</entry>
 	<entry key="arguments">javax.swing.JFrame,java.awt.Frame</entry>
-	<entry key="flags">r,m,f,s</entry>
+	<entry key="flags">r,m,f,s,y</entry>
 </properties>

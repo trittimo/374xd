@@ -28,6 +28,7 @@ public class DOTFileExporter implements IExporter {
 					node.getAttributeString());
 		}
 		
+		
 		for (INode node : graph.getNodes().values()) {
 			List<ILink> links = node.getLinks();
 			for (ILink link : links) {
@@ -37,7 +38,12 @@ public class DOTFileExporter implements IExporter {
 		
 		digraph += "}";
 		
+		
 		digraph = sanitize(digraph);
+		
+		if (params.getFlags().contains("y")) {
+			digraph = digraph.replaceAll("#[^\\\\l]*DOLLAR.*?\\\\l", "");
+		}
 		
 		Path file = Paths.get(outFileName);
 		byte data[] = digraph.getBytes();
