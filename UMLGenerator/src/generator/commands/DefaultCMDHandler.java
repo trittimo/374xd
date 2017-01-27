@@ -3,6 +3,7 @@ package generator.commands;
 import java.lang.reflect.Constructor;
 import java.util.List;
 import generator.Graph;
+import generator.analyzers.BlacklistAnalyzer;
 import generator.analyzers.FieldAnalyzer;
 import generator.analyzers.IAnalyzer;
 import generator.analyzers.LinkPriorityAnalyzer;
@@ -43,8 +44,6 @@ public class DefaultCMDHandler implements ICMDHandler {
 				try {
 					Class<IAnalyzer> analyzer = (Class<IAnalyzer>) Class.forName(name);
 					analyzers.add(analyzer.newInstance());
-//					Constructor<IAnalyzer> c = analyzer.getConstructor(Graph.class, CMDParams.class, IGraphFactory.class);
-//					c.newInstance(arg0)
 				} catch (Exception e) {
 					System.err.println("Could not load custom analyzer");
 					e.printStackTrace();
@@ -52,8 +51,13 @@ public class DefaultCMDHandler implements ICMDHandler {
 			}
 		}
 		
+		
 		// always add the LinkPriorityAnalyzer last so we can deal with that
 		analyzers.add(new LinkPriorityAnalyzer());
+		
+		
+		// Remove any nodes that don't belong last
+		analyzers.add(new BlacklistAnalyzer());
 		
 		Graph graph = new Graph();
 		try {

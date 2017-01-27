@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class CMDParser {
@@ -30,7 +31,7 @@ public class CMDParser {
 		if (config == null && !hasParsedDefaultConfig) {
 			// Use default
 			return parsePropertiesStream(defaultConfigurationFile, defaultConfigurationFile, cmd);
-		} else if (!hasParsedDefaultConfig) {
+		} else if (config != null) {
 			return parsePropertiesStream(config, defaultConfigurationFile, cmd);
 		} else {
 			return cmd;
@@ -49,8 +50,15 @@ public class CMDParser {
 		String[] args = settings.getProperty("arguments").split(",");
 		String[] flags = settings.getProperty("flags").split(",");
 		
-		ArrayList<String> theWhitelist = new ArrayList<String>();
-		ArrayList<String> theBlacklist = new ArrayList<String>();
+		List<String> theWhitelist = new ArrayList<String>();
+		List<String> theBlacklist = new ArrayList<String>();
+		
+		if (current.getNamedLists().containsKey("blacklist")) {
+			theBlacklist = current.getNamedLists().get("blacklist");
+		}
+		if (current.getNamedLists().containsKey("whitelist")) {
+			theWhitelist = current.getNamedLists().get("whitelist");
+		}
 		
 		for (String s : whitelisted) {
 			if (s.isEmpty()) {
@@ -64,6 +72,7 @@ public class CMDParser {
 			}
 			theBlacklist.add(s.trim());
 		}
+		
 		
 		current.addNamedList("blacklist", theBlacklist);
 		current.addNamedList("whitelist", theWhitelist);

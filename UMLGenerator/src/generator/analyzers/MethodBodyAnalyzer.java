@@ -48,6 +48,9 @@ public class MethodBodyAnalyzer  implements IAnalyzer {
 			for (String t: map.get(s)) {
 				start = graph.getNodes().get(s);
 				end = graph.getNodes().get(t);
+				if (start == null || end == null) {
+					continue;
+				}
 				start.addLink(new DependencyLink(start, end));
 			}
 		}
