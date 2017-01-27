@@ -59,15 +59,15 @@ public class InheritanceAnalyzer implements IAnalyzer {
 				//System.out.print("Nodes = " + graph.getNodes().keySet());
 				INode child = graph.getNodes().get(childname);
 				INode parent = graph.getNodes().get(supername);
-				StyleAttribute red = new StyleAttribute("color","red",10);
-				child.setAttribute(red);
+				StyleAttribute color = new StyleAttribute("color","orange",10);
+				child.setAttribute(color);
 				if (parent != null)
-					parent.setAttribute(red);
+					parent.setAttribute(color);
 				// find link
 				for (ILink link : child.getLinks()) {
 					if (link.getEnd().equals(supername)) {
 						if (link instanceof generator.links.ExtendsLink)
-							link.setAttribute(red);
+							link.setAttribute(color);
 					}
 				}
 			}

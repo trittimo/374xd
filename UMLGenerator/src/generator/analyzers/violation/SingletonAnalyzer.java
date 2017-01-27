@@ -41,7 +41,7 @@ public class SingletonAnalyzer implements IAnalyzer {
 				if (isSingleton) {
 					JavaClassNode javanode = (JavaClassNode) node;
 					javanode.addStereotype("Singleton");
-					javanode.setAttribute(new StyleAttribute("color","orange",20));
+					javanode.setAttribute(new StyleAttribute("color","blue",20));
 					
 					break;
 				}
