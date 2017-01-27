@@ -24,18 +24,35 @@ public class InheritanceAnalyzer implements IAnalyzer {
 			try {
 				reader = new ClassReader(node.getQualifiedName());
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 			ClassNode classNode = new ClassNode();
 			reader.accept(classNode, ClassReader.EXPAND_FRAMES);
+			
+			if (classNode.superName == null)
+				continue;
+			
+			ClassNode superNode = new ClassNode();
+			
+			try {
+				reader = new ClassReader(classNode.superName);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			reader.accept(superNode, ClassReader.EXPAND_FRAMES);
 			
 			// Ensure it is a regular class (i.e. not abstract or an interface or an annotation)
 			if ((classNode.access & (Opcodes.ACC_INTERFACE | Opcodes.ACC_ANNOTATION | Opcodes.ACC_ABSTRACT)) > 0) {
 				continue;
 			}
 			
+			// Ensure super is a regular class (i.e. not abstract or an interface or an annotation)
+			if ((superNode.access & (Opcodes.ACC_INTERFACE | Opcodes.ACC_ANNOTATION | Opcodes.ACC_ABSTRACT)) > 0) {
+				continue;
+			}
+			
 			// If there is a superclass that is not Object
-			if (classNode.superName != null && !classNode.superName.equals("java/lang/Object")) {
+			if (!superNode.name.equals("java/lang/Object")) {
 				String childname = classNode.name.replace("/", ".");
 				String supername = classNode.superName.replace("/", ".");
 				System.out.printf("InheritanceAnalyzer Warning: Bad inheritance @ %s >> %s %n", childname, supername);
@@ -48,7 +65,7 @@ public class InheritanceAnalyzer implements IAnalyzer {
 					parent.setAttribute(red);
 				// find link
 				for (ILink link : child.getLinks()) {
-					if (link.getEnd() == supername) {
+					if (link.getEnd().equals(supername)) {
 						if (link instanceof generator.links.ExtendsLink)
 							link.setAttribute(red);
 					}
