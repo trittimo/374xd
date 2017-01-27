@@ -13,7 +13,40 @@ public class BlacklistAnalyzer implements IAnalyzer {
 
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
-
+		if (params.getNamedLists().containsKey("whitelist")) {
+			List<String> whitelist = params.getNamedLists().get("whitelist");
+			List<String> toRemove = new ArrayList<String>();
+			
+			for (String node : graph.getNodes().keySet()) {
+				if (!whitelist.contains(node)) {
+					toRemove.add(node);
+				}
+			}
+			
+			List<ILink> links;
+			for (INode node : graph.getNodes().values()) {
+				links = new ArrayList<ILink>();
+				for (ILink link : node.getLinks()) {
+					if (!whitelist.contains(link.getStart()) || !whitelist.contains(link.getEnd())) {
+						links.add(link);
+					} else {
+						System.out.println("Keeping" + link);
+					}
+				}
+				for (ILink link : links) {
+					node.removeLink(link);
+				}
+			}
+			
+			for (String node : toRemove) {
+				System.out.printf("Removing: %s\n", node);
+				graph.getNodes().remove(node);
+			}
+			
+			return false;
+			
+		}
+		
 		if (!params.getNamedLists().containsKey("blacklist")) {
 			return false;			
 		}
@@ -24,13 +57,13 @@ public class BlacklistAnalyzer implements IAnalyzer {
 			return false;
 		}
 		
-		List<String> nodes = new ArrayList<String>();
+		List<String> toRemove = new ArrayList<String>();
 		
 		
 		for (String node : graph.getNodes().keySet()) {
 			for (String blacklisted : blacklist) {
 				if (node.matches(blacklisted)) {
-					nodes.add(node);
+					toRemove.add(node);
 				}
 			}
 		}
@@ -39,7 +72,7 @@ public class BlacklistAnalyzer implements IAnalyzer {
 		for (INode node : graph.getNodes().values()) {
 			links = new ArrayList<ILink>();
 			for (ILink link : node.getLinks()) {
-				if (nodes.contains(link.getEnd())) {
+				if (toRemove.contains(link.getEnd())) {
 					links.add(link);
 				}
 			}
@@ -48,7 +81,7 @@ public class BlacklistAnalyzer implements IAnalyzer {
 			}
 		}
 		
-		for (String node : nodes) {
+		for (String node : toRemove) {
 			graph.getNodes().remove(node);
 		}
 		
