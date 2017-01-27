@@ -2,10 +2,10 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<comment/>
-	<entry key="blacklist"></entry>
+	<entry key="blacklist">java.*</entry>
 	<entry key="whitelist"></entry>
 	<entry key="pairs">
-		analyzers=generator.analyzers.violation.InheritanceAnalyzer
+		analyzers=generator.analyzers.violation.InheritanceAnalyzer;generator.analyzers.violation.SingletonAnalyzer
 	</entry>
 	<entry key="arguments">
 		test.A,
