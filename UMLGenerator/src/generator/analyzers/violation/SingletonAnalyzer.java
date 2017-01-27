@@ -11,6 +11,7 @@ import org.objectweb.asm.tree.MethodNode;
 
 import generator.Graph;
 import generator.INode;
+import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
@@ -36,7 +37,7 @@ public class SingletonAnalyzer implements IAnalyzer {
 				isSingleton &= retType.startsWith("L") &&
 						retType.substring(1, retType.indexOf(';')).equals(classNode.name);
 				if (isSingleton) {
-					// TODO
+					graph.getNodes().get(classNode.name.replace("/", ".")).setAttribute(new StyleAttribute("color","orange",20));
 					System.out.printf("Hey I'm a singleton: %s\n", name);
 					break;
 				}

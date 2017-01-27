@@ -8,6 +8,7 @@ import org.objectweb.asm.tree.ClassNode;
 
 import generator.Graph;
 import generator.INode;
+import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
@@ -34,7 +35,7 @@ public class InheritanceAnalyzer implements IAnalyzer {
 			
 			// If there is a superclass that is not Object
 			if (classNode.superName != null && !classNode.superName.equals("java/lang/Object")) {
-				System.out.printf("Change color cuz bad: %s\n", classNode.name);
+				graph.getNodes().get(classNode.name.replace("/", ".")).setAttribute(new StyleAttribute("color","red",10));
 			}
 		}
 		return false;

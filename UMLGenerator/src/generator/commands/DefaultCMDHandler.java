@@ -1,7 +1,8 @@
 package generator.commands;
 
-import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
+
 import generator.Graph;
 import generator.analyzers.BlacklistAnalyzer;
 import generator.analyzers.FieldAnalyzer;
@@ -17,7 +18,7 @@ public class DefaultCMDHandler implements ICMDHandler {
 	
 	@Override
 	public void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, IGraphFactory factory) {
-		
+		List<IAnalyzer> lastPass = new ArrayList<IAnalyzer>();
 		List<String> flags = params.getFlags();
 		
 		if (flags.contains("r")) {
@@ -42,6 +43,7 @@ public class DefaultCMDHandler implements ICMDHandler {
 				if (name.isEmpty())
 					continue;
 				try {
+					@SuppressWarnings("unchecked")
 					Class<IAnalyzer> analyzer = (Class<IAnalyzer>) Class.forName(name);
 					analyzers.add(analyzer.newInstance());
 				} catch (Exception e) {
@@ -51,13 +53,15 @@ public class DefaultCMDHandler implements ICMDHandler {
 			}
 		}
 		
+
 		
 		// always add the LinkPriorityAnalyzer last so we can deal with that
-		analyzers.add(new LinkPriorityAnalyzer());
+		lastPass.add(new LinkPriorityAnalyzer());
 		
 		
 		// Remove any nodes that don't belong last
-		analyzers.add(new BlacklistAnalyzer());
+		lastPass.add(new BlacklistAnalyzer());
+		
 		
 		Graph graph = new Graph();
 		try {
@@ -75,6 +79,15 @@ public class DefaultCMDHandler implements ICMDHandler {
 			}
 			
 			factory.linkGraph(graph);
+			
+			updateRequired = true;
+			while (updateRequired) {
+				updateRequired = false;
+				for (IAnalyzer analyzer : lastPass) {
+					//System.err.printf("DEBUG: Analyzing with %s%n", analyzer.getClass().getName());
+					updateRequired |= analyzer.analyze(graph, params, factory);
+				}
+			}
 			
 			for (IExporter exporter : exporters) {
 				exporter.export(graph, params);

@@ -1,5 +1,6 @@
 package generator.analyzers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import generator.Graph;
@@ -13,24 +14,32 @@ public class LinkPriorityAnalyzer implements IAnalyzer {
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
 		HashMap<String, ILink> local;
+		ArrayList<ILink> toRemove;
 		String target;
+		boolean changed = false;
 		for (INode node : graph.getNodes().values()) {
 			local = new HashMap<String, ILink>();
+			toRemove = new ArrayList<ILink>();
 			for (ILink link : node.getLinks()) {
-				target = link.getRelationship().split("->")[1].trim();
+				target = link.getEnd();
 				if (!local.containsKey(target))
 					local.put(target, link);
 				else {
 					if (supercedes(link, local.get(target))) {
-						node.removeLink(local.get(target));
+						toRemove.add(local.get(target));
 						local.put(target, link);
 					} else {
-						node.removeLink(link);
+						toRemove.add(link);
 					}
 				}
 			}
+			if (toRemove.size() > 0)
+				changed = true;
+			for (ILink link : toRemove) {
+				node.removeLink(link);
+			}
 		}
-		return false;
+		return changed;
 	}
 
 	/**
