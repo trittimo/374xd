@@ -13,14 +13,17 @@ import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
 import generator.links.DependencyLink;
+import generator.links.DependencyManyLink;
 import generator.nodes.JavaClassNode;
 
 public class MethodBodyAnalyzer  implements IAnalyzer {
 
 	private HashMap<String, HashSet<String>> map;
+	private HashMap<String, HashSet<String>> mapMulti;
 	
 	public MethodBodyAnalyzer() {
 		map = new HashMap<String, HashSet<String>>();
+		mapMulti = new HashMap<String, HashSet<String>>();
 	}
 	
 	@Override
@@ -54,6 +57,16 @@ public class MethodBodyAnalyzer  implements IAnalyzer {
 				start.addLink(new DependencyLink(start, end));
 			}
 		}
+		for (String s : mapMulti.keySet()) {
+			for (String t: mapMulti.get(s)) {
+				start = graph.getNodes().get(s);
+				end = graph.getNodes().get(t);
+				if (start == null || end == null) {
+					continue;
+				}
+				start.addLink(new DependencyManyLink(start, end));
+			}
+		}
 		
 		// return true if added a class
 		return (addClasses.size() > 0);
@@ -72,6 +85,7 @@ public class MethodBodyAnalyzer  implements IAnalyzer {
 		// declare some vars to use
 		String toparse;
 		HashSet<String> toLink = new HashSet<String>();
+		HashSet<String> toLinkMulti = new HashSet<String>();
 		
 		
 		// for every method in a class node...
@@ -93,13 +107,14 @@ public class MethodBodyAnalyzer  implements IAnalyzer {
 					toparse = v.desc;
 				else
 					toparse = v.signature;
-				parseSignature(toLink, toparse);
+				parseSignature(toLink, toLinkMulti, toparse);
 			}
 		}
 
 		// asm always picks up the class as a local variable of itself
 		// we should remove that since UML doesn't really consider it that way
 		toLink.remove(classname);
+		toLinkMulti.remove(classname);
 		
 		// check to see if we have nodes not in the graph
 		for (String s : toLink) {
@@ -111,12 +126,19 @@ public class MethodBodyAnalyzer  implements IAnalyzer {
 		
 		// put info in the map
 		map.put(classname, toLink);
+		mapMulti.put(classname, toLinkMulti);
 	}
 
-	public void parseSignature(Set<String> list, String analyze) {
+	public void parseSignature(Set<String> list, Set<String> multilist, String analyze) {
 		// ignore array bits
-		while (analyze.startsWith("["))
+		boolean oneToMany = false;
+		while (analyze.startsWith("[")) {
 			analyze = analyze.substring(1);
+			oneToMany = true;
+		}
+		
+		if (oneToMany)
+			list = multilist;
 		
 		// skip non-objects
 		if (!analyze.startsWith("L"))
@@ -124,33 +146,29 @@ public class MethodBodyAnalyzer  implements IAnalyzer {
 		
 		analyze = analyze.substring(1); // skip the L
 		
-		
 		int index_brace = analyze.indexOf('<');
 		int index_semic = analyze.indexOf(';');
 		
 		// Handle case where a ; comes before a < 
 		// e.g. Lsome/class/here;Ljava/util/ArrayList<Ljava/lang/String;>;
-		if (index_semic < index_brace) {
+		while (index_semic < index_brace) {
 			list.add(analyze.substring(0, index_semic));
 			analyze = analyze.substring(index_semic + 1);
+			index_semic = analyze.indexOf(';');
 		}
-		
 		
 		// if signature has a generic
 		if (index_brace > 0) {
+			// parse list part
 			list.add(analyze.substring(0, index_brace).replace('/', '.'));
 			// parse generic
-			try {
-				parseSignature(list, analyze.substring(index_brace + 1, analyze.indexOf('>')));
-			} catch (Exception e) {
-				System.out.println("Malformed signature: " + analyze);
-			}
+			parseSignature(multilist, multilist, analyze.substring(index_brace + 1, analyze.lastIndexOf('>')));
 		} else {
 			// without generic
 			list.add(analyze.substring(0, index_semic).replace('/', '.'));
 			analyze = analyze.substring(index_semic + 1);
 			if (analyze.length() > 0)
-				parseSignature(list, analyze);
+				parseSignature((oneToMany)?multilist:list, multilist, analyze);
 		}
 	} 
 	

@@ -1,5 +1,6 @@
 package generator.analyzers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 
 import generator.Graph;
+import generator.ILink;
 import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
@@ -18,9 +20,16 @@ import generator.nodes.JavaClassNode;
 
 public class FieldAnalyzer implements IAnalyzer {
 
+	ArrayList<String> done;
+	
+	public FieldAnalyzer() {
+		done = new ArrayList<String>();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
+		
 		HashMap<String, Set<String>> fields = new HashMap<String, Set<String>>();
 		HashMap<String, Set<String>> multiFields = new HashMap<String, Set<String>>();
 		
@@ -29,42 +38,30 @@ public class FieldAnalyzer implements IAnalyzer {
 		for (INode node : graph.getNodes().values()) {
 			if (node instanceof JavaClassNode) {
 				ClassNode classNode = ((JavaClassNode) node).getClassNode();
+				if (done.contains(classNode.name))
+					continue;
+				done.add(classNode.name);
+				className = classNode.name.replaceAll("/", ".");
 				HashSet<String> currentList = new HashSet<String>();
 				HashSet<String> currentMultiList = new HashSet<String>();
 				for (FieldNode fn : (List<FieldNode>) classNode.fields) {
-					switch (fn.desc.charAt(0)) {
-						case '[': // array
-							className = fn.desc.substring(fn.desc.lastIndexOf("[")+1,fn.desc.length()-1).replaceAll("/", ".");
-							if (!className.startsWith("L"))
-								break; // not a class
-							else
-								className = className.substring(1);
-							if (!graph.getNodes().containsKey(className)) {
-								continue;
-							} 
-							// one to many
-							currentMultiList.add(className);
-							break;
-						case 'L': // a class
-							className = fn.desc.substring(1).replaceAll("/", ".").substring(0, fn.desc.length()-2);
-							if (!graph.getNodes().containsKey(className)) {
-								continue;
-							}
-							currentList.add(className);
-						default:
-							//primitives will be ignored
-					}
+					parseSignature(currentList, currentMultiList, 
+						(fn.signature == null)?fn.desc:fn.signature);
 				}
-				multiFields.put(classNode.name.replaceAll("/", "."), currentMultiList);
-				fields.put(classNode.name.replaceAll("/", "."), currentList);
+				multiFields.put(className, currentMultiList);
+				fields.put(className, currentList);
 			}
 		}
-		
 
+		ILink link;
 		for (String name : multiFields.keySet()) {
 			INode node = graph.getNodes().get(name);
 			for (String field : multiFields.get(name)) {
-				node.addLink(new AssociationManyLink(node, graph.getNodes().get(field)));
+				if (!graph.getNodes().containsKey(field))
+					factory.addNodeToGraph(graph, field);
+				link = new AssociationManyLink(node, graph.getNodes().get(field));
+				System.out.println("FieldAnalyzer: NewLink: " + link);
+				node.addLink(link);
 			}
 		}
 		
@@ -73,7 +70,11 @@ public class FieldAnalyzer implements IAnalyzer {
 			for (String field : fields.get(name)) {
 				if (multiFields.get(name).contains(field)) // case: already added as multi
 					continue;
-				node.addLink(new AssociationLink(node, graph.getNodes().get(field)));
+				if (!graph.getNodes().containsKey(field))
+					factory.addNodeToGraph(graph, field);
+				link = new AssociationLink(node, graph.getNodes().get(field));
+				System.out.println("FieldAnalyzer: NewLink: " + link);
+				node.addLink(link);
 			}
 		}
 		
@@ -81,5 +82,48 @@ public class FieldAnalyzer implements IAnalyzer {
 		return false;
 	}
 	
+
+	public void parseSignature(Set<String> list, Set<String> multilist, String analyze) {
+		// ignore array bits
+		boolean oneToMany = false;
+		while (analyze.startsWith("[")) {
+			analyze = analyze.substring(1);
+			oneToMany = true;
+		}
+		
+		if (oneToMany)
+			list = multilist;
+		
+		// skip non-objects
+		if (!analyze.startsWith("L"))
+			return;
+		
+		analyze = analyze.substring(1); // skip the L
+		
+		int index_brace = analyze.indexOf('<');
+		int index_semic = analyze.indexOf(';');
+		
+		// Handle case where a ; comes before a < 
+		// e.g. Lsome/class/here;Ljava/util/ArrayList<Ljava/lang/String;>;
+		while (index_semic < index_brace) {
+			list.add(analyze.substring(0, index_semic));
+			analyze = analyze.substring(index_semic + 1);
+			index_semic = analyze.indexOf(';');
+		}
+		
+		// if signature has a generic
+		if (index_brace > 0) {
+			// parse list part
+			list.add(analyze.substring(0, index_brace).replace('/', '.'));
+			// parse generic
+			parseSignature(multilist, multilist, analyze.substring(index_brace + 1, analyze.lastIndexOf('>')));
+		} else {
+			// without generic
+			list.add(analyze.substring(0, index_semic).replace('/', '.'));
+			analyze = analyze.substring(index_semic + 1);
+			if (analyze.length() > 0)
+				parseSignature((oneToMany)?multilist:list, multilist, analyze);
+		}
+	}
 
 }
