@@ -1,6 +1,7 @@
 package generator.nodes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -12,6 +13,7 @@ import org.objectweb.asm.tree.ParameterNode;
 import generator.Graph;
 import generator.ILink;
 import generator.INode;
+import generator.StyleAttribute;
 import generator.links.ExtendsLink;
 import generator.links.ImplementsLink;
 
@@ -19,10 +21,14 @@ public class JavaClassNode implements INode {
 
 	private ArrayList<ILink> links;
 	protected ClassNode classNode;
+
+	protected HashMap<String, StyleAttribute> attributes;
 	
 	public JavaClassNode(ClassNode node) {
 		this.classNode = node;
 		this.links = new ArrayList<ILink>();
+		attributes = new HashMap<String, StyleAttribute>();
+		this.setAttribute(new StyleAttribute("shape", "record", 10));
 	}
 	
 	@Override
@@ -152,5 +158,27 @@ public class JavaClassNode implements INode {
 	public void removeLink(ILink link) {
 		this.links.remove(link);
 	}
+	
 
+	@Override
+	public String getAttributeString() {
+		String str = "";
+		for (StyleAttribute sa : this.attributes.values()) {
+			str += String.format(", %s=\"%s\"", sa.getIndentifier(), sa.getValue());
+		}
+		return str;
+	}
+
+	@Override
+	public void setAttribute(StyleAttribute sa) {
+		String id = sa.getIndentifier();
+		// if already have this style
+		if (attributes.containsKey(id)) {
+			// return unless new style has higher priority.
+			if (attributes.get(id).getPriority() >= sa.getPriority())
+				return;
+		}
+		// otherwise, set the style
+		attributes.put(id, sa);
+	}
 }

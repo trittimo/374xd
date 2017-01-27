@@ -22,9 +22,10 @@ public class DOTFileExporter implements IExporter {
 		String digraph = "digraph " + outFileName.substring(0, outFileName.indexOf('.')) + "{\nconcentrate=true;\nrankdir=\"BT\";\n";
 		
 		for (INode node : graph.getNodes().values() ) {
-			digraph += String.format("%s [ shape=\"record\", label = \"%s\" ];\n",
+			digraph += String.format("%s [label = \"%s\"%s ];\n",
 					node.getQualifiedName(),
-					node.getLabel());
+					node.getLabel(),
+					node.getAttributeString());
 		}
 		
 		for (INode node : graph.getNodes().values()) {

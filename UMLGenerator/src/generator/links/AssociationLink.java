@@ -1,16 +1,13 @@
 package generator.links;
 
 import generator.INode;
+import generator.StyleAttribute;
 
 public class AssociationLink extends OneToOneLink {
 
 	public AssociationLink(INode from, INode to) {
 		super(from, to);
-	}
-
-	@Override
-	public String getAttributes() {
-		return "arrowhead=\"vee\"";
+		this.setAttribute(new StyleAttribute("arrowhead", "vee", 1));
 	}
 
 	@Override

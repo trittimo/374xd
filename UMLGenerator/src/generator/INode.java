@@ -16,5 +16,7 @@ public interface INode {
 	
 	public void removeLink(ILink link);
 	
+	public String getAttributeString();
+	public void setAttribute(StyleAttribute sa);
 
 }
