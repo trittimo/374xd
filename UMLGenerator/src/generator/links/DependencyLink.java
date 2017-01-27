@@ -13,4 +13,9 @@ public class DependencyLink extends OneToOneLink {
 		return "arrowhead=\"vee\", style=\"dashed\"";
 	}
 
+	@Override
+	public int getPriority() {
+		return 10;
+	}
+
 }

@@ -13,4 +13,9 @@ public class AssociationLink extends OneToOneLink {
 		return "arrowhead=\"vee\"";
 	}
 
+	@Override
+	public int getPriority() {
+		return 20;
+	}
+
 }

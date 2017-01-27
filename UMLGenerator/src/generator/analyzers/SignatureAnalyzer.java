@@ -65,7 +65,7 @@ public class SignatureAnalyzer implements IAnalyzer {
 						}
 					}
 				}
-				if (add) {
+				if (add && (node != other)) {
 					node.addLink(new DependencyLink(node, other));
 				}
 			}

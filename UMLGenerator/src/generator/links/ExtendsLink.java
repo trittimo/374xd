@@ -17,4 +17,9 @@ public class ExtendsLink extends OneToOneLink {
 		return "arrowhead=\"onormal\"";
 	}
 
+	@Override
+	public int getPriority() {
+		return 30;
+	}
+
 }

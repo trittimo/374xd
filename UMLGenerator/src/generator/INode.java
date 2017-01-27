@@ -14,5 +14,7 @@ public interface INode {
 	
 	public List<ILink> getLinks();
 	
+	public void removeLink(ILink link);
+	
 
 }

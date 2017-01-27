@@ -2,8 +2,6 @@ package generator.nodes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
@@ -19,7 +17,7 @@ import generator.links.ImplementsLink;
 
 public class JavaClassNode implements INode {
 
-	private List<ILink> links;
+	private ArrayList<ILink> links;
 	protected ClassNode classNode;
 	
 	public JavaClassNode(ClassNode node) {
@@ -80,8 +78,9 @@ public class JavaClassNode implements INode {
 	}
 
 	public String getMethodSection() {
-		String section = "|";
+		@SuppressWarnings("unchecked")
 		List<MethodNode> methods = (List<MethodNode>) classNode.methods;
+		String section = "|";
 		for(MethodNode method : methods) {
 			if (method.name.startsWith("<")) {
 				continue;
@@ -102,6 +101,7 @@ public class JavaClassNode implements INode {
 	}
 
 	private String getMethodArguments(MethodNode m) {
+		@SuppressWarnings("unchecked")
 		List<ParameterNode> params = m.parameters;
 		Type[] types = Type.getArgumentTypes(m.desc);
 		String stringify = "";
@@ -119,12 +119,8 @@ public class JavaClassNode implements INode {
 
 	@Override
 	public void addLink(ILink link) {
-		int exist = this.links.indexOf(link);
-		if (exist < 0)
-			this.links.add(link);
-		if (link instanceof generator.links.OneToManyLink) // one to many has priority
-			this.links.set(exist, link); // override existing
-		// other wise ignore it, we already have a one to one.
+		if (!this.links.contains(link))
+			this.links.add(link); // handles duplicates since it's a set 
 	}
 
 	@Override
@@ -150,6 +146,11 @@ public class JavaClassNode implements INode {
 
 	public ClassNode getClassNode() {
 		return this.classNode;
+	}
+
+	@Override
+	public void removeLink(ILink link) {
+		this.links.remove(link);
 	}
 
 }

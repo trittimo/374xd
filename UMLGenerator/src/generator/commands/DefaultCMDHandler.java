@@ -4,6 +4,7 @@ import java.util.List;
 import generator.Graph;
 import generator.analyzers.FieldAnalyzer;
 import generator.analyzers.IAnalyzer;
+import generator.analyzers.LinkPriorityAnalyzer;
 import generator.analyzers.MethodBodyAnalyzer;
 import generator.analyzers.RecursiveClassAnalyzer;
 import generator.analyzers.SignatureAnalyzer;
@@ -15,20 +16,26 @@ public class DefaultCMDHandler implements ICMDHandler {
 	@Override
 	public void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, IGraphFactory factory) {
 		
+		List<String> flags = params.getFlags();
 		
-		if (params.getFlags().contains("r")) {
+		if (flags.contains("r")) {
 			analyzers.add(new RecursiveClassAnalyzer());
 		}
 		
-		if (params.getFlags().contains("f")) {
+		if (flags.contains("f")) {
 			analyzers.add(new FieldAnalyzer());
 		}
 		
-		if (params.getFlags().contains("m")) {
+		if (flags.contains("s")) {
 			analyzers.add(new SignatureAnalyzer());
 		}
 		
-		analyzers.add(new MethodBodyAnalyzer());
+		if (flags.contains("m")) {
+			analyzers.add(new MethodBodyAnalyzer());
+		}
+		
+		// always add the LinkPriorityAnalyzer last so we can deal with that
+		analyzers.add(new LinkPriorityAnalyzer());
 		
 		Graph graph = new Graph();
 		try {

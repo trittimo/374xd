@@ -37,8 +37,7 @@ public abstract class OneToManyLink implements ILink {
 
 	public String toString() {
 		return String.format("<%s, %s>", 
-			getClass().getName(), getRelationship())
-			.replaceAll("Many", "");
+			getClass().getName(), getRelationship());
 	}
 	
 	public int hashCode() {

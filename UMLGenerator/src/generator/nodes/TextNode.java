@@ -42,4 +42,9 @@ public class TextNode implements INode {
 		return;
 	}
 
+	@Override
+	public void removeLink(ILink link) {
+		links.remove(link);
+	}
+
 }
