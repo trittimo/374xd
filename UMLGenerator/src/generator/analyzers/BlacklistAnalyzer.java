@@ -13,7 +13,7 @@ public class BlacklistAnalyzer implements IAnalyzer {
 
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
-		if (params.getNamedLists().containsKey("whitelist")) {
+		if (params.getNamedLists().containsKey("whitelist") && params.getNamedLists().get("whitelist").size() > 0) {
 			List<String> whitelist = params.getNamedLists().get("whitelist");
 			List<String> toRemove = new ArrayList<String>();
 			
