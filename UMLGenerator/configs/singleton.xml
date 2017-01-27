@@ -3,11 +3,11 @@
 <properties>
 	<comment/>
 	<entry key="blacklist"></entry>
-	<entry key="whitelist"></entry>
+	<entry key="whitelist">test.ChocolateBoilerLazy,test.ChocolateBoiler,java.lang.Runtime,java.awt.Desktop,java.util.Calendar</entry>
 	<entry key="pairs">
 		analyzers=generator.analyzers.violation.SingletonAnalyzer,
 		lastpass=generator.analyzers.violation.InheritanceAnalyzer
 	</entry>
-	<entry key="arguments"></entry>
-	<entry key="flags">r,m,f,s</entry>
+	<entry key="arguments">test.ChocolateBoilerLazy,test.ChocolateBoiler,java.lang.Runtime,java.awt.Desktop,java.util.Calendar</entry>
+	<entry key="flags">m,f,s</entry>
 </properties>

@@ -140,7 +140,11 @@ public class MethodBodyAnalyzer  implements IAnalyzer {
 		if (index_brace > 0) {
 			list.add(analyze.substring(0, index_brace).replace('/', '.'));
 			// parse generic
-			parseSignature(list, analyze.substring(index_brace + 1, analyze.indexOf('>')));
+			try {
+				parseSignature(list, analyze.substring(index_brace + 1, analyze.indexOf('>')));
+			} catch (Exception e) {
+				System.out.println("Malformed signature: " + analyze);
+			}
 		} else {
 			// without generic
 			list.add(analyze.substring(0, index_semic).replace('/', '.'));

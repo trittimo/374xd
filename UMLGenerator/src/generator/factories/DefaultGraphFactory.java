@@ -23,7 +23,8 @@ public class DefaultGraphFactory implements IGraphFactory {
 		try {
 			reader = new ClassReader(qualifiedName);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Unable to find class: " + qualifiedName);
+			return;
 		}
 		ClassNode classNode = new ClassNode();
 		reader.accept(classNode, ClassReader.EXPAND_FRAMES);
