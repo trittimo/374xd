@@ -1,5 +1,6 @@
 package generator.commands;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import generator.Graph;
 import generator.analyzers.FieldAnalyzer;
@@ -32,6 +33,23 @@ public class DefaultCMDHandler implements ICMDHandler {
 		
 		if (flags.contains("m")) {
 			analyzers.add(new MethodBodyAnalyzer());
+		}
+		
+		if (params.getOptionPairs().containsKey("analyzers")) {
+			String[] analyzerNames = params.getOptionPairs().get("analyzers").split(";");
+			for (String name : analyzerNames) {
+				if (name.isEmpty())
+					continue;
+				try {
+					Class<IAnalyzer> analyzer = (Class<IAnalyzer>) Class.forName(name);
+					analyzers.add(analyzer.newInstance());
+//					Constructor<IAnalyzer> c = analyzer.getConstructor(Graph.class, CMDParams.class, IGraphFactory.class);
+//					c.newInstance(arg0)
+				} catch (Exception e) {
+					System.err.println("Could not load custom analyzer");
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		// always add the LinkPriorityAnalyzer last so we can deal with that

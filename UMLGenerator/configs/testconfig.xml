@@ -4,10 +4,12 @@
 	<comment/>
 	<entry key="blacklist"></entry>
 	<entry key="whitelist"></entry>
-	<entry key="pairs"></entry>
+	<entry key="pairs">
+		analyzers=test.TestAnalyzer;test.TestAnalyzer2
+	</entry>
 	<entry key="arguments">
 		test.A,
 		test.B
 	</entry>
-	<entry key="flags">r,m,f</entry>
+	<entry key="flags">r,m,f,s</entry>
 </properties>
