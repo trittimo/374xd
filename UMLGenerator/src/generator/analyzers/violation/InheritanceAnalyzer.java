@@ -7,6 +7,7 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
 import generator.Graph;
+import generator.ILink;
 import generator.INode;
 import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
@@ -35,7 +36,23 @@ public class InheritanceAnalyzer implements IAnalyzer {
 			
 			// If there is a superclass that is not Object
 			if (classNode.superName != null && !classNode.superName.equals("java/lang/Object")) {
-				graph.getNodes().get(classNode.name.replace("/", ".")).setAttribute(new StyleAttribute("color","red",10));
+				String childname = classNode.name.replace("/", ".");
+				String supername = classNode.superName.replace("/", ".");
+				System.out.printf("InheritanceAnalyzer Warning: Bad inheritance @ %s >> %s %n", childname, supername);
+				//System.out.print("Nodes = " + graph.getNodes().keySet());
+				INode child = graph.getNodes().get(childname);
+				INode parent = graph.getNodes().get(supername);
+				StyleAttribute red = new StyleAttribute("color","red",10);
+				child.setAttribute(red);
+				if (parent != null)
+					parent.setAttribute(red);
+				// find link
+				for (ILink link : child.getLinks()) {
+					if (link.getEnd() == supername) {
+						if (link instanceof generator.links.ExtendsLink)
+							link.setAttribute(red);
+					}
+				}
 			}
 		}
 		return false;

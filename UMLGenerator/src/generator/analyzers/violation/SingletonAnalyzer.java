@@ -15,9 +15,11 @@ import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
+import generator.nodes.JavaClassNode;
 
 public class SingletonAnalyzer implements IAnalyzer {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
 		ClassReader reader = null;
@@ -37,8 +39,10 @@ public class SingletonAnalyzer implements IAnalyzer {
 				isSingleton &= retType.startsWith("L") &&
 						retType.substring(1, retType.indexOf(';')).equals(classNode.name);
 				if (isSingleton) {
-					graph.getNodes().get(classNode.name.replace("/", ".")).setAttribute(new StyleAttribute("color","orange",20));
-					System.out.printf("Hey I'm a singleton: %s\n", name);
+					JavaClassNode javanode = (JavaClassNode) node;
+					javanode.addStereotype("Singleton");
+					javanode.setAttribute(new StyleAttribute("color","orange",20));
+					
 					break;
 				}
 			}

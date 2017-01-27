@@ -23,11 +23,13 @@ public class JavaClassNode implements INode {
 	protected ClassNode classNode;
 
 	protected HashMap<String, StyleAttribute> attributes;
+	protected String stereotype;
 	
 	public JavaClassNode(ClassNode node) {
 		this.classNode = node;
 		this.links = new ArrayList<ILink>();
 		attributes = new HashMap<String, StyleAttribute>();
+		this.stereotype = null;
 		this.setAttribute(new StyleAttribute("shape", "record", 10));
 	}
 	
@@ -40,7 +42,7 @@ public class JavaClassNode implements INode {
 	public String getLabel() {
 		String label = "{";
 		// Name
-		label += getLabelName();		
+		label += getLabelName();	
 		// Fields
 		label += getFieldSection();
 		// Methods
@@ -50,7 +52,10 @@ public class JavaClassNode implements INode {
 	}
 
 	protected String getLabelName() {
-		return classNode.name.substring(classNode.name.lastIndexOf('/') + 1);
+		String name = classNode.name.substring(classNode.name.lastIndexOf('/') + 1);
+		if (stereotype == null)
+			return name;
+		return String.format("\\<\\<%s\\>\\>\\n%s", stereotype, name);
 	}
 	
 	protected String getFieldSection() {
@@ -180,5 +185,9 @@ public class JavaClassNode implements INode {
 		}
 		// otherwise, set the style
 		attributes.put(id, sa);
+	}
+
+	public void addStereotype(String string) {
+		this.stereotype = string;
 	}
 }

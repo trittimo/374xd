@@ -6,15 +6,11 @@ public class JavaInterfaceNode extends JavaClassNode {
 
 	public JavaInterfaceNode(ClassNode node) {
 		super(node);
+		stereotype = "interface";
 	}
 
 	@Override
 	public String getFieldSection() {
 		return "";
-	}
-	
-	@Override
-	protected String getLabelName() {
-		return "\\<\\<interface\\>\\>\\n" + classNode.name.substring(classNode.name.lastIndexOf('/') + 1);
 	}
 }

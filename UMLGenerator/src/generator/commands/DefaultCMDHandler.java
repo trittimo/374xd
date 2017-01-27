@@ -52,14 +52,27 @@ public class DefaultCMDHandler implements ICMDHandler {
 				}
 			}
 		}
-		
 
+		if (params.getOptionPairs().containsKey("lastpass")) {
+			String[] analyzerNames = params.getOptionPairs().get("lastpass").split(";");
+			for (String name : analyzerNames) {
+				if (name.isEmpty())
+					continue;
+				try {
+					@SuppressWarnings("unchecked")
+					Class<IAnalyzer> analyzer = (Class<IAnalyzer>) Class.forName(name);
+					lastPass.add(analyzer.newInstance());
+				} catch (Exception e) {
+					System.err.println("Could not load custom analyzer");
+					e.printStackTrace();
+				}
+			}
+		}
 		
 		// always add the LinkPriorityAnalyzer last so we can deal with that
 		lastPass.add(new LinkPriorityAnalyzer());
 		
-		
-		// Remove any nodes that don't belong last
+		// always remove any nodes that don't belong last
 		lastPass.add(new BlacklistAnalyzer());
 		
 		
