@@ -1,0 +1,28 @@
+NOTES:
+	- Along each step, have optionally no command in order to finish execution early
+	recursive/dependency/etc. javatransformers
+javatransformers return boolean to tell if they changed anything
+new nodes in graph are added to new nodes queue so they can be processed
+
+What varies:
+	Command line args
+	Analysis of code
+	Add more detail to graph
+	Formatting of resulting UML
+	Method of using generated UML (i.e. just create png in folder vs show in gui)
+
+Addendums to varies:
+	Nodes and arrows must be highly extensible
+
+What stays the same:
+	A relatively simple API that can be hooked into and provide extensive functionality
+	Runs on Java code
+
+Ideas:
+	Use command pattern to encapsulate analysis of code
+	Use AbstractFactory to generate specifics:
+		- JavaNodes
+		- UMLNodes
+		- UMLEdges
+	Add hooks through each step of the process so anyone can do as they wish in those steps
+	Use template pattern for hooks

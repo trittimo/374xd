@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>387</y>
+      <w>117</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>UMLGeneratorApp
+--
+main(args: String[])</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>198</x>
+      <y>324</y>
+      <w>432</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>UMLGenerator&lt;N,S&gt;
+--
+argHandlers: List&lt;IArgumentHandler&lt;S&gt;&gt;
+graphTransformers: List&lt;IGraphTransformer&lt;N&gt;&gt;
+...
+--
+addArgumentsHandler(handler: IArgumentHandler&lt;S&gt;)
+addGraphTransformer(transformer: IGraphTransformer&lt;N&gt;)
+addGraphAnalyzer(analyzer: IAnalyzer)
+addGraphRenderer(renderer: IGraphRenderer)
+addLastPassExecutor(executor: ILastPassExecutor)
+execute(arguments: T[])</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>108</x>
+      <y>405</y>
+      <w>108</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>198</x>
+      <y>135</y>
+      <w>297</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>1. Instantiate the UMLGenerator with the type of
+    the arguments you expect to take (likely this will
+    be a string).
+2. Add the necessary commands used in order to
+    perform operations (i.e. call the add... methods).
+3. Call the execute method with the necessary
+    arguments.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>279</x>
+      <y>243</y>
+      <w>27</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>873</x>
+      <y>72</y>
+      <w>468</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+IArgumentHandler&lt;SettingsType&gt;
+--
+getProjectSettings(arguments: T[]): Settings</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>873</x>
+      <y>180</y>
+      <w>468</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+IGraphTransformer&lt;NodeType&gt;
+--
+transform(settings: Settings, current: Graph&lt;NodeType&gt;): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>873</x>
+      <y>288</y>
+      <w>468</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+IAnalyzer
+--
+analyze(graph: Graph, settings: Settings): Graph
+update(graph: Graph, settings: Settings, changed: Changed): Graph</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>621</x>
+      <y>324</y>
+      <w>270</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;110.0;130.0;110.0;130.0;10.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>126</y>
+      <w>27</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>216</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>126</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>873</x>
+      <y>441</y>
+      <w>468</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+IGraphRenderer&lt;IAnalyzer&gt;
+--
+renderGraph(graph: Graph, settings: Settings, current: Export): Export</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>414</y>
+      <w>27</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>486</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1890</x>
+      <y>288</y>
+      <w>387</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+/IGraphObserver/
+--
+update(graph: Graph, settings: Settings, changed: Changed): Graph</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>324</y>
+      <w>576</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>620.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1260</x>
+      <y>135</y>
+      <w>81</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Runs once</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1188</x>
+      <y>378</y>
+      <w>153</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>May run multiple times</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1260</x>
+      <y>504</y>
+      <w>81</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Runs once</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>873</x>
+      <y>495</y>
+      <w>207</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Only renders for the analyzer it is
+parameterized for</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>873</x>
+      <y>558</y>
+      <w>468</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ILastPassExecutor
+--
+execute(graph: Graph, settings: Settings, exported: Export)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>603</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1260</x>
+      <y>621</y>
+      <w>81</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Runs once</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1890</x>
+      <y>540</y>
+      <w>153</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>Export
+--
+name: String
+attributes: List&lt;String&gt;
+nodes: List&lt;ExportNode&gt;
+edges: List&lt;ExportEdge&gt;
+comments: List&lt;String&gt;
+--
+export(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2079</x>
+      <y>477</y>
+      <w>180</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>ExportNode
+--
+name: String
+attributes: Map&lt;String, String&gt;
+--
+export(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2079</x>
+      <y>603</y>
+      <w>180</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>ExportEdge
+--
+start: String
+end: String
+connector: String
+attributes: Map&lt;String, String&gt;
+--
+export(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2034</x>
+      <y>513</y>
+      <w>63</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2034</x>
+      <y>612</y>
+      <w>63</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>50.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>477</y>
+      <w>576</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>620.0;140.0;490.0;140.0;490.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>594</y>
+      <w>459</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>490.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1188</x>
+      <y>243</y>
+      <w>153</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>May run multiple times</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
