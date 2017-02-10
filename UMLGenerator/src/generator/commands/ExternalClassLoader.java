@@ -114,7 +114,10 @@ public class ExternalClassLoader extends ClassLoader {
 	}
 
 	private Class<?> readClassFromURI(String key, String path) throws IOException, URISyntaxException {
-		if (ENABLE_CL_DEBUG) System.out.printf("Loading class '%s' from URI '%s'...%n", key, new File(new URI(path)).getAbsolutePath());
+		if (ENABLE_CL_DEBUG) {
+			System.out.printf("Loading class '%s' from URI '%s'...%n", key, new File(new URI(path)).getAbsolutePath());
+		}
+		
 		// load class
 		byte[] buffer = this.readBytesFromResource(new URI(path).toURL());
 		// define class

@@ -4,10 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
+import java.util.Stack;
 
 import generator.Graph;
 import generator.analyzers.BidirectionalLinkReplacementAnalyzer;
@@ -142,9 +147,40 @@ public class DefaultCMDHandler implements ICMDHandler {
 	}
 	
 
-	protected Properties loadExternalClassIndex(String eciName) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+	protected Properties loadExternalClassIndex(String eciName) throws InvalidPropertiesFormatException, FileNotFoundException, IOException, URISyntaxException {
 		Properties classes = new Properties();
 		classes.loadFromXML(new FileInputStream(eciName));
+		
+		
+		for (String key : classes.stringPropertyNames()) {
+			String property = classes.getProperty(key);
+			if (property.indexOf('*') >= 0) {
+				classes.remove(key);
+				if (key.lastIndexOf('|') >= 0) {
+					key = key.substring(0, key.lastIndexOf('|'));
+				}
+				Stack<File> todo = new Stack<File>();
+				File start = new File(new URI(property.substring(0, property.indexOf('*') - 1)));
+				todo.push(start);
+				while (!todo.isEmpty()) {
+					File current = todo.pop();
+					for (File file : current.listFiles()) {
+						if (file.isDirectory()) {
+							todo.push(file);
+						} else {
+							if (!file.getAbsolutePath().endsWith(".class")) {
+								continue;
+							}
+							String keyName = file.getAbsolutePath().replace(start.getAbsolutePath(), "");
+							keyName = key + keyName.replaceAll("\\\\", ".");
+							keyName = keyName.replaceAll(".class", "");
+							classes.setProperty(keyName, file.toURI().toURL().toExternalForm());
+						}
+					}
+				}
+			}
+		}
+		
 		return classes;
 	}
 
