@@ -38,5 +38,25 @@ public class BidirectionalLink extends Link {
 	public void setStyleAttributes() {
 		this.setAttribute(new StyleAttribute("dir", "both", Integer.MAX_VALUE));
 	}
+	
+	@Override
+	public void setAttribute(StyleAttribute attribute) {
+		super.setAttribute(attribute);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return super.equals(o);
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 }
