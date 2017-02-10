@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment/>
+	<entry key="blacklist">java.*,org.*,sun.*</entry>
+	<entry key="whitelist"></entry>
+	<entry key="pairs">analyzers=generator.analyzers.pattern.SingletonAnalyzer,
+		lastpass=generator.analyzers.violation.InheritanceAnalyzer;generator.analyzers.violation.DependencyInversionAnalyzer;generator.analyzers.pattern.DecoratorAnalyzer;generator.analyzers.pattern.AdapterAnalyzer</entry>
+	<entry key="arguments">
+		generator.analyzers.violation.InheritanceAnalyzer,
+		generator.analyzers.pattern.SingletonAnalyzer,
+		generator.analyzers.BidirectionalLinkReplacementAnalyzer,
+		generator.analyzers.BlacklistAnalyzer,
+		generator.analyzers.FieldAnalyzer,
+		generator.analyzers.IAnalyzer,
+		generator.analyzers.LinkPriorityAnalyzer,
+		generator.analyzers.MethodBodyAnalyzer,
+		generator.analyzers.RecursiveClassAnalyzer,
+		generator.analyzers.SignatureAnalyzer,
+		generator.commands.CMDParams,
+		generator.commands.CMDParser,
+		generator.commands.DefaultCMDHandler,
+		generator.commands.ICMDHandler,
+		generator.exporters.DOTFileExporter,
+		generator.exporters.IExporter,
+		generator.exporters.PNGExporter,
+		generator.factories.DefaultGraphFactory,
+		generator.factories.IGraphFactory,
+		generator.links.AssociationLink,
+		generator.links.AssociationManyLink,
+		generator.links.BidirectionalLink,
+		generator.links.DependencyLink,
+		generator.links.DependencyManyLink,
+		generator.links.ExtendsLink,
+		generator.links.ImplementsLink,
+		generator.nodes.JavaAbstractNode,
+		generator.nodes.JavaAnnotationNode,
+		generator.nodes.JavaClassNode,
+		generator.nodes.JavaInterfaceNode,
+		generator.nodes.TextNode,
+		generator.Graph,
+		generator.INode,
+		generator.Link,
+		generator.StyleAttribute,
+		generator.UMLGenerator,
+		generator.UMLGeneratorApp
+	</entry>
+	<entry key="flags">r,m,f,s</entry>
+</properties>

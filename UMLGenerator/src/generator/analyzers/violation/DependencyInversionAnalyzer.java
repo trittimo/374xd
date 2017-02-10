@@ -129,12 +129,16 @@ public class DependencyInversionAnalyzer implements IAnalyzer {
 	}
 	
 	private ClassNode loadClass(String className) {
+		if (className.indexOf(';') >= 0) {
+			className = className.substring(0, className.indexOf(';')-1);
+		}
 		if (cache.containsKey(className))
 			return cache.get(className);
 		ClassReader reader = null;
 		try {
 			reader = ExternalClassLoader.getClassReader(className);
 		} catch (IOException e) {
+			System.out.println("lol");
 			System.out.println("Unable to find class: " + className);
 			return null;
 		}

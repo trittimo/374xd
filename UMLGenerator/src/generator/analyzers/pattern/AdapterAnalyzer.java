@@ -17,6 +17,7 @@ import generator.nodes.JavaClassNode;
 
 //for all of the methods you override, you make a call to the same inner object
 public class AdapterAnalyzer implements IAnalyzer {
+	
 	private boolean hasRun = false;
 	private static final int RUN_LIMIT = 500;
 	@Override
@@ -28,6 +29,7 @@ public class AdapterAnalyzer implements IAnalyzer {
 		
 		HashSet<Link> links = new HashSet<Link>();
 		for (INode node : graph.getNodes().values()) {
+			System.out.println(node.getQualifiedName());
 			for (Link edge : node.getLinks()) {
 				links.add(edge);
 			}
@@ -65,12 +67,9 @@ public class AdapterAnalyzer implements IAnalyzer {
 		
 	}
 	private boolean isInherits(Link l) {
-		System.out.println(l.getClass());
 		return l instanceof ImplementsLink || l instanceof ExtendsLink;
 	}
 	private boolean isAssociation(Link l) {
-		System.out.println(l.getClass());
-		System.out.println("=============");
 		return l instanceof AssociationLink || l instanceof AssociationManyLink;
 	}
 }

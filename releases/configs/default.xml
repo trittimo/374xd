@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment/>
+	<entry key="blacklist">java.lang.Object</entry>
+	<entry key="whitelist"></entry>
+	<entry key="pairs">out=exported.dot,png=exported.png</entry>
+	<entry key="arguments"></entry>
+	<entry key="flags"></entry>
+</properties>
