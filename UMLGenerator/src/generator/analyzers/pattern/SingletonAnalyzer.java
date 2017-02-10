@@ -14,6 +14,7 @@ import generator.INode;
 import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
 import generator.commands.CMDParams;
+import generator.commands.ExternalClassLoader;
 import generator.factories.IGraphFactory;
 import generator.nodes.JavaClassNode;
 
@@ -25,10 +26,12 @@ public class SingletonAnalyzer implements IAnalyzer {
 		ClassReader reader = null;
 		for (String name : graph.getNodes().keySet()) {
 			INode node = graph.getNodes().get(name);
+			
 			try {
-				reader = new ClassReader(node.getQualifiedName());
+				reader = ExternalClassLoader.getClassReader(name);
 			} catch (IOException e) {
 				e.printStackTrace();
+				continue;
 			}
 			ClassNode classNode = new ClassNode();
 			reader.accept(classNode, ClassReader.EXPAND_FRAMES);

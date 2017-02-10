@@ -12,6 +12,7 @@ import generator.INode;
 import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
 import generator.commands.CMDParams;
+import generator.commands.ExternalClassLoader;
 import generator.factories.IGraphFactory;
 
 public class InheritanceAnalyzer implements IAnalyzer {
@@ -24,7 +25,7 @@ public class InheritanceAnalyzer implements IAnalyzer {
 		for (String name : graph.getNodes().keySet()) {
 			INode node = graph.getNodes().get(name);
 			try {
-				reader = new ClassReader(node.getQualifiedName());
+				reader = ExternalClassLoader.getClassReader(node.getQualifiedName());
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -37,7 +38,7 @@ public class InheritanceAnalyzer implements IAnalyzer {
 			ClassNode superNode = new ClassNode();
 			
 			try {
-				reader = new ClassReader(classNode.superName);
+				reader = ExternalClassLoader.getClassReader(classNode.superName);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

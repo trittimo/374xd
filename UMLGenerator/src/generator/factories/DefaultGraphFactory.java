@@ -2,14 +2,13 @@ package generator.factories;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
-
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
 import generator.Graph;
 import generator.INode;
+import generator.commands.ExternalClassLoader;
 import generator.nodes.JavaAbstractNode;
 import generator.nodes.JavaAnnotationNode;
 import generator.nodes.JavaClassNode;
@@ -21,7 +20,7 @@ public class DefaultGraphFactory implements IGraphFactory {
 	public void addNodeToGraph(Graph g, String qualifiedName) {
 		ClassReader reader = null;
 		try {
-			reader = new ClassReader(qualifiedName);
+			reader = ExternalClassLoader.getClassReader(qualifiedName);
 		} catch (IOException e) {
 			System.out.println("Unable to find class: " + qualifiedName);
 			return;

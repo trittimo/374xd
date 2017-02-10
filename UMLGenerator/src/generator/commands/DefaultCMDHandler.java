@@ -1,7 +1,13 @@
 package generator.commands;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
+import java.util.Properties;
 
 import generator.Graph;
 import generator.analyzers.BidirectionalLinkReplacementAnalyzer;
@@ -21,6 +27,27 @@ public class DefaultCMDHandler implements ICMDHandler {
 	public void execute(CMDParams params, List<IAnalyzer> analyzers, List<IExporter> exporters, IGraphFactory factory) {
 		List<IAnalyzer> lastPass = new ArrayList<IAnalyzer>();
 		List<String> flags = params.getFlags();
+		
+		// Load from External Class Index
+		String eciName = "eci.xml";
+		if (params.getOptionPairs().containsKey("ECI")) {
+			eciName = params.getOptionPairs().get("ECI");
+		}
+		try {
+			Properties toLoad = loadExternalClassIndex(eciName);
+			ClassLoader cl = ExternalClassLoader.getClassLoader(toLoad);
+			Thread.currentThread().setContextClassLoader(cl);
+			
+			for (Object key : toLoad.keySet()) {
+				System.out.printf("%s: %s%n",
+						key.toString(),
+						Thread.currentThread().getContextClassLoader().loadClass(key.toString()).getName());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// get flags
 		
 		if (flags.contains("r")) {
 			analyzers.add(new RecursiveClassAnalyzer());
@@ -112,6 +139,13 @@ public class DefaultCMDHandler implements ICMDHandler {
 			e.printStackTrace();
 		}
 		
+	}
+	
+
+	protected Properties loadExternalClassIndex(String eciName) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+		Properties classes = new Properties();
+		classes.loadFromXML(new FileInputStream(eciName));
+		return classes;
 	}
 
 }

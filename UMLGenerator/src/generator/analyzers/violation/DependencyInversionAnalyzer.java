@@ -14,6 +14,7 @@ import generator.Link;
 import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
 import generator.commands.CMDParams;
+import generator.commands.ExternalClassLoader;
 import generator.factories.IGraphFactory;
 import generator.links.DependencyLink;
 import generator.links.DependencyManyLink;
@@ -118,7 +119,7 @@ public class DependencyInversionAnalyzer implements IAnalyzer {
 			return cache.get(className);
 		ClassReader reader = null;
 		try {
-			reader = new ClassReader(className);
+			reader = ExternalClassLoader.getClassReader(className);
 		} catch (IOException e) {
 			System.out.println("Unable to find class: " + className);
 			return null;

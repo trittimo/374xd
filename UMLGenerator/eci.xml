@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>
+		An index of classes to load into the system at runtime. 
+		The key of the entry should be qualified name, and the PCDATA should be a path to the class file.
+	</comment>
+	<entry key="dank.memes.FooBar">file:/C:/EclipseWorkspaces/csse374/TestProject/bin/dank/memes/FooBar.class</entry>
+</properties>
