@@ -187,6 +187,7 @@ public class JavaClassNode implements INode {
 		attributes.put(id, sa);
 	}
 
+	@Override
 	public void addStereotype(String string) {
 		this.stereotype = string;
 	}

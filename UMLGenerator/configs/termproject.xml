@@ -4,10 +4,8 @@
 	<comment/>
 	<entry key="blacklist">java.*,org.*,sun.*</entry>
 	<entry key="whitelist"></entry>
-	<entry key="pairs">
-		analyzers=generator.analyzers.violation.SingletonAnalyzer,
-		lastpass=generator.analyzers.violation.InheritanceAnalyzer
-	</entry>
+	<entry key="pairs">analyzers=generator.analyzers.violation.SingletonAnalyzer,
+		lastpass=generator.analyzers.violation.InheritanceAnalyzer;generator.analyzers.violation.DependencyInversionAnalyzer</entry>
 	<entry key="arguments">
 		generator.analyzers.violation.InheritanceAnalyzer,
 		generator.analyzers.violation.SingletonAnalyzer,

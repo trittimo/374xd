@@ -28,7 +28,7 @@ public class LinkPriorityAnalyzer implements IAnalyzer {
 		
 		boolean changed = false;
 		
-		// depends over assoc
+		// assoc over deps
 		
 		for (INode node : graph.getNodes().values()) {
 			HashMap<String, Link> localDeps = new HashMap<String, Link>();

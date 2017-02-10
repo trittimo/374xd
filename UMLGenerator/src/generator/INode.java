@@ -19,5 +19,10 @@ public interface INode {
 	public String getAttributeString();
 	
 	public void setAttribute(StyleAttribute sa);
+	
+	public default void addStereotype(String s) {
+		System.out.println("Warning: Default addStereotype invoked");
+		return;
+	}
 
 }
