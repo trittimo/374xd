@@ -4,7 +4,39 @@
 
 ## UML Diagram
 
+##### Project UML
 ![UMLDiagram](ProjectUML.png "UML Diagram for this Project")
+
+##### Generated Project UML
+![UMLDiagram-Generated](TermProject.png "Generated UML Diagram for this Project")
+
+## Design Philosophy
+
+There are 4 main stages to the process, outlined below.
+
+##### Stage 1:  Loading and Parsing
+
+1. Parse command line arguments
+2. Parse configuration file arguments
+3. Load external classes *(if necessary)*
+
+##### Stage 2: Building the Graph
+
+1. Initialize the first pass `IAnalyzer` list
+2. Initialize the lastpass `IAnalyzer` list
+3. Initialize the `IExporter` list
+4. Add nodes to the graph (based on command line arguments)
+
+##### Stage 3: Analysis
+
+1. Call `boolean analyze(Graph graph, CMDParams params, IGraphFactory factory)` on each `IAnalyzer` in the first pass list (in the order they were added)
+2. Repeat step 1 until each `IAnalyzer` returns false
+3. Call `boolean analyze(Graph graph, CMDParams params, IGraphFactory factory)` on each `IAnalyzer` in the lastpass list (in the order they were added)
+4. Repeat step 3 until each `IAnalyzer` returns false
+
+##### Stage 4: Exporting
+
+1. Call `export(Graph graph, CMDParams params)` on each exporter (in the order they were added)
 
 ## Running the program
 
@@ -36,4 +68,11 @@ These are the default command line arguments recognized by the `DefaultCMDHandle
 
 The config file uses the [XML format for Java Properties](https://docs.oracle.com/javase/7/docs/api/java/util/Properties.html). Pairs can be specified with the pairs key, flags with the flags key, and options with the options key. Whitelist and blacklist also have their own key.
 
-There is also a eci.xml that is used for loading classes off the class path. However, it is recommended that you use the java VM classpath argument instead wherever possible, as this behavior is rather glitchy. 
+There is also a eci.xml that is used for loading classes off the class path. However, it is recommended that you use the java VM classpath argument instead wherever possible, as this behavior is not as consistent. 
+
+### Implementation Details
+
+* `BlacklistAnalyzer` and `LinkPriorityAnalyzer` are always added to last pass by default. In order to override this behavior, you will have to substitute out the `DefaultCMDHandler` with your own implementation of the `ICMDHandler`.
+* `IGraphFactory` is a bit of a misnomer. `IGraphFactory` is more of a convenience/utility class than a factory, since the `Graph` can be modified fine without it. `IGraphFactory` just adds some convenience and syntax-safety in adding nodes and links. While it ostensibly is a factory for graphs, this definition is not as rigid as one might expect from more typical factory patterns. 
+* The `ExternalClassLoader` does not actually support loading JARs in this version, despite what the code may suggest. Unfortunately we ran into errors in finding loaded classes from the URLClassLoader, so the functionality is disabled for the time being. However, the methods and such will remain in the implementation (despite non-functionality) in order to demonstrate future plans for the API. For the time being, it is best to unzip the jar to a folder, and then load that folder as a package using the package loading syntax in `eci.xml`.
+* The `ExternalClassLoader` is not the optimal way of adding classes at runtime. It is much better to use the JVM's `classpath` or `cp` arguments wherever possible, as this adds it to the system ClassLoader, which is much less likely to experience bugs and corner cases. This option remains for situations. 
