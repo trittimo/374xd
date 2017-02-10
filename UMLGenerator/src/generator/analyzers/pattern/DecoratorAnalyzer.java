@@ -137,7 +137,7 @@ public class DecoratorAnalyzer implements IAnalyzer {
 				// and are not void
 				Set<String> excmethods = new HashSet<String>();
 				for (int i = 0; i < excnode.getDeclaredMethods().length; i++) {
-					Method m = excnode.getMethods()[i];
+					Method m = excnode.getDeclaredMethods()[i];
 					if (m.getDeclaringClass().getName().equals(excnode.getName())) {
 						if (!m.getReturnType().equals(void.class)) {
 							excmethods.add(m.getName());
@@ -196,72 +196,4 @@ public class DecoratorAnalyzer implements IAnalyzer {
 		
 		return false;
 	}
-
-//		
-//		while (!decorators.isEmpty()) {
-//			INode decorator = decorators.pop();
-//			String color = "chartreuse";
-//			String name = "decorator";
-//			if (isBadDecorator(decorator)) {
-//				color = "maroon1";
-//				name = "BAD DECORATOR";
-//			}
-//			decorator.setAttribute(new StyleAttribute("fillcolor",color,10));
-//			decorator.setAttribute(new StyleAttribute("style","filled",10));
-//			JavaClassNode classNode = (JavaClassNode) decorator;
-//			classNode.addStereotype(name);
-//			
-//			
-//			
-//			for (Link link : decorator.getLinks()) {
-//				if (link instanceof ExtendsLink) {
-//					link.setAttribute(new StyleAttribute("label", "<<decorates>>", 15));
-//				} else if (link instanceof ImplementsLink) {
-//					if (components.contains(link.getEnd())) {
-//						link.setAttribute(new StyleAttribute("label", "<<decorates>>", 15));
-//					}
-//				}
-//			}
-//			
-//			for (INode inode : graph.getNodes().values()) {
-//				for (Link link : inode.getLinks()) {
-//					if (link instanceof ExtendsLink) {
-//						if (link.getEnd().equals(decorator.getQualifiedName())) {
-//							decorators.add(inode);
-//							link.setAttribute(new StyleAttribute("label", "<<decorates>>", 15));
-//							break;
-//						}
-//					}
-//				}
-//			}
-//		}
-//		
-//		for (String component : components) {
-//			for (INode inode : graph.getNodes().values()) {
-//				String name = inode.getQualifiedName();
-//				if (name.equals(component)) {
-//					JavaClassNode classNode = (JavaClassNode) inode;
-//					classNode.addStereotype("component");
-//					inode.setAttribute(new StyleAttribute("fillcolor", "chartreuse", 10));
-//					inode.setAttribute(new StyleAttribute("style", "filled", 10));
-//				}
-//			}
-//		}
-//		return false;
-//	}
-//
-//	private boolean isBadDecorator(INode d) {
-//		Class<?> decorator = null;
-//		try {
-//			decorator = Thread.currentThread.getContextClassLoader().loadClass(d.getQualifiedName());
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		for (Method m : decorator.getMethods()) {
-//			
-//		}
-//		
-//		return false;
-//	}
-
 }

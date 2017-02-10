@@ -5,9 +5,8 @@
 	<entry key="blacklist">java.*,org.*,sun.*</entry>
 	<entry key="whitelist"></entry>
 	<entry key="pairs">analyzers=generator.analyzers.pattern.SingletonAnalyzer,
-		lastpass=generator.analyzers.violation.InheritanceAnalyzer;generator.analyzers.violation.DependencyInversionAnalyzer;generator.analyzers.pattern.DecoratorAnalyzer</entry>
+		lastpass=generator.analyzers.violation.InheritanceAnalyzer;generator.analyzers.violation.DependencyInversionAnalyzer;generator.analyzers.pattern.DecoratorAnalyzer;generator.analyzers.pattern.AdapterAnalyzer</entry>
 	<entry key="arguments">
-		dank.memes.FooBar,
 		generator.analyzers.violation.InheritanceAnalyzer,
 		generator.analyzers.pattern.SingletonAnalyzer,
 		generator.analyzers.BidirectionalLinkReplacementAnalyzer,

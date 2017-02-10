@@ -3,10 +3,10 @@
 <properties>
   <comment/>
   <entry key="blacklist"></entry>
-  <entry key="whitelist">problem.client.App, problem.lib.IteratorAdapter, problem.lib.LinearTransformer, java.util.Enumeration, java.util.Iterator</entry>
+  <entry key="whitelist">test.Test,test.TestA,test.TestB</entry>
   <entry key="pairs">
     lastpass=generator.analyzers.pattern.AdapterAnalyzer
   </entry>
-  <entry key="arguments">problem.client.App, problem.lib.IteratorAdapter, problem.lib.LinearTransformer, java.util.Enumeration, java.util.Iterator</entry>
+  <entry key="arguments">test.Test,test.TestA,test.TestB</entry>
   <entry key="flags">m,f,s</entry>
 </properties>

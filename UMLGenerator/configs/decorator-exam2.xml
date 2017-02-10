@@ -3,22 +3,10 @@
 <properties>
 	<comment/>
 	<entry key="blacklist"></entry>
-	<entry key="whitelist">
-		problem.AbstractPizzaIngredientFactoryDecorator,
-		problem.PrepareIngredientCommand,
-		problem.PrintCommand,
-		problem.PrintDecorator,
-		headfirst.factory.pizzaaf.PizzaIngredientFactory
-	</entry>
+	<entry key="whitelist">problem.DecryptionInputStream, problem.EncryptionOutputStream, problem.IDecryption, problem.IEncryption, problem.SubstitutionCipher, problem.TextEditorApp, java.io.InputStream, java.io.OutputStream, java.io.FilterInputStream, java.io.FilterOutputStream</entry>
 	<entry key="pairs">
 		lastpass=generator.analyzers.pattern.DecoratorAnalyzer
 	</entry>
-	<entry key="arguments">
-		problem.AbstractPizzaIngredientFactoryDecorator,
-		problem.PrepareIngredientCommand,
-		problem.PrintCommand,
-		problem.PrintDecorator,
-		headfirst.factory.pizzaaf.PizzaIngredientFactory
-	</entry>
+	<entry key="arguments">problem.DecryptionInputStream, problem.EncryptionOutputStream, problem.IDecryption, problem.IEncryption, problem.SubstitutionCipher, problem.TextEditorApp, java.io.InputStream, java.io.OutputStream, java.io.FilterInputStream, java.io.FilterOutputStream</entry>
 	<entry key="flags">m,f,s</entry>
 </properties>
