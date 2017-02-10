@@ -74,7 +74,7 @@ public class DefaultCMDHandler implements ICMDHandler {
 					continue;
 				try {
 					@SuppressWarnings("unchecked")
-					Class<IAnalyzer> analyzer = (Class<IAnalyzer>) Class.forName(name);
+					Class<IAnalyzer> analyzer = (Class<IAnalyzer>) Thread.currentThread().getContextClassLoader().loadClass(name);
 					analyzers.add(analyzer.newInstance());
 				} catch (Exception e) {
 					System.err.println("Could not load custom analyzer");
