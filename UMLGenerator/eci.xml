@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<comment>
-		An index of classes to load into the system at runtime. 
-		The key of the entry should be qualified name, and the PCDATA should be a path to the class file.
-	</comment>
-	<entry key=".jars">file:/C:/jarfile1.jar;file:/C:/jarfile2.jar</entry>
-  	<entry key="problem|1">file:/C:/Users/trittimo/Documents/School/CSSE374/Lab2-1/bin/problem/*</entry>
+  <comment>
+    An index of classes to load into the system at runtime. 
+    The key of the entry should be qualified name, and the PCDATA should be a path to the class file.
+  </comment>
+  <entry key=".jars">file:/C:/Users/trittimo/.gradle/caches/modules-2/files-2.1/edu.rosehulman.csse374/BasicEditor/1.0.6/84047b31f04173c0f4d51fde69042650754618e7/BasicEditor-1.0.6.jar;file:/C:/Users/trittimo/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar;file:/C:/Users/trittimo/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.7/8de00e382a817981b737be84cb8def687d392963/log4j-api-2.7.jar;file:/C:/Users/trittimo/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.7/a3f2b4e64c61a7fc1ed8f1e5ba371933404ed98a/log4j-core-2.7.jar</entry>
+  <entry key="problem|1">file:/C:/Users/trittimo/Documents/School/CSSE374/Lab2-1/bin/problem/*</entry>
+  <!--<entry key="edu.rosehulman.csse374">file:/C:/Users/trittimo/Documents/School/CSSE374/PizzaFactoryFinal/bin/edu/rosehulman/csse374/*</entry>-->
+  <entry key="problem|2">file:/C:/Users/trittimo/Documents/School/CSSE374/Lab6-1/bin/problem/*</entry>
+  <entry key="problem|3">file:/C:/Users/trittimo/Documents/School/CSSE374/Exam2/bin/problem/*</entry>
+  <entry key="headfirst.factory">file:/C:/Users/trittimo/Documents/School/CSSE374/Exam2/bin/headfirst/factory/*</entry>
+  <entry key="exam">file:/C:/Users/trittimo/Documents/School/CSSE374/1-1LiveCoding-ExamVersion/bin/exam/*</entry>
 
-	<!--<entry key="dank.memes.FooBar">file:/C:/EclipseWorkspaces/csse374/TestProject/bin/dank/memes/FooBar.class</entry>-->
+
+
+  <!--<entry key="dank.memes.FooBar">file:/C:/EclipseWorkspaces/csse374/TestProject/bin/dank/memes/FooBar.class</entry>-->
 </properties>
