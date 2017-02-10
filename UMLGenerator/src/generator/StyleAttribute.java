@@ -11,7 +11,13 @@ public class StyleAttribute {
 		val = value;
 	}
 	
-	public int getPriority() {return priority;}
-	public String getIndentifier() {return id;}
-	public String getValue() {return val;}
+	public int getPriority() {
+		return priority;
+	}
+	public String getIndentifier() {
+		return id;
+	}
+	public String getValue() {
+		return val;
+	}
 }

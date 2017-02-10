@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import generator.Graph;
+import generator.analyzers.BidirectionalLinkReplacementAnalyzer;
 import generator.analyzers.BlacklistAnalyzer;
 import generator.analyzers.FieldAnalyzer;
 import generator.analyzers.IAnalyzer;
@@ -36,6 +37,8 @@ public class DefaultCMDHandler implements ICMDHandler {
 		if (flags.contains("m")) {
 			analyzers.add(new MethodBodyAnalyzer());
 		}
+		
+		lastPass.add(new BidirectionalLinkReplacementAnalyzer());
 		
 		if (params.getOptionPairs().containsKey("analyzers")) {
 			String[] analyzerNames = params.getOptionPairs().get("analyzers").split(";");

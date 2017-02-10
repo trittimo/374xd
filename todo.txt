@@ -1,0 +1,3 @@
+Singleton definition
+Bidirecitonal arrow
+Remove things from a composite

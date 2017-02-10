@@ -2,9 +2,10 @@ package generator.analyzers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import generator.Graph;
-import generator.ILink;
+import generator.Link;
 import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
@@ -13,14 +14,14 @@ public class LinkPriorityAnalyzer implements IAnalyzer {
 
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
-		HashMap<String, ILink> local;
-		ArrayList<ILink> toRemove;
+		HashMap<String, Link> local;
+		ArrayList<Link> toRemove;
 		String target;
 		boolean changed = false;
 		for (INode node : graph.getNodes().values()) {
-			local = new HashMap<String, ILink>();
-			toRemove = new ArrayList<ILink>();
-			for (ILink link : node.getLinks()) {
+			local = new HashMap<String, Link>();
+			toRemove = new ArrayList<Link>();
+			for (Link link : node.getLinks()) {
 				target = link.getEnd();
 				if (!local.containsKey(target))
 					local.put(target, link);
@@ -35,13 +36,14 @@ public class LinkPriorityAnalyzer implements IAnalyzer {
 			}
 			if (toRemove.size() > 0)
 				changed = true;
-			for (ILink link : toRemove) {
+			for (Link link : toRemove) {
 				node.removeLink(link);
 			}
 		}
+		
 		return changed;
 	}
-
+	
 	/**
 	 * Return true when link1 is more important than link2
 	 * 
@@ -49,7 +51,7 @@ public class LinkPriorityAnalyzer implements IAnalyzer {
 	 * @param link2
 	 * @return
 	 */
-	private boolean supercedes(ILink link1, ILink link2) {
+	private boolean supercedes(Link link1, Link link2) {
 		return (link1.getPriority() > link2.getPriority());
 	}
 

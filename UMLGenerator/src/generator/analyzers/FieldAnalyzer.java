@@ -10,7 +10,7 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 
 import generator.Graph;
-import generator.ILink;
+import generator.Link;
 import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
@@ -53,7 +53,7 @@ public class FieldAnalyzer implements IAnalyzer {
 			}
 		}
 
-		ILink link;
+		Link link;
 		for (String name : multiFields.keySet()) {
 			INode node = graph.getNodes().get(name);
 			for (String field : multiFields.get(name)) {
@@ -61,7 +61,7 @@ public class FieldAnalyzer implements IAnalyzer {
 					factory.addNodeToGraph(graph, field);
 				if (node != null && graph.getNodes().get(field) != null) {
 					link = new AssociationManyLink(node, graph.getNodes().get(field));
-					System.out.println("FieldAnalyzer: NewLink: " + link);
+					//System.out.println("FieldAnalyzer: NewLink: " + link);
 					node.addLink(link);
 				}
 			}
@@ -75,7 +75,7 @@ public class FieldAnalyzer implements IAnalyzer {
 				if (!graph.getNodes().containsKey(field))
 					factory.addNodeToGraph(graph, field);
 				link = new AssociationLink(node, graph.getNodes().get(field));
-				System.out.println("FieldAnalyzer: NewLink: " + link);
+				//System.out.println("FieldAnalyzer: NewLink: " + link);
 				node.addLink(link);
 			}
 		}

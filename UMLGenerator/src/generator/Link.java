@@ -1,32 +1,36 @@
-package generator.links;
+package generator;
 
 import java.util.HashMap;
+import java.util.Map;
 
-import generator.ILink;
-import generator.INode;
-import generator.StyleAttribute;
+import generator.links.BidirectionalLink;
 
-public abstract class OneToManyLink implements ILink {
+public abstract class Link {
+	private Map<String, StyleAttribute> attributes;
 	private int hashCode;
-	
-	protected HashMap<String, StyleAttribute> attributes;
-	
 	protected String start;
 	protected String end;
 	
-	public OneToManyLink(String from, String to) {
+	public abstract int getPriority();
+	
+	public Link() {
+		this.attributes = new HashMap<String, StyleAttribute>();
+	}
+	
+	public Link(String from, String to) {
+		this();
 		start = from;
 		end = to;
-		// create attribute map
-		attributes = new HashMap<String, StyleAttribute>();
-		// precompute hash so it only has to be done once
+		// initialize attributes
+		// precompute hashCode for speed. used to uniquely identify links
 		hashCode = toString().hashCode();
 	}
 	
-	public OneToManyLink(INode from, INode to) {
+	public Link(INode from, INode to) {
 		this(from.getQualifiedName(), to.getQualifiedName());
 	}
-	
+	// attributes must be immuatable after being passed
+	// prevents code from messing with our style by modifying it after passing the object
 	public void setAttribute(final StyleAttribute sa) {
 		String id = sa.getIndentifier();
 		// if already have this style
@@ -38,7 +42,6 @@ public abstract class OneToManyLink implements ILink {
 		// otherwise, set the style
 		attributes.put(id, sa);
 	}
-
 	
 	public String getAttributes() {
 		String str = "";
@@ -49,7 +52,20 @@ public abstract class OneToManyLink implements ILink {
 		return str;
 	}
 	
-	public abstract int getPriority();
+	public Map<String, StyleAttribute> getStyleAttributes() {
+		return this.attributes;
+	}
+	
+	public String toString() {
+		return String.format("<%s, %s>", 
+				getClass().getName(), getRelationship());
+	}
+	
+	public boolean equals(Object o) {
+		if (!(o instanceof Link))
+			return false;
+		return o.toString().equals(this.toString());
+	}
 	
 	public String getStart() {
 		return this.start;
@@ -63,19 +79,11 @@ public abstract class OneToManyLink implements ILink {
 		return start + " -> " + end;
 	}
 	
-
-	public String toString() {
-		return String.format("<%s, %s>", 
-			getClass().getName(), getRelationship());
-	}
-	
 	public int hashCode() {
 		return this.hashCode;
 	}
 	
-	public boolean equals(Object o) {
-		if (!(o instanceof ILink))
-			return false;
-		return o.toString().equals(this.toString());
+	public Link getBidirectional() {
+		return new BidirectionalLink(this);
 	}
 }

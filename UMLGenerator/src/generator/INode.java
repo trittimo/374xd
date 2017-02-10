@@ -8,15 +8,16 @@ public interface INode {
 	
 	public String getLabel();
 	
-	public void addLink(ILink link);
+	public void addLink(Link link);
 	
 	public void createLinks(Graph g);
 	
-	public List<ILink> getLinks();
+	public List<Link> getLinks();
 	
-	public void removeLink(ILink link);
+	public void removeLink(Link link);
 	
 	public String getAttributeString();
+	
 	public void setAttribute(StyleAttribute sa);
 
 }

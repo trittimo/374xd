@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import generator.Graph;
-import generator.ILink;
+import generator.Link;
 import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
@@ -23,17 +23,17 @@ public class BlacklistAnalyzer implements IAnalyzer {
 				}
 			}
 			
-			List<ILink> links;
+			List<Link> links;
 			for (INode node : graph.getNodes().values()) {
-				links = new ArrayList<ILink>();
-				for (ILink link : node.getLinks()) {
+				links = new ArrayList<Link>();
+				for (Link link : node.getLinks()) {
 					if (!whitelist.contains(link.getStart()) || !whitelist.contains(link.getEnd())) {
 						links.add(link);
 					} else {
 						System.out.println("Keeping" + link);
 					}
 				}
-				for (ILink link : links) {
+				for (Link link : links) {
 					node.removeLink(link);
 				}
 			}
@@ -68,15 +68,15 @@ public class BlacklistAnalyzer implements IAnalyzer {
 			}
 		}
 		
-		List<ILink> links;
+		List<Link> links;
 		for (INode node : graph.getNodes().values()) {
-			links = new ArrayList<ILink>();
-			for (ILink link : node.getLinks()) {
+			links = new ArrayList<Link>();
+			for (Link link : node.getLinks()) {
 				if (toRemove.contains(link.getEnd())) {
 					links.add(link);
 				}
 			}
-			for (ILink link : links) {
+			for (Link link : links) {
 				node.removeLink(link);
 			}
 		}

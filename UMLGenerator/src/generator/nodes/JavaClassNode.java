@@ -11,7 +11,7 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.ParameterNode;
 
 import generator.Graph;
-import generator.ILink;
+import generator.Link;
 import generator.INode;
 import generator.StyleAttribute;
 import generator.links.ExtendsLink;
@@ -19,7 +19,7 @@ import generator.links.ImplementsLink;
 
 public class JavaClassNode implements INode {
 
-	private ArrayList<ILink> links;
+	private ArrayList<Link> links;
 	protected ClassNode classNode;
 
 	protected HashMap<String, StyleAttribute> attributes;
@@ -27,7 +27,7 @@ public class JavaClassNode implements INode {
 	
 	public JavaClassNode(ClassNode node) {
 		this.classNode = node;
-		this.links = new ArrayList<ILink>();
+		this.links = new ArrayList<Link>();
 		attributes = new HashMap<String, StyleAttribute>();
 		this.stereotype = null;
 		this.setAttribute(new StyleAttribute("shape", "record", 10));
@@ -129,13 +129,13 @@ public class JavaClassNode implements INode {
 	}
 
 	@Override
-	public void addLink(ILink link) {
+	public void addLink(Link link) {
 		if (!this.links.contains(link))
 			this.links.add(link); // handles duplicates since it's a set 
 	}
 
 	@Override
-	public List<ILink> getLinks() {
+	public List<Link> getLinks() {
 		return this.links;
 	}
 
@@ -160,7 +160,7 @@ public class JavaClassNode implements INode {
 	}
 
 	@Override
-	public void removeLink(ILink link) {
+	public void removeLink(Link link) {
 		this.links.remove(link);
 	}
 	

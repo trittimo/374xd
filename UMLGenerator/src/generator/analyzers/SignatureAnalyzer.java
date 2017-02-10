@@ -10,12 +10,11 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
 
 import generator.Graph;
-import generator.ILink;
+import generator.Link;
 import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
 import generator.links.DependencyLink;
-import generator.links.OneToOneLink;
 import generator.nodes.JavaClassNode;
 
 public class SignatureAnalyzer implements IAnalyzer {
@@ -57,12 +56,9 @@ public class SignatureAnalyzer implements IAnalyzer {
 			for (String field : fields.get(name)) {
 				boolean add = true;
 				INode other = graph.getNodes().get(field);
-				for (ILink link : node.getLinks()) {
-					if (link instanceof OneToOneLink) {
-						OneToOneLink theLink = (OneToOneLink) link;
-						if (theLink.getEnd().equals(other.getQualifiedName().replaceAll("/", "."))) {
-							add = false;
-						}
+				for (Link link : node.getLinks()) {
+					if (link.getEnd().equals(other.getQualifiedName().replaceAll("/", "."))) {
+						add = false;
 					}
 				}
 				if (add && (node != other)) {

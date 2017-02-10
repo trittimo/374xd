@@ -7,7 +7,7 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
 import generator.Graph;
-import generator.ILink;
+import generator.Link;
 import generator.INode;
 import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
@@ -61,10 +61,10 @@ public class InheritanceAnalyzer implements IAnalyzer {
 				INode parent = graph.getNodes().get(supername);
 				StyleAttribute color = new StyleAttribute("color","orange",10);
 				child.setAttribute(color);
-				if (parent != null)
-					parent.setAttribute(color);
+				//if (parent != null)
+					//parent.setAttribute(color);
 				// find link
-				for (ILink link : child.getLinks()) {
+				for (Link link : child.getLinks()) {
 					if (link.getEnd().equals(supername)) {
 						if (link instanceof generator.links.ExtendsLink)
 							link.setAttribute(color);

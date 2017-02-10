@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import generator.Graph;
-import generator.ILink;
+import generator.Link;
 import generator.INode;
 import generator.StyleAttribute;
 
@@ -12,7 +12,7 @@ public class TextNode implements INode {
 	
 	private String qualifiedName;
 	private String text;
-	private List<ILink> links;
+	private List<Link> links;
 	
 	protected HashMap<String, StyleAttribute> attributes;
 	
@@ -34,12 +34,12 @@ public class TextNode implements INode {
 	}
 
 	@Override
-	public void addLink(ILink l) {
+	public void addLink(Link l) {
 		links.add(l);
 	}
 
 	@Override
-	public List<ILink> getLinks() {
+	public List<Link> getLinks() {
 		return links;
 	}
 
@@ -49,7 +49,7 @@ public class TextNode implements INode {
 	}
 
 	@Override
-	public void removeLink(ILink link) {
+	public void removeLink(Link link) {
 		links.remove(link);
 	}
 
