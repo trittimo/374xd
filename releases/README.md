@@ -56,12 +56,16 @@ These are the default command line arguments recognized by the `DefaultCMDHandle
 * `f`: Enable field analysis (adds `FieldAnalyzer` to `IAnalyzer` list)
 * `s`: Enable signature analysis (adds `SignatureAnalyzer` to `IAnalyzer` list)
 * `m`: Enable method-body analysis (adds `MethodBodyAnalyzer` to `IAnalyzer` list)
+
 ##### Key-Value Pairs
-* `config`: Path to the configuration file to use for this runtime.
+
+* `config`: Path to the configuration file to use for this runtime. If not specified, it will attempt to default to `--config configs/default.xml`
 * `analyzers`: Comma seperated list of `IAnalyzer` implementations to add to the `IAnalyzer` list.
 * `lastpass`: Comma seperated list of `IAnalyzer` implementations to add to the `lastpass` `IAnalyzer` list. The `lastpass` list is run after all the normal `IAnalyzer` list has finished.
 * `ECI`: The location of the External Class Index XML
+
 ##### Named Lists
+
 * `whitelist`: Whitelist of classes for the UML
 * `blacklist`: Blacklist of classes for the UML
 
