@@ -19,7 +19,7 @@ public class DependencyInversionAnalyzer implements IAnalyzer {
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
 		boolean changed = false;
 		
-		
+		 
 		
 		return changed;
 	}

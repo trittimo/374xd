@@ -17,7 +17,7 @@ import generator.links.DependencyManyLink;
  * 
  * This analyzer makes it so that there cannot be both dependency and association links with the same start and end.
  * It also makes sure there is only one Dependency/DependencyMany/Association/AssociationMany link between those nodes.
- * 
+ *  
  * @author AMcKee
  *
  */

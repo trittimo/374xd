@@ -64,7 +64,7 @@ public class InheritanceAnalyzer implements IAnalyzer {
 				INode child = graph.getNodes().get(childname);
 				StyleAttribute color = new StyleAttribute("color","orange",10);
 				child.setAttribute(color);
-//				uncomment to also mark the parent
+//				uncomment to also mark the parent 
 //				INode parent = graph.getNodes().get(supername);
 //				if (parent != null)
 //					parent.setAttribute(color);
