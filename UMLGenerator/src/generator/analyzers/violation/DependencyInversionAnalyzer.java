@@ -16,6 +16,8 @@ import generator.analyzers.IAnalyzer;
 import generator.commands.CMDParams;
 import generator.commands.ExternalClassLoader;
 import generator.factories.IGraphFactory;
+import generator.links.AssociationLink;
+import generator.links.AssociationManyLink;
 import generator.links.DependencyLink;
 import generator.links.DependencyManyLink;
 import generator.nodes.JavaAbstractNode;
@@ -41,25 +43,27 @@ public class DependencyInversionAnalyzer implements IAnalyzer {
 		final StyleAttribute fillColor = new StyleAttribute("fillcolor", "cyan", 5);
 		final StyleAttribute fillStyle = new StyleAttribute("style", "filled", 5);
 		
-		SHOW_WARNINGS = params.getFlags().contains("show-design-warnings");
+		SHOW_WARNINGS = params.getFlags().contains("show-design-warnings") || SHOW_WARNINGS;
 		
-		for (INode node : graph.getNodes().values()) {
-			for (Link link : node.getLinks()) {
-				if ((link instanceof DependencyLink) || (link instanceof DependencyManyLink)) {
-					INode child = graph.getNodes().get(link.getEnd());
-					if (!isViolation(node, child))
+		for (INode violator : graph.getNodes().values()) {
+			for (Link link : violator.getLinks()) {
+				if ((link instanceof DependencyLink) || (link instanceof DependencyManyLink)
+						|| (link instanceof AssociationLink) || (link instanceof AssociationManyLink)) {
+					
+					INode end = graph.getNodes().get(link.getEnd());
+					if (!isViolation(end))
 						continue;
-					String name = child.getQualifiedName();
+					String name = end.getQualifiedName();
 					if (name.lastIndexOf('.') > -1) {
 						name = name.substring(name.lastIndexOf('.')+1);
 					}
 					
-					node.addStereotype("Depends on " + name);
-					child.addStereotype("Concrete Dependency");
-					node.setAttribute(fillColor);
-					node.setAttribute(fillStyle);
-					child.setAttribute(fillColor);
-					child.setAttribute(fillStyle);
+					violator.addStereotype("Depends on " + name);
+					end.addStereotype("Concrete Dependency");
+					violator.setAttribute(fillColor);
+					violator.setAttribute(fillStyle);
+					end.setAttribute(fillColor);
+					end.setAttribute(fillStyle);
 				}
 			}
 		}
@@ -68,22 +72,30 @@ public class DependencyInversionAnalyzer implements IAnalyzer {
 		return false;
 	}
 
-	private boolean isViolation(INode node, INode child) {
+	private boolean isViolation(INode end) {		
 		// depends on abstract is OK
-		if (child instanceof JavaAbstractNode)
+		if (end instanceof JavaAbstractNode) {
+//			System.out.println(end.getQualifiedName() + " not violation because abstract");
 			return false;
+		}
 		// depends on interface is OK
-		if (child instanceof JavaInterfaceNode)
+		if (end instanceof JavaInterfaceNode) {
+//			System.out.println(end.getQualifiedName() + " not violation because interface");
 			return false;
+		}
 		// depends on annotation is probably OK, more likely to be a false positive
-		if (child instanceof JavaAnnotationNode)
+		if (end instanceof JavaAnnotationNode) {
+//			System.out.println(end.getQualifiedName() + " not violation because annotation");
 			return false;
+		}
 		// check to see if child has abstract parent available. if so, determine it to be a violation
-		if (hasAbstractParent(child.getQualifiedName())) {
+		if (hasAbstractParent(end.getQualifiedName())) {
 			if (SHOW_WARNINGS)
-				System.out.printf("DependencyInversion: VIOLATION: %s has an abstract parent.%n", child.getQualifiedName());
+				System.out.printf("DependencyInversion: VIOLATION: %s has an abstract parent.%n", end.getQualifiedName());
 			return true;
 		}
+		
+//		System.out.println(end.getQualifiedName() + " not violation because ?");
 		return false;
 	}
 	
@@ -101,10 +113,12 @@ public class DependencyInversionAnalyzer implements IAnalyzer {
 				return false;
 			
 			superNode = loadClass(classNode.superName);
-			if ((classNode.access & Opcodes.ACC_ABSTRACT) > 0) {
+			if (((superNode.access & Opcodes.ACC_ABSTRACT) > 0) || ((superNode.access & Opcodes.ACC_INTERFACE) > 0)) {
 				if (SHOW_WARNINGS)
 					System.out.printf("DependencyInversion: PRE-VIOLATION: %s has abstract parent %s%n", classNode.name, superNode.name);
 				return true;
+			} else {
+//				System.out.println(classNode.name + " is not abstract!!!");
 			}
 			
 			return hasAbstractParent(classNode.superName);

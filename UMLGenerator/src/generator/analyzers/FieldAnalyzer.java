@@ -101,7 +101,10 @@ public class FieldAnalyzer implements IAnalyzer {
 		
 		// Handle case where a ; comes before a < 
 		// e.g. Lsome/class/here;Ljava/util/ArrayList<Ljava/lang/String;>;
-		while (index_semic < index_brace) {
+		while ((index_semic < index_brace)) {
+			if (index_semic < 0) {
+				return;
+			}
 			while (analyze.startsWith("[")) {
 				analyze = analyze.substring(1);
 				oneToMany = true;
@@ -131,7 +134,9 @@ public class FieldAnalyzer implements IAnalyzer {
 			// parse list part
 			list.add(analyze.substring(1, index_brace).replace('/', '.'));
 			// parse generic
+			
 			parseSignature(multilist, multilist, analyze.substring(index_brace + 1, analyze.lastIndexOf('>')));
+			
 		} else {
 			// without generic
 			list.add(analyze.substring(1, index_semic).replace('/', '.'));

@@ -17,9 +17,9 @@ public class BlacklistAnalyzer implements IAnalyzer {
 			List<String> whitelist = params.getNamedLists().get("whitelist");
 			List<String> toRemove = new ArrayList<String>();
 			
-			for (String node : graph.getNodes().keySet()) {
-				if (!whitelist.contains(node)) {
-					toRemove.add(node);
+			for (String nodeName : graph.getNodes().keySet()) {
+				if (!whitelist.contains(graph.getNodes().get(nodeName).getQualifiedName())) {
+					toRemove.add(nodeName);
 				}
 			}
 			
@@ -37,6 +37,7 @@ public class BlacklistAnalyzer implements IAnalyzer {
 					node.removeLink(link);
 				}
 			}
+			
 			
 			for (String node : toRemove) {
 				//System.out.printf("Removing: %s\n", node);
@@ -74,6 +75,12 @@ public class BlacklistAnalyzer implements IAnalyzer {
 			for (Link link : node.getLinks()) {
 				if (toRemove.contains(link.getEnd())) {
 					links.add(link);
+				} else {
+					for (String bl : blacklist) {
+						if (link.getEnd().matches(bl)) {
+							links.add(link);
+						}
+					}
 				}
 			}
 			for (Link link : links) {

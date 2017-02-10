@@ -93,9 +93,12 @@ public class AdapterAnalyzer implements IAnalyzer {
 						excmethods.add(m.getName());
 					}
 				}
-				// If the adapter doesn't override all of the methods in the class its extending, it's not an adapter				
-				if (!excmethods.equals(cmethods)) {
-					toRemove.add(l);
+				
+				// If the adapter doesn't override all of the methods in the class its extending, it's not an adapter
+				for (String excmethod : excmethods) {
+					if (!cmethods.contains(excmethod)) {
+						toRemove.add(l);
+					}
 				}
 			}
 			
@@ -146,12 +149,11 @@ public class AdapterAnalyzer implements IAnalyzer {
 				continue;
 			}
 			
-			
 			// Get what it's adapting			
 			String adapting = possibleObjects.iterator().next();
 			String qual = null;
 			for (FieldNode field : (List<FieldNode>) classNode.fields) {
-				if (field.name.equals(adapting)) {
+				if (field.name.equals(adapting) && field.desc.startsWith("L")) {
 					qual = field.desc;
 					qual = qual.substring(1);
 					qual = qual.replace('/', '.');
@@ -189,116 +191,3 @@ public class AdapterAnalyzer implements IAnalyzer {
 		return false;
 	}
 }
-//			
-//			if (possibleComponents.isEmpty()) {
-//				continue;
-//			}
-//			
-//			toRemove.clear();
-//			toRemove.addAll(possibleComponents.keySet());
-//			// Step 3: ensure that the node contains a constructor with the component
-//			for (Link extended : possibleComponents.keySet()) {
-//				for (Constructor<?> constructor : cnode.getDeclaredConstructors()) {
-//					for (Class<?> parameter : constructor.getParameterTypes()) {
-//						if (parameter.getName().equals(extended.getEnd())) {
-//							toRemove.remove(extended);
-//						}
-//					}
-//				}
-//			}
-//			for (Link l : toRemove) {
-//				possibleComponents.remove(l);
-//			}
-//			
-//			if (possibleComponents.isEmpty()) {
-//				continue;
-//			}
-//			
-//			// Confirmed that we're a decorator: could still be a bad decorator though
-//			String color = "lawngreen";
-//			String description = "decorator";
-//			Class<?> excnode = null;
-//			
-//			// It's a bad decorator if the class does not override every method in its component
-//			for (INode extended : possibleComponents.values()) {
-//				try {
-//					excnode = Thread.currentThread().getContextClassLoader().loadClass(extended.getQualifiedName());
-//				} catch (ClassNotFoundException e) {
-//					e.printStackTrace();
-//				}
-//				
-//				
-//				// Get all the methods from the node that are actually declared in the node's class
-//				// and are not void
-//				Set<String> cmethods = new HashSet<String>();
-//				for (int i = 0; i < cnode.getMethods().length; i++) {
-//					Method m = cnode.getMethods()[i];
-//					if (m.getDeclaringClass().getName().equals(cnode.getName())) {
-//						if (!m.getReturnType().equals(void.class)) {
-//							cmethods.add(m.getName());
-//						}
-//					}
-//				}
-//				
-//				// Get all the methods from the node that are actually declared in the node's class
-//				// and are not void
-//				Set<String> excmethods = new HashSet<String>();
-//				for (int i = 0; i < excnode.getDeclaredMethods().length; i++) {
-//					Method m = excnode.getMethods()[i];
-//					if (m.getDeclaringClass().getName().equals(excnode.getName())) {
-//						if (!m.getReturnType().equals(void.class)) {
-//							excmethods.add(m.getName());
-//						}
-//					}
-//				}
-//				
-//				// If the decorator doesn't override all of the methods in the class its extending, it's bad!
-//				if (!cmethods.equals(excmethods)) {
-//					color = "maroon1";
-//					description = "bad decorator";
-//				}
-//				
-//			}
-//			
-//			
-//			// Color/add descriptions to the components and links
-//			for (Link link : possibleComponents.keySet()) {
-//				link.setAttribute(new StyleAttribute("label", "<<decorates>>", 15));
-//				JavaClassNode component = (JavaClassNode) possibleComponents.get(link);
-//				
-//				component.setAttribute(new StyleAttribute("fillcolor", color, 15));
-//				component.setAttribute(new StyleAttribute("style", "filled", 15));
-//				
-//				component.addStereotype("component");
-//			}
-//			
-//			// Create a stack so we can color/describe anything that extends the inode too
-//			Stack<INode> toColor = new Stack<INode>();
-//			toColor.add(inode);
-//			
-//			int limit = RUN_LIMIT;
-//			while (!toColor.isEmpty() && limit-- > 0) {
-//				JavaClassNode decorator = (JavaClassNode) toColor.pop();
-//				
-//				// Add the styles to indicate that it's a decorator
-//				decorator.setAttribute(new StyleAttribute("fillcolor", color, 15));
-//				decorator.setAttribute(new StyleAttribute("style", "filled", 15));
-//				
-//				decorator.addStereotype(description);
-//				
-//				for (INode node : graph.getNodes().values()) {
-//					if (node.getQualifiedName().equals(decorator.getQualifiedName())) {
-//						continue;
-//					} else if (node.getQualifiedName().indexOf('$') >= 0) {
-//						continue;
-//					}
-//					for (Link link : node.getLinks()) {
-//						if (link.getEnd().equals(decorator.getQualifiedName()) && (link instanceof ExtendsLink)) {
-//							toColor.push(node);
-//						}
-//					}
-//				}
-//			}
-//		}
-//		
-//		return false;

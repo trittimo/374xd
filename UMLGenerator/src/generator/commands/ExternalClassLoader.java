@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,7 @@ public class ExternalClassLoader extends ClassLoader {
 	}
 
 	public static void addJars(String[] jarURI) throws MalformedURLException, URISyntaxException {
+		System.out.println("Adding jars: " + Arrays.asList(jarURI));
 		if (singleton == null)
 			singleton = new ExternalClassLoader();
 		URL[] jars = singleton.jarLoader.getURLs();
@@ -89,8 +91,9 @@ public class ExternalClassLoader extends ClassLoader {
 		try {
 			if (clazz == null)
 				clazz = this.jarLoader.loadClass(name);
+	
 		} catch (ClassNotFoundException e) {
-			// do nothing, just check system
+			System.out.printf("Can't find %s in jarLoader%n", name);
 		}
 		
 		if (clazz == null)
@@ -134,7 +137,8 @@ public class ExternalClassLoader extends ClassLoader {
 			bos.write(buffer, 0, read);
 		}
 		buffer = bos.toByteArray();
-		System.out.printf("Read %d bytes from source '%s'%n", buffer.length, url.toExternalForm());
+		if (ENABLE_CL_DEBUG)
+			System.out.printf("Read %d bytes from source '%s'%n", buffer.length, url.toExternalForm());
 		byteCache.put(url, buffer);
 		return buffer;
 	}

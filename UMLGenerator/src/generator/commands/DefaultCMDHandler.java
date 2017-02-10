@@ -44,9 +44,8 @@ public class DefaultCMDHandler implements ICMDHandler {
 			Thread.currentThread().setContextClassLoader(cl);
 			
 			for (Object key : toLoad.keySet()) {
-				System.out.printf("%s: %s%n",
-						key.toString(),
-						Thread.currentThread().getContextClassLoader().loadClass(key.toString()).getName());
+				// see if everything loaded
+				Thread.currentThread().getContextClassLoader().loadClass(key.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,6 +86,9 @@ public class DefaultCMDHandler implements ICMDHandler {
 				}
 			}
 		}
+		
+		// always remove any nodes that don't belong last
+		lastPass.add(new BlacklistAnalyzer());
 
 		if (params.getOptionPairs().containsKey("lastpass")) {
 			String[] analyzerNames = params.getOptionPairs().get("lastpass").split(";");
@@ -106,9 +108,6 @@ public class DefaultCMDHandler implements ICMDHandler {
 		
 		// always add the LinkPriorityAnalyzer last so we can deal with that
 		lastPass.add(new LinkPriorityAnalyzer());
-		
-		// always remove any nodes that don't belong last
-		lastPass.add(new BlacklistAnalyzer());
 		
 		
 		Graph graph = new Graph();
@@ -153,6 +152,11 @@ public class DefaultCMDHandler implements ICMDHandler {
 		
 		if (classes.containsKey(".jars")) {
 			String[] jarURI = classes.getProperty(".jars").split(";");
+			System.out.println("Jars:");
+			for (String s : jarURI)
+				System.out.println("\t" + s);
+			System.out.println();
+			System.out.println();
 			ExternalClassLoader.addJars(jarURI);
 			classes.remove(".jars");
 		}
