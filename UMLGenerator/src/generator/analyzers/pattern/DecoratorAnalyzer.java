@@ -4,14 +4,17 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 import generator.Graph;
 import generator.INode;
 import generator.Link;
+import generator.StyleAttribute;
 import generator.analyzers.IAnalyzer;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
@@ -32,6 +35,7 @@ import generator.nodes.JavaClassNode;
 
 public class DecoratorAnalyzer implements IAnalyzer {
 	private boolean hasRun = false;
+	private static final int RUN_LIMIT = 500;
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
 		if (hasRun) {
@@ -60,7 +64,7 @@ public class DecoratorAnalyzer implements IAnalyzer {
 			
 			Class<?> cnode = null;
 			try {
-				cnode = Class.forName(inode.getQualifiedName());
+				cnode = Thread.currentThread().getContextClassLoader().loadClass(inode.getQualifiedName());
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -104,134 +108,95 @@ public class DecoratorAnalyzer implements IAnalyzer {
 			}
 			
 			// Confirmed that we're a decorator: could still be a bad decorator though
-			System.out.print(inode.getQualifiedName() + " -> ");
-			System.out.print("[");
-			for (INode node : possibleComponents.values()) {
-				System.out.print(node.getQualifiedName() + ",");
-			}
-			System.out.println("]");
-			String color = "chartreuse";
+			String color = "lawngreen";
 			String description = "decorator";
 			Class<?> excnode = null;
+			
 			// It's a bad decorator if the class does not override every method in its component
 			for (INode extended : possibleComponents.values()) {
 				try {
-					excnode = Class.forName(extended.getQualifiedName());
+					excnode = Thread.currentThread().getContextClassLoader().loadClass(extended.getQualifiedName());
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 				
 				
 				// Get all the methods from the node that are actually declared in the node's class
-				List<Method> cmethods = new ArrayList<Method>();
+				// and are not void
+				Set<String> cmethods = new HashSet<String>();
 				for (int i = 0; i < cnode.getMethods().length; i++) {
 					Method m = cnode.getMethods()[i];
 					if (m.getDeclaringClass().getName().equals(cnode.getName())) {
-						cmethods.add(m);
+						if (!m.getReturnType().equals(void.class)) {
+							cmethods.add(m.getName());
+						}
 					}
 				}
 				
-				// For every method in the extended node
-				for (Method m1 : excnode.getMethods()) {
-					if (!m1.getReturnType().equals(void.class)) {
-						// Check every method in the current node
-						boolean contains = false;
-						for (Method m2 : cmethods) {
-							if (m1.getName().equals(m2.getName())) {
-								for (int i = 0; i < m1.getParameterTypes().length; i++) {
-									if (m2.getParameterTypes().length <= i) {
-										contains = false;
-										continue;
-									}
-									Class<?> c1 = m1.getParameterTypes()[i];
-									Class<?> c2 = m2.getParameterTypes()[i];
-									contains &= c1.getName().equals(c2.getName());
-								}
-							}
-							if (!contains) {
-								System.out.println(m1.getName());
-							}
+				// Get all the methods from the node that are actually declared in the node's class
+				// and are not void
+				Set<String> excmethods = new HashSet<String>();
+				for (int i = 0; i < excnode.getDeclaredMethods().length; i++) {
+					Method m = excnode.getMethods()[i];
+					if (m.getDeclaringClass().getName().equals(excnode.getName())) {
+						if (!m.getReturnType().equals(void.class)) {
+							excmethods.add(m.getName());
+						}
+					}
+				}
+				
+				// If the decorator doesn't override all of the methods in the class its extending, it's bad!
+				if (!cmethods.equals(excmethods)) {
+					color = "maroon1";
+					description = "bad decorator";
+				}
+				
+			}
+			
+			
+			// Color/add descriptions to the components and links
+			for (Link link : possibleComponents.keySet()) {
+				link.setAttribute(new StyleAttribute("label", "<<decorates>>", 15));
+				JavaClassNode component = (JavaClassNode) possibleComponents.get(link);
+				
+				component.setAttribute(new StyleAttribute("fillcolor", color, 15));
+				component.setAttribute(new StyleAttribute("style", "filled", 15));
+				
+				component.addStereotype("component");
+			}
+			
+			// Create a stack so we can color/describe anything that extends the inode too
+			Stack<INode> toColor = new Stack<INode>();
+			toColor.add(inode);
+			
+			int limit = RUN_LIMIT;
+			while (!toColor.isEmpty() && limit-- > 0) {
+				JavaClassNode decorator = (JavaClassNode) toColor.pop();
+				
+				// Add the styles to indicate that it's a decorator
+				decorator.setAttribute(new StyleAttribute("fillcolor", color, 15));
+				decorator.setAttribute(new StyleAttribute("style", "filled", 15));
+				
+				decorator.addStereotype(description);
+				
+				for (INode node : graph.getNodes().values()) {
+					if (node.getQualifiedName().equals(decorator.getQualifiedName())) {
+						continue;
+					} else if (node.getQualifiedName().indexOf('$') >= 0) {
+						continue;
+					}
+					for (Link link : node.getLinks()) {
+						if (link.getEnd().equals(decorator.getQualifiedName()) && (link instanceof ExtendsLink)) {
+							toColor.push(node);
 						}
 					}
 				}
 			}
-			
-			
-			
 		}
 		
 		return false;
 	}
 
-//	private Map<INode, List<INode>> getSuperClasses(Graph graph) {
-//		Map<INode, List<INode>> supers = new HashMap<INode, List<INode>>();
-//		Collection<INode> nodes = graph.getNodes().values();
-//		for (INode node : nodes) {
-//			
-//		}
-//	}
-		
-		
-//		
-//		Stack<INode> decorators = new Stack<INode>();
-//		List<String> components = new ArrayList<String>();
-//		
-//		for (INode inode : graph.getNodes().values()) {
-//			if (!(inode instanceof JavaClassNode)) {
-//				continue;
-//			}
-//			
-//			List<Link> links = inode.getLinks();
-//			
-//			// If the maybdecorator implements/extends something
-//			List<String> subclassed = new ArrayList<String>();
-//			for (Link link : links) {
-//				if (link instanceof ExtendsLink || link instanceof ImplementsLink) {
-//					String end = link.getEnd();
-//					subclassed.add(end);
-//				}
-//			}
-//			
-//			JavaClassNode node = (JavaClassNode) inode;
-//			ClassNode classNode = node.getClassNode();
-//			List<String> fieldTypes = new ArrayList<String>();
-//			
-//			// If the maybedecorator contained fields it implements/extends
-//			if (subclassed.size() > 0) {
-//				
-//				
-//				String type;
-//				List<FieldNode> fields = (List<FieldNode>) classNode.fields;
-//				for(FieldNode field : fields) {
-//					type = Type.getType(field.desc).getClassName();
-//					if (subclassed.contains(type)) {
-//						fieldTypes.add(type);
-//					}
-//				}
-//			}
-//			
-//			// If the maybedecorator has a constructor that takes one of the fieldTypes as a parameter
-//			if (fieldTypes.size() > 0) {
-//				try {
-//					Class<?> clazz = Class.forName(classNode.name.replaceAll("/", "."));
-//					for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-//						for (Class<?> param : constructor.getParameterTypes()) {
-//							String name = param.getName();
-//							if (subclassed.contains(name)) {
-//								// It's a decorator
-//								components.add(name);
-//								decorators.add(inode);
-//							}
-//						}
-//					}
-//				} catch (ClassNotFoundException e) {
-//					// Handle?
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//		
-//		
 //		
 //		while (!decorators.isEmpty()) {
 //			INode decorator = decorators.pop();
@@ -288,7 +253,7 @@ public class DecoratorAnalyzer implements IAnalyzer {
 //	private boolean isBadDecorator(INode d) {
 //		Class<?> decorator = null;
 //		try {
-//			decorator = Class.forName(d.getQualifiedName());
+//			decorator = Thread.currentThread.getContextClassLoader().loadClass(d.getQualifiedName());
 //		} catch (ClassNotFoundException e) {
 //			e.printStackTrace();
 //		}

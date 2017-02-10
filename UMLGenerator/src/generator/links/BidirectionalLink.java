@@ -1,5 +1,7 @@
 package generator.links;
 
+import java.util.Map;
+
 import generator.Link;
 import generator.StyleAttribute;
 
@@ -33,6 +35,11 @@ public class BidirectionalLink extends Link {
 	public String getEnd() {
 		return this.directionalLink.getEnd();
 	}
+	
+	@Override
+	public String getAttributes() {
+		return super.getAttributes();
+	}
 
 	@Override
 	public void setStyleAttributes() {
@@ -57,6 +64,11 @@ public class BidirectionalLink extends Link {
 	@Override
 	public int hashCode() {
 		return super.hashCode();
+	}
+	
+	@Override
+	public Map<String, StyleAttribute> getStyleAttributes() {
+		return super.getStyleAttributes();
 	}
 
 }
