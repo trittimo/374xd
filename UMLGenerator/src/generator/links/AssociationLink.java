@@ -6,19 +6,18 @@ import generator.Link;
 import generator.StyleAttribute;
 
 public class AssociationLink extends Link {
-	
-	public AssociationLink(String from, String to) {
-		super(from, to);
-		this.setAttribute(new StyleAttribute("arrowhead", "vee", 1));
-	}
-	
-	public AssociationLink(INode from, INode to) {
-		this(from.getQualifiedName(), to.getQualifiedName());
-	}
 
+	public AssociationLink(INode start, INode end) {
+		super(start, end);
+	}
+	
+	public AssociationLink(String start, String end) {
+		super(start, end);
+	}
+	
 	@Override
-	public int getPriority() {
-		return 20;
+	public void setStyleAttributes() {
+		this.setAttribute(new StyleAttribute("arrowhead", "vee", 1));
 	}
 
 }

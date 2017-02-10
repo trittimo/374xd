@@ -6,19 +6,19 @@ import generator.StyleAttribute;
 
 public class ImplementsLink extends Link {
 
-	public ImplementsLink(String from, String to) {
-		super(from, to);
-		this.setAttribute(new StyleAttribute("arrowhead", "onormal", 1));
-		this.setAttribute(new StyleAttribute("style", "dashed", 1));
+	public ImplementsLink(INode start, INode end) {
+		super(start, end);
 	}
 	
-	public ImplementsLink(INode from, INode to) {
-		this(from.getQualifiedName(), to.getQualifiedName());
+	public ImplementsLink(String start, String end) {
+		super(start, end);
 	}
 
 	@Override
-	public int getPriority() {
-		return 30;
+	public void setStyleAttributes() {
+		this.setAttribute(new StyleAttribute("arrowhead", "onormal", 1));
+		this.setAttribute(new StyleAttribute("style", "dashed", 1));
 	}
+
 
 }

@@ -1,30 +1,22 @@
 package generator.links;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import generator.Link;
 import generator.StyleAttribute;
 
 public class BidirectionalLink extends Link {
 	private Link directionalLink;
-	Map<String, StyleAttribute> attributes;
 
 	public BidirectionalLink(final Link link) {
+		super();
 		this.directionalLink = link;
-		this.attributes = new HashMap<String, StyleAttribute>();
-		this.attributes.putAll(link.getStyleAttributes());
-		this.setAttribute(new StyleAttribute("dir", "both", Integer.MAX_VALUE));
+		for (StyleAttribute sa : link.getStyleAttributes().values()) {
+			this.setAttribute(sa);
+		}
 	}
 	
 	@Override
 	public Link getBidirectional() {
 		return this;
-	}
-
-	@Override
-	public int getPriority() {
-		return this.directionalLink.getPriority();
 	}
 
 	@Override
@@ -40,6 +32,11 @@ public class BidirectionalLink extends Link {
 	@Override
 	public String getEnd() {
 		return this.directionalLink.getEnd();
+	}
+
+	@Override
+	public void setStyleAttributes() {
+		this.setAttribute(new StyleAttribute("dir", "both", Integer.MAX_VALUE));
 	}
 
 }

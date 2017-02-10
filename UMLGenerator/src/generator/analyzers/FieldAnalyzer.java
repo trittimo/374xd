@@ -96,36 +96,45 @@ public class FieldAnalyzer implements IAnalyzer {
 		if (oneToMany)
 			list = multilist;
 		
-		// skip non-objects
-		if (!analyze.startsWith("L"))
-			return;
-		
-		analyze = analyze.substring(1); // skip the L
-		
 		int index_brace = analyze.indexOf('<');
 		int index_semic = analyze.indexOf(';');
 		
 		// Handle case where a ; comes before a < 
 		// e.g. Lsome/class/here;Ljava/util/ArrayList<Ljava/lang/String;>;
 		while (index_semic < index_brace) {
-			System.out.println(analyze);
+			while (analyze.startsWith("[")) {
+				analyze = analyze.substring(1);
+				oneToMany = true;
+			}
 			if (analyze.equals("Ljava/lang/Class<*>;")) {
 				return;
 			}
-			list.add(analyze.substring(0, index_semic));
+			if (analyze.charAt(0) == 'L')
+				list.add(analyze.substring(1, index_semic));
 			analyze = analyze.substring(index_semic + 1);
 			index_semic = analyze.indexOf(';');
+			index_brace = analyze.indexOf('<');
+			oneToMany = false;
 		}
+		
+		while (analyze.startsWith("[")) {
+			analyze = analyze.substring(1);
+			oneToMany = true;
+		}
+		
+		// skip non-objects
+		if (!analyze.startsWith("L"))
+			return;
 		
 		// if signature has a generic
 		if (index_brace > 0) {
 			// parse list part
-			list.add(analyze.substring(0, index_brace).replace('/', '.'));
+			list.add(analyze.substring(1, index_brace).replace('/', '.'));
 			// parse generic
 			parseSignature(multilist, multilist, analyze.substring(index_brace + 1, analyze.lastIndexOf('>')));
 		} else {
 			// without generic
-			list.add(analyze.substring(0, index_semic).replace('/', '.'));
+			list.add(analyze.substring(1, index_semic).replace('/', '.'));
 			analyze = analyze.substring(index_semic + 1);
 			if (analyze.length() > 0)
 				parseSignature((oneToMany)?multilist:list, multilist, analyze);

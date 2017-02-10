@@ -11,10 +11,11 @@ public abstract class Link {
 	protected String start;
 	protected String end;
 	
-	public abstract int getPriority();
+	public abstract void setStyleAttributes();
 	
 	public Link() {
 		this.attributes = new HashMap<String, StyleAttribute>();
+		this.setStyleAttributes();
 	}
 	
 	public Link(String from, String to) {

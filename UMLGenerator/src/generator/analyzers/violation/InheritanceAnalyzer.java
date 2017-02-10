@@ -16,6 +16,8 @@ import generator.factories.IGraphFactory;
 
 public class InheritanceAnalyzer implements IAnalyzer {
 
+	private static final boolean PRINT_WARNINGS_TO_CONSOLE = false;
+	
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
 		ClassReader reader = null;
@@ -55,14 +57,17 @@ public class InheritanceAnalyzer implements IAnalyzer {
 			if (!superNode.name.equals("java/lang/Object")) {
 				String childname = classNode.name.replace("/", ".");
 				String supername = classNode.superName.replace("/", ".");
-				System.out.printf("InheritanceAnalyzer Warning: Bad inheritance @ %s >> %s %n", childname, supername);
+				if (PRINT_WARNINGS_TO_CONSOLE) {
+					System.out.printf("InheritanceAnalyzer Warning: Bad inheritance @ %s >> %s %n", childname, supername);
+				}
 				//System.out.print("Nodes = " + graph.getNodes().keySet());
 				INode child = graph.getNodes().get(childname);
 				INode parent = graph.getNodes().get(supername);
 				StyleAttribute color = new StyleAttribute("color","orange",10);
 				child.setAttribute(color);
-				//if (parent != null)
-					//parent.setAttribute(color);
+//				uncomment to also mark the parent
+//				if (parent != null)
+//					parent.setAttribute(color);
 				// find link
 				for (Link link : child.getLinks()) {
 					if (link.getEnd().equals(supername)) {

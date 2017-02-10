@@ -6,19 +6,16 @@ import generator.StyleAttribute;
 
 public class ExtendsLink extends Link {
 
-	public ExtendsLink(String from, String to) {
-		super(from, to);
-		this.setAttribute(new StyleAttribute("arrowhead", "onormal", 1));
+	public ExtendsLink(INode start, INode end) {
+		super(start, end);
 	}
 	
-	public ExtendsLink(INode from, INode to) {
-		this(from.getQualifiedName(), to.getQualifiedName());
+	public ExtendsLink(String start, String end) {
+		super(start, end);
 	}
-	
-
 	@Override
-	public int getPriority() {
-		return 30;
+	public void setStyleAttributes() {
+		this.setAttribute(new StyleAttribute("arrowhead", "onormal", 1));
 	}
 
 }

@@ -2,38 +2,77 @@ package generator.analyzers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import generator.Graph;
 import generator.Link;
 import generator.INode;
 import generator.commands.CMDParams;
 import generator.factories.IGraphFactory;
+import generator.links.AssociationLink;
+import generator.links.AssociationManyLink;
+import generator.links.DependencyLink;
+import generator.links.DependencyManyLink;
 
 public class LinkPriorityAnalyzer implements IAnalyzer {
 
 	@Override
 	public boolean analyze(Graph graph, CMDParams params, IGraphFactory factory) {
-		HashMap<String, Link> local;
-		ArrayList<Link> toRemove;
-		String target;
+		
 		boolean changed = false;
+		
+		// depends over assoc
+		
 		for (INode node : graph.getNodes().values()) {
-			local = new HashMap<String, Link>();
-			toRemove = new ArrayList<Link>();
+			HashMap<String, Link> localDeps = new HashMap<String, Link>();
+			HashMap<String, Link> localAssoc = new HashMap<String, Link>();
+			ArrayList<Link> toRemove = new ArrayList<Link>();
 			for (Link link : node.getLinks()) {
-				target = link.getEnd();
-				if (!local.containsKey(target))
-					local.put(target, link);
-				else {
-					if (supercedes(link, local.get(target))) {
-						toRemove.add(local.get(target));
-						local.put(target, link);
-					} else {
+				String target = link.getEnd();
+				if (link instanceof DependencyLink) {
+					// if we already have dep, ignore and remove this one
+					if (localDeps.containsKey(target)) {
 						toRemove.add(link);
 					}
+					// otherwise note dependency
+					else {
+						localDeps.put(target, link);
+					}
+				}
+				else if (link instanceof DependencyManyLink) {
+					// if we already have dep, remove it
+					if (localDeps.containsKey(target)) {
+						toRemove.add(localDeps.get(target));
+					}
+					// note dependency (always prioritize many over one)
+					localDeps.put(target, link);
+				}
+				else if (link instanceof AssociationLink) {
+					// if we already have dep, ignore and remove this one
+					if (localAssoc.containsKey(target)) {
+						toRemove.add(link);
+					}
+					// otherwise note dependency
+					else {
+						localAssoc.put(target, link);
+					}
+				}
+				else if (link instanceof AssociationManyLink) {
+					// if we already have assoc, remove it
+					if (localAssoc.containsKey(target)) {
+						toRemove.add(localAssoc.get(target));
+					}
+					// note assoc (this makes it always prioritize many over one)
+					localAssoc.put(target, link);
 				}
 			}
+			
+			// finally remove all deps where we have assoc
+			for (String target : localAssoc.keySet()) {
+				if (localDeps.containsKey(target))
+					toRemove.add(localDeps.get(target));
+			}
+			
+			// actually do the removing
 			if (toRemove.size() > 0)
 				changed = true;
 			for (Link link : toRemove) {
@@ -42,17 +81,6 @@ public class LinkPriorityAnalyzer implements IAnalyzer {
 		}
 		
 		return changed;
-	}
-	
-	/**
-	 * Return true when link1 is more important than link2
-	 * 
-	 * @param link1
-	 * @param link2
-	 * @return
-	 */
-	private boolean supercedes(Link link1, Link link2) {
-		return (link1.getPriority() > link2.getPriority());
 	}
 
 }

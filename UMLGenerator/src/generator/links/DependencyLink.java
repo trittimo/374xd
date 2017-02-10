@@ -6,24 +6,19 @@ import generator.StyleAttribute;
 
 public class DependencyLink extends Link {
 
-	public DependencyLink(String from, String to) {
-		super(from, to);
+	public DependencyLink(INode start, INode end) {
+		super(start, end);
+	}
+	
+	public DependencyLink(String start, String end) {
+		super(start, end);
+	}
+	
+	@Override
+	public void setStyleAttributes() {
 		this.setAttribute(new StyleAttribute("arrowhead", "vee", 1));
 		this.setAttribute(new StyleAttribute("style", "dashed", 1));
 	}
-	
-	public DependencyLink(INode from, INode to) {
-		this(from.getQualifiedName(), to.getQualifiedName());
-	}
 
-	@Override
-	public int getPriority() {
-		return 10;
-	}
-
-	@Override
-	public BidirectionalLink getBidirectional() {
-		return new BidirectionalLink(this);
-	}
 
 }
