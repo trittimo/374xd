@@ -4,10 +4,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -28,12 +32,27 @@ public class ExternalClassLoader extends ClassLoader {
 
 	private Map<URL, byte[]> byteCache;
 	
+	private URLClassLoader jarLoader;
+	
 	protected ExternalClassLoader() {
 		super(Thread.currentThread().getContextClassLoader());
 		this.classes = new Properties();
 		this.byteCache = new HashMap<URL, byte[]>();
+		this.jarLoader = new URLClassLoader(new URL[0]);
 	}
 
+	public static void addJars(String[] jarURI) throws MalformedURLException, URISyntaxException {
+		if (singleton == null)
+			singleton = new ExternalClassLoader();
+		URL[] jars = singleton.jarLoader.getURLs();
+		URL[] jars2 = new URL[jars.length + jarURI.length];
+		int i;
+		for (i = 0; i < jars.length; i++)
+			jars2[i] = jars[i];
+		for (; i < jars2.length; i++)
+			jars2[i] = new URI(jarURI[i - jars.length]).toURL();
+		singleton.jarLoader = URLClassLoader.newInstance(jars2);
+	}
 	
 	public static ClassReader getClassReader(String name) throws IOException {
 		if (singleton == null)
@@ -65,6 +84,13 @@ public class ExternalClassLoader extends ClassLoader {
 					throw new ClassNotFoundException("ClassNotFoundException: Failed due to " + e.getMessage());
 				}
 			}
+		}
+		
+		try {
+			if (clazz == null)
+				clazz = this.jarLoader.loadClass(name);
+		} catch (ClassNotFoundException e) {
+			// do nothing, just check system
 		}
 		
 		if (clazz == null)

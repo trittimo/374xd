@@ -151,6 +151,11 @@ public class DefaultCMDHandler implements ICMDHandler {
 		Properties classes = new Properties();
 		classes.loadFromXML(new FileInputStream(eciName));
 		
+		if (classes.containsKey(".jars")) {
+			String[] jarURI = classes.getProperty(".jars").split(";");
+			ExternalClassLoader.addJars(jarURI);
+			classes.remove(".jars");
+		}
 		
 		for (String key : classes.stringPropertyNames()) {
 			String property = classes.getProperty(key);
