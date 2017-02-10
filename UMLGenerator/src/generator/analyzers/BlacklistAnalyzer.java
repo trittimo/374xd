@@ -30,7 +30,7 @@ public class BlacklistAnalyzer implements IAnalyzer {
 					if (!whitelist.contains(link.getStart()) || !whitelist.contains(link.getEnd())) {
 						links.add(link);
 					} else {
-						System.out.println("Keeping" + link);
+						//System.out.println("Keeping" + link);
 					}
 				}
 				for (Link link : links) {
@@ -39,7 +39,7 @@ public class BlacklistAnalyzer implements IAnalyzer {
 			}
 			
 			for (String node : toRemove) {
-				System.out.printf("Removing: %s\n", node);
+				//System.out.printf("Removing: %s\n", node);
 				graph.getNodes().remove(node);
 			}
 			

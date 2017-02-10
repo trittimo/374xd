@@ -1,4 +1,4 @@
-package generator.analyzers.violation;
+package generator.analyzers.pattern;
 
 import java.io.IOException;
 import java.util.List;

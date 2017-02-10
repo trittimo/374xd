@@ -40,10 +40,7 @@ public class DependencyInversionAnalyzer implements IAnalyzer {
 		final StyleAttribute fillColor = new StyleAttribute("fillcolor", "cyan", 5);
 		final StyleAttribute fillStyle = new StyleAttribute("style", "filled", 5);
 		
-		SHOW_WARNINGS = params.getFlags().contains("show-design-warnings") || true;
-		
-		
-		System.out.println("Analyzing Dependency Inversion...");
+		SHOW_WARNINGS = params.getFlags().contains("show-design-warnings");
 		
 		for (INode node : graph.getNodes().values()) {
 			for (Link link : node.getLinks()) {
@@ -51,7 +48,12 @@ public class DependencyInversionAnalyzer implements IAnalyzer {
 					INode child = graph.getNodes().get(link.getEnd());
 					if (!isViolation(node, child))
 						continue;
-					node.addStereotype("Depends on " + child.getQualifiedName());
+					String name = child.getQualifiedName();
+					if (name.lastIndexOf('.') > -1) {
+						name = name.substring(name.lastIndexOf('.')+1);
+					}
+					
+					node.addStereotype("Depends on " + name);
 					child.addStereotype("Concrete Dependency");
 					node.setAttribute(fillColor);
 					node.setAttribute(fillStyle);

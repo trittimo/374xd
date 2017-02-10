@@ -4,11 +4,11 @@
 	<comment/>
 	<entry key="blacklist">java.*,org.*,sun.*</entry>
 	<entry key="whitelist"></entry>
-	<entry key="pairs">analyzers=generator.analyzers.violation.SingletonAnalyzer,
-		lastpass=generator.analyzers.violation.InheritanceAnalyzer;generator.analyzers.violation.DependencyInversionAnalyzer</entry>
+	<entry key="pairs">analyzers=generator.analyzers.pattern.SingletonAnalyzer,
+		lastpass=generator.analyzers.violation.InheritanceAnalyzer;generator.analyzers.violation.DependencyInversionAnalyzer;generator.analyzers.pattern.DecoratorAnalyzer</entry>
 	<entry key="arguments">
 		generator.analyzers.violation.InheritanceAnalyzer,
-		generator.analyzers.violation.SingletonAnalyzer,
+		generator.analyzers.pattern.SingletonAnalyzer,
 		generator.analyzers.BidirectionalLinkReplacementAnalyzer,
 		generator.analyzers.BlacklistAnalyzer,
 		generator.analyzers.FieldAnalyzer,

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment/>
+	<entry key="blacklist"></entry>
+	<entry key="whitelist">test.ChocolateBoilerLazy,test.ChocolateBoiler,java.lang.Runtime,java.awt.Desktop,java.util.Calendar</entry>
+	<entry key="pairs">
+		analyzers=generator.analyzers.violation.SingletonAnalyzer,
+		lastpass=generator.analyzers.violation.InheritanceAnalyzer
+	</entry>
+	<entry key="arguments">test.ChocolateBoilerLazy,test.ChocolateBoiler,java.lang.Runtime,java.awt.Desktop,java.util.Calendar</entry>
+	<entry key="flags">m,f,s</entry>
+</properties>

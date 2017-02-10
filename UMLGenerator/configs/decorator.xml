@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment/>
+	<entry key="blacklist"></entry>
+	<entry key="whitelist">problem.DecryptionInputStream, problem.EncryptionOutputStream, problem.IDecryption, problem.IEncryption, problem.SubstitutionCipher, problem.TextEditorApp, java.io.FilterInputStream, java.io.InputStream, java.io.OutputStream, java.io.FilterOutputStream</entry>
+	<entry key="pairs">
+		lastpass=generator.analyzers.pattern.DecoratorAnalyzer
+	</entry>
+	<entry key="arguments">problem.DecryptionInputStream, problem.EncryptionOutputStream, problem.IDecryption, problem.IEncryption, problem.SubstitutionCipher, problem.TextEditorApp, java.io.FilterInputStream, java.io.InputStream, java.io.FilterOutputStream, java.io.OutputStream</entry>
+	<entry key="flags">m,f,s,r</entry>
+</properties>
