@@ -8,7 +8,7 @@
 ![UMLDiagram](ProjectUML.png "UML Diagram for this Project")
 
 ##### Generated Project UML
-![UMLDiagram-Generated](TermProject.png "Generated UML Diagram for this Project")
+![UMLDiagram-Generated](termproject.png "Generated UML Diagram for this Project")
 
 ## Design Philosophy
 
